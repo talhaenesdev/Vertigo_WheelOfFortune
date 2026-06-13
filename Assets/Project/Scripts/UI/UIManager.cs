@@ -17,8 +17,17 @@ namespace Assets.Project.Scripts.UI
 
         [SerializeField]
         private Button spinButton;
+        [SerializeField]
+        private Button collectButton;
+        [SerializeField]
+        private Button restarttButton;
+
+        [SerializeField]
+        private GameObject gameOverPanel;
 
         public System.Action OnSpinPressed;
+        public System.Action OnCollectPressed;
+        public System.Action OnRestartPressed;
 
         private void OnValidate()
         {
@@ -42,6 +51,10 @@ namespace Assets.Project.Scripts.UI
         {
             spinButton.onClick.AddListener(
                 () => OnSpinPressed?.Invoke());
+            collectButton.onClick.AddListener(
+                () => OnCollectPressed?.Invoke());
+            restarttButton.onClick.AddListener(
+                () => OnRestartPressed?.Invoke());
         }
 
         public void UpdateZone(int zone)
@@ -55,13 +68,17 @@ namespace Assets.Project.Scripts.UI
         }
         public void SetLeaveButton(bool active)
         {
-            leaveButton.gameObject.SetActive(active);
+            leaveButton.interactable = active;
         }
         public void SetSpinButton(
             bool active)
         {
             spinButton.interactable =
                 active;
+        }
+        public void ShowGameOver()
+        {
+            gameOverPanel.SetActive(true);
         }
     }
 }
