@@ -14,6 +14,12 @@ namespace Assets.Project.Scripts.UI
 
         [SerializeField]
         private TMP_Text rewardText;
+
+        [SerializeField]
+        private Button spinButton;
+
+        public System.Action OnSpinPressed;
+
         private void OnValidate()
         {
             if (zoneText == null)
@@ -32,6 +38,11 @@ namespace Assets.Project.Scripts.UI
                 leaveButton = transform.Find("ui_panel_buttons/ui_button_leave")
                     .GetComponent<Button>();
         }
+        private void Start()
+        {
+            spinButton.onClick.AddListener(
+                () => OnSpinPressed?.Invoke());
+        }
 
         public void UpdateZone(int zone)
         {
@@ -45,6 +56,12 @@ namespace Assets.Project.Scripts.UI
         public void SetLeaveButton(bool active)
         {
             leaveButton.gameObject.SetActive(active);
+        }
+        public void SetSpinButton(
+            bool active)
+        {
+            spinButton.interactable =
+                active;
         }
     }
 }

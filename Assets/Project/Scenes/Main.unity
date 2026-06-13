@@ -213,6 +213,7 @@ MonoBehaviour:
   leaveButton: {fileID: 2087987855}
   zoneText: {fileID: 347040580}
   rewardText: {fileID: 483078466}
+  spinButton: {fileID: 1728932342}
 --- !u!1 &51322276
 GameObject:
   m_ObjectHideFlags: 0
@@ -1039,6 +1040,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6cfb8dc739b97e4eb70646b1951e14d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Assets.Project.Scripts.GamePlay.WheelController
+  wheelTransform: {fileID: 1799591128}
 --- !u!4 &798703810
 Transform:
   m_ObjectHideFlags: 0
@@ -1461,7 +1463,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f662fbbee5201394389491f9816a72b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Assets.Project.Scripts.GamePlay.GameManager
-  uiManager: {fileID: 0}
+  uiManager: {fileID: 4889040}
   wheelController: {fileID: 798703809}
   rewardManager: {fileID: 2098769644}
   zoneManager: {fileID: 504083023}

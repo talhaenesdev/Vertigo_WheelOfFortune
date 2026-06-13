@@ -1,6 +1,5 @@
 using Assets.Project.Scripts.Data;
 using Assets.Project.Scripts.UI;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.Project.Scripts.GamePlay
@@ -23,8 +22,43 @@ namespace Assets.Project.Scripts.GamePlay
         private WheelConfig goldenWheel;
         private void Start()
         {
+            UpdateLeaveButton();
 
-            InvokeRepeating(nameof(PlayTurn), 1f, 2f);
+            uiManager.OnSpinPressed += HandleSpin;
+        }
+        private void HandleSpin()
+        {
+            uiManager.SetSpinButton(false);
+            SetupWheel();
+
+            wheelController.Spin(OnSpinCompleted);
+        }
+        private void OnSpinCompleted(
+                WheelSliceData result)
+        {
+            uiManager.SetSpinButton(true);
+            if (result.SliceType == SliceType.Bomb)
+            {
+                rewardManager.ResetReward();
+
+                Debug.Log("BOMB!");
+                Debug.Log("GAME OVER");
+
+                return;
+            }
+
+            rewardManager.AddReward(
+                result.RewardAmount);
+
+            zoneManager.NextZone();
+
+            uiManager.UpdateZone(
+                zoneManager.CurrentZone);
+
+            uiManager.UpdateReward(
+                rewardManager.TotalReward);
+
+            UpdateLeaveButton();
         }
 
         private void SetupWheel()
@@ -55,8 +89,8 @@ namespace Assets.Project.Scripts.GamePlay
 
             SetupWheel();
 
-            WheelSliceData result =
-                wheelController.Spin();
+            WheelSliceData result = null;
+               // wheelController.Spin();
 
             if (result.SliceType == SliceType.Bomb)
             {
@@ -83,6 +117,16 @@ namespace Assets.Project.Scripts.GamePlay
             uiManager.UpdateReward(
                 rewardManager.TotalReward);
 
+            ZoneType zoneType = zoneManager.GetCurrentZoneType();
+
+            bool canLeave =
+                zoneType == ZoneType.Safe ||
+                zoneType == ZoneType.Super;
+
+            uiManager.SetLeaveButton(canLeave);
+        }
+        private void UpdateLeaveButton()
+        {
             ZoneType zoneType = zoneManager.GetCurrentZoneType();
 
             bool canLeave =
