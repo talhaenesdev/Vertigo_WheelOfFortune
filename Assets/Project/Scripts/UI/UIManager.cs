@@ -140,5 +140,9 @@ namespace Assets.Project.Scripts.UI
             rewardUIEntity.Setup(rewardType, rewardSprite, rewardAmount);
         }
 
+        public void SetWheelVisual(WheelVisualVO wheelVisualVO)
+        {
+            wheelView.SetPointerImage(wheelVisualVO.PointerSprite, wheelVisualVO.WheelSprite, wheelVisualVO.TextColor);
+        }
     }
 }

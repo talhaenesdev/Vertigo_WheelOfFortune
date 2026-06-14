@@ -2420,8 +2420,7 @@ MonoBehaviour:
   rewardManager: {fileID: 2098769644}
   zoneManager: {fileID: 504083023}
   normalWheel: {fileID: 11400000, guid: 4b5c3519f223bf74097dd8cf0e70d05a, type: 2}
-  silverWheel: {fileID: 11400000, guid: 318e9c3abb96aaf43835d568b7041597, type: 2}
-  goldenWheel: {fileID: 11400000, guid: 2534afc938c8fca4993599c1d57083c3, type: 2}
+  wheelVisualConfig: {fileID: 11400000, guid: 02534b09971af48469d2a08263793abe, type: 2}
 --- !u!4 &1520458042
 Transform:
   m_ObjectHideFlags: 0
@@ -4011,6 +4010,10 @@ MonoBehaviour:
   - {fileID: 2101351449369994874}
   - {fileID: 8070034085029077435}
   - {fileID: 7716337148749394072}
+  pointerImage: {fileID: 73281005}
+  wheelImage: {fileID: 6259299840353966196}
+  wheelTitleText: {fileID: 8461634857296582063}
+  wheelBonusText: {fileID: 948839511095808859}
 --- !u!114 &948839511095808859
 MonoBehaviour:
   m_ObjectHideFlags: 0

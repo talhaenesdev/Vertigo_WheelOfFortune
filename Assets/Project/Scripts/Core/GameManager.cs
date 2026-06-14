@@ -17,10 +17,8 @@ namespace Assets.Project.Scripts.GamePlay
         private WheelConfig normalWheel;
 
         [SerializeField]
-        private WheelConfig silverWheel;
+        private WheelVisualConfig wheelVisualConfig;
 
-        [SerializeField]
-        private WheelConfig goldenWheel;
 
         private GameState currentState;
 
@@ -34,6 +32,7 @@ namespace Assets.Project.Scripts.GamePlay
 
             UpdateLeaveButton();
             SetupWheel();
+            SetWheelVisual();
         }
 
         private void HandleRestart()
@@ -50,8 +49,8 @@ namespace Assets.Project.Scripts.GamePlay
                 zoneManager.GetCurrentZoneType();
 
             bool canCollect =
-                zoneType == ZoneType.Safe ||
-                zoneType == ZoneType.Super;
+                zoneType == ZoneType.Bronze ||
+                zoneType == ZoneType.Golden;
 
             if (!canCollect)
                 return;
@@ -108,19 +107,37 @@ namespace Assets.Project.Scripts.GamePlay
             uiManager.SetSpinButton(true);
 
             currentState = GameState.WaitingForInput;
+
+            SetWheelVisual();
         }
 
-        private void SetupWheel()
+        private void SetWheelVisual()
         {
+            uiManager.SetWheelVisual(wheelVisualConfig.GetVisual(zoneManager.GetCurrentZoneType()));
+
             ZoneType zoneType =
                 zoneManager.GetCurrentZoneType();
 
-            Debug.Log(
-                $"Zone {zoneManager.CurrentZone} - {zoneType}");
-            Debug.Log($"SetupWheel: {normalWheel.Zones[zoneManager.CurrentZone-1].Slices.Count}");
+            uiManager.ZoneBonusText();
+
+            switch (zoneType)
+            {
+                case ZoneType.Silver:
+                    uiManager.WheelTypeText("Normal Wheel", Color.white);
+                    break;
+
+                case ZoneType.Bronze:
+                    uiManager.WheelTypeText("Safe Wheel", Color.green);
+                    break;
+
+                case ZoneType.Golden:
+                    uiManager.WheelTypeText("Super Wheel", Color.yellow);
+                    uiManager.ZoneBonusText("10x");
+                    break;
+            }
+
 
             int trueZoneIndex = zoneManager.CurrentZone - 1;
-
             var slices = normalWheel.Zones[trueZoneIndex].Slices;
 
             for (int i = 0; i < slices.Count; i++)
@@ -142,37 +159,23 @@ namespace Assets.Project.Scripts.GamePlay
 
                 uiManager.SetWheelRewardUI(i, rewardIcon, rewardAmount);
             }
+            Debug.Log(
 
-            uiManager.ZoneBonusText();
-
-            switch (zoneType)
-            {
-                case ZoneType.Normal:
-                    uiManager.WheelTypeText("Normal Wheel", Color.white);
-                    wheelController.SetConfig(normalWheel);
-                    break;
-
-                case ZoneType.Safe:
-                    uiManager.WheelTypeText("Safe Wheel", Color.green);
-                    //wheelController.SetConfig(silverWheel);
-                    break;
-
-                case ZoneType.Super:
-                    uiManager.WheelTypeText("Super Wheel", Color.yellow);
-                    uiManager.ZoneBonusText("10x");
-                    //wheelController.SetConfig(goldenWheel);
-                    break;
-            }
+                $"Zone {zoneManager.CurrentZone} - {zoneType}");
         }
 
+        private void SetupWheel()
+        {
+            wheelController.SetConfig(normalWheel);
+        }
       
         private void UpdateLeaveButton()
         {
             ZoneType zoneType = zoneManager.GetCurrentZoneType();
 
             bool canCollect =
-                zoneType == ZoneType.Safe ||
-                zoneType == ZoneType.Super;
+                zoneType == ZoneType.Bronze ||
+                zoneType == ZoneType.Golden;
 
             uiManager.SetCollectButton(canCollect);
         }

@@ -7,7 +7,7 @@ namespace Assets.Project.Scripts.Data
     [CreateAssetMenu(fileName = "RewardIcon",menuName = "Game/RewardIcon Config")]
     public class RewardIconDatabase : ScriptableObject
     {
-        public List<RewardIconData> items;
+        [SerializeField] private List<RewardIconData> items;
 
         private Dictionary<RewardType, Sprite> cache;
 

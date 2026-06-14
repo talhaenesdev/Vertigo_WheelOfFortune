@@ -9,12 +9,12 @@ namespace Assets.Project.Scripts.GamePlay
         public ZoneType GetCurrentZoneType()
         {
             if (CurrentZone % 30 == 0)
-                return ZoneType.Super;
+                return ZoneType.Golden;
 
             if (CurrentZone % 5 == 0)
-                return ZoneType.Safe;
+                return ZoneType.Bronze;
 
-            return ZoneType.Normal;
+            return ZoneType.Silver;
         }
 
         public void NextZone()
