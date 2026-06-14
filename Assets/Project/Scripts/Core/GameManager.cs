@@ -136,7 +136,6 @@ namespace Assets.Project.Scripts.GamePlay
                     break;
             }
 
-
             int trueZoneIndex = zoneManager.CurrentZone - 1;
             var slices = normalWheel.Zones[trueZoneIndex].Slices;
 
@@ -159,9 +158,8 @@ namespace Assets.Project.Scripts.GamePlay
 
                 uiManager.SetWheelRewardUI(i, rewardIcon, rewardAmount);
             }
-            Debug.Log(
 
-                $"Zone {zoneManager.CurrentZone} - {zoneType}");
+            Debug.Log($"Zone {zoneManager.CurrentZone} - {zoneType}");
         }
 
         private void SetupWheel()

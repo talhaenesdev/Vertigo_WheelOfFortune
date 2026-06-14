@@ -1,4 +1,4 @@
-using Assets.Project.Scripts.Data;
+﻿using Assets.Project.Scripts.Data;
 using DG.Tweening;
 using UnityEngine;
 
@@ -20,33 +20,29 @@ namespace Assets.Project.Scripts.GamePlay
         {
             var zone = currentConfig.Zones[currentZoneId];
 
-            int targetIndex =
-                Random.Range(0, zone.Slices.Count);
+            int sliceCount = zone.Slices.Count;
+            float sliceAngle = 360f / sliceCount;
 
-            float sliceAngle =
-                360f / zone.Slices.Count;
+            int targetIndex = Random.Range(0, sliceCount);
 
-            float targetAngle =
-                targetIndex * sliceAngle;
+            float offset = sliceAngle * 0.9f;
 
-            float finalRotation =
-                1440f + targetAngle;
+            float targetRotation = 360f * 5 + (targetIndex * sliceAngle) - offset;
 
             wheelTransform
                 .DORotate(
-                    new Vector3(0, 0, -finalRotation),
+                    new Vector3(0, 0, -targetRotation),
                     4f,
                     RotateMode.FastBeyond360)
                 .SetEase(Ease.OutQuart)
                 .OnComplete(() =>
                 {
-                    onComplete?.Invoke(zone.Slices[targetIndex]);
-                });
+                    float z = wheelTransform.eulerAngles.z;
 
-            Debug.Log(
-                $"Spinning wheel for zone {currentZoneId} " +
-                $"reward : {zone.Slices[targetIndex].Reward?.RewardType} " +
-                $"amount : {zone.Slices[targetIndex].Reward?.Amount}");
+                    int resultIndex = Mathf.FloorToInt((z + offset) / sliceAngle) % sliceCount;
+
+                    onComplete?.Invoke(zone.Slices[resultIndex]);
+                });
         }
     }
 }
