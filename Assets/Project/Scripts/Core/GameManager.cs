@@ -1,6 +1,5 @@
 using Assets.Project.Scripts.Data;
 using Assets.Project.Scripts.UI;
-using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -34,6 +33,7 @@ namespace Assets.Project.Scripts.GamePlay
             uiManager.OnRestartPressed += HandleRestart;
 
             UpdateLeaveButton();
+            SetupWheel();
         }
 
         private void HandleRestart()
@@ -56,8 +56,6 @@ namespace Assets.Project.Scripts.GamePlay
             if (!canCollect)
                 return;
 
-            Debug.Log(
-                $"PLAYER COLLECTED {rewardManager.TotalReward}");
 
             currentState = GameState.GameOver;
         }
@@ -73,11 +71,15 @@ namespace Assets.Project.Scripts.GamePlay
 
             SetupWheel();
 
-            wheelController.Spin(OnSpinCompleted);
+            int currentZoneIndex = zoneManager.CurrentZone - 1; 
+
+            wheelController.Spin(OnSpinCompleted, currentZoneIndex);
         }
+
         private void OnSpinCompleted(
                 WheelSliceData result)
         {
+            Debug.Log("Slice Type : " + result.SliceType);
             if (result.SliceType == SliceType.Bomb)
             {
                 currentState = GameState.GameOver;
@@ -85,17 +87,21 @@ namespace Assets.Project.Scripts.GamePlay
                 rewardManager.ResetReward();
 
                 uiManager.ShowGameOver();
-                Debug.Log("GAME OVER");
-
+                
                 return;
             }
 
-            rewardManager.AddReward(result.RewardAmount);
+            rewardManager.AddReward(result.Reward);
+
+            RewardType rewardType = result.Reward.RewardType;
+
+            uiManager.AddRewardArea(rewardType,
+                rewardManager.GetRewardIcon(rewardType),
+                rewardManager.GetRewardAmount(rewardType));
 
             zoneManager.NextZone();
 
             uiManager.UpdateZone(zoneManager.CurrentZone);
-            uiManager.UpdateReward(rewardManager.TotalReward);
 
             UpdateLeaveButton();
 
@@ -111,75 +117,64 @@ namespace Assets.Project.Scripts.GamePlay
 
             Debug.Log(
                 $"Zone {zoneManager.CurrentZone} - {zoneType}");
+            Debug.Log($"SetupWheel: {normalWheel.Zones[zoneManager.CurrentZone-1].Slices.Count}");
+
+            int trueZoneIndex = zoneManager.CurrentZone - 1;
+
+            var slices = normalWheel.Zones[trueZoneIndex].Slices;
+
+            for (int i = 0; i < slices.Count; i++)
+            {
+                var slice = slices[i];
+
+                Sprite rewardIcon = null;
+                string rewardAmount = string.Empty;
+
+                if (slice.SliceType != SliceType.Bomb)
+                {
+                    rewardIcon = rewardManager.GetRewardIcon(slice.Reward.RewardType);
+                    rewardAmount = slice.Reward.Amount.ToString();
+                }
+                else
+                {
+                    rewardIcon = rewardManager.GetRewardIcon(RewardType.Bomb);
+                }
+
+                uiManager.SetWheelRewardUI(i, rewardIcon, rewardAmount);
+            }
+
+            uiManager.ZoneBonusText();
 
             switch (zoneType)
             {
                 case ZoneType.Normal:
+                    uiManager.WheelTypeText("Normal Wheel", Color.white);
                     wheelController.SetConfig(normalWheel);
                     break;
 
                 case ZoneType.Safe:
-                    wheelController.SetConfig(silverWheel);
+                    uiManager.WheelTypeText("Safe Wheel", Color.green);
+                    //wheelController.SetConfig(silverWheel);
                     break;
 
                 case ZoneType.Super:
-                    wheelController.SetConfig(goldenWheel);
+                    uiManager.WheelTypeText("Super Wheel", Color.yellow);
+                    uiManager.ZoneBonusText("10x");
+                    //wheelController.SetConfig(goldenWheel);
                     break;
             }
         }
 
-        private void PlayTurn()
-        {
-            Debug.Log(
-                $"Zone Type: {zoneManager.GetCurrentZoneType()}");
-
-            SetupWheel();
-
-            WheelSliceData result = null;
-               // wheelController.Spin();
-
-            if (result.SliceType == SliceType.Bomb)
-            {
-                rewardManager.ResetReward();
-
-                Debug.Log("BOMB!");
-                Debug.Log("GAME OVER");
-
-                CancelInvoke();
-
-                return;
-            }
-
-            rewardManager.AddReward(result.RewardAmount);
-
-            Debug.Log($"Reward: {result.RewardAmount}");
-            Debug.Log($"Total: {rewardManager.TotalReward}");
-
-            zoneManager.NextZone();
-
-            uiManager.UpdateZone(
-                zoneManager.CurrentZone);
-
-            uiManager.UpdateReward(
-                rewardManager.TotalReward);
-
-            ZoneType zoneType = zoneManager.GetCurrentZoneType();
-
-            bool canLeave =
-                zoneType == ZoneType.Safe ||
-                zoneType == ZoneType.Super;
-
-            uiManager.SetLeaveButton(canLeave);
-        }
+      
         private void UpdateLeaveButton()
         {
             ZoneType zoneType = zoneManager.GetCurrentZoneType();
 
-            bool canLeave =
+            bool canCollect =
                 zoneType == ZoneType.Safe ||
                 zoneType == ZoneType.Super;
 
-            uiManager.SetLeaveButton(canLeave);
+            uiManager.SetCollectButton(canCollect);
         }
 
     }

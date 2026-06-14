@@ -16,13 +16,15 @@ namespace Assets.Project.Scripts.GamePlay
             currentConfig = config;
         }
 
-        public void Spin(System.Action<WheelSliceData> onComplete)
+        public void Spin(System.Action<WheelSliceData> onComplete, int currentZoneId)
         {
+            var zone = currentConfig.Zones[currentZoneId];
+
             int targetIndex =
-                Random.Range(0, currentConfig.Slices.Count);
+                Random.Range(0, zone.Slices.Count);
 
             float sliceAngle =
-                360f / currentConfig.Slices.Count;
+                360f / zone.Slices.Count;
 
             float targetAngle =
                 targetIndex * sliceAngle;
@@ -38,9 +40,13 @@ namespace Assets.Project.Scripts.GamePlay
                 .SetEase(Ease.OutQuart)
                 .OnComplete(() =>
                 {
-                    onComplete?.Invoke(
-                        currentConfig.Slices[targetIndex]);
+                    onComplete?.Invoke(zone.Slices[targetIndex]);
                 });
+
+            Debug.Log(
+                $"Spinning wheel for zone {currentZoneId} " +
+                $"reward : {zone.Slices[targetIndex].Reward?.RewardType} " +
+                $"amount : {zone.Slices[targetIndex].Reward?.Amount}");
         }
     }
 }

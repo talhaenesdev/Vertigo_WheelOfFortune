@@ -8,6 +8,6 @@ namespace Assets.Project.Scripts.Data
     menuName = "Game/Wheel Config")]
     public class WheelConfig : ScriptableObject
     {
-        public List<WheelSliceData> Slices;
+        public List<WheelSliceRow> Zones;
     }
 }

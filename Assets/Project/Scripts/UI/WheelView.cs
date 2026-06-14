@@ -1,16 +1,16 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class WheelView : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] List<RewardEntity> _rewardImages = new List<RewardEntity>();
+
+    public void SetRewardView(int index, Sprite sprite, string text)
     {
-        
+        if (index >= 0 && index < _rewardImages.Count)
+        {
+            _rewardImages[index].SetReward(sprite, text);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
