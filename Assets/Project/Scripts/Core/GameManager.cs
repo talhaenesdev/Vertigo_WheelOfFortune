@@ -1,9 +1,11 @@
 using Assets.Project.Scripts.Data;
+using Assets.Project.Scripts.Economy;
+using Assets.Project.Scripts.Enums;
+using Assets.Project.Scripts.GamePlay;
 using Assets.Project.Scripts.UI;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-namespace Assets.Project.Scripts.GamePlay
+namespace Assets.Project.Scripts.Core
 {
     public class GameManager : MonoBehaviour
     {
@@ -11,6 +13,9 @@ namespace Assets.Project.Scripts.GamePlay
         [SerializeField] private WheelController wheelController;
         [SerializeField] private RewardManager rewardManager;
         [SerializeField] private ZoneManager zoneManager;
+        [SerializeField] private PopupManager _popupManager;
+        [SerializeField] private CurrencyManager _currencyManager;
+        [SerializeField] private ADManager _adManager;
 
 
         [SerializeField]
@@ -19,25 +24,56 @@ namespace Assets.Project.Scripts.GamePlay
         [SerializeField]
         private WheelVisualConfig wheelVisualConfig;
 
+        [SerializeField]
+        private ReviveData _reviveData;
 
+        [SerializeField]
+        private UserCurrencyData _userCurrencyData;
+        
         private GameState currentState;
 
         private void Start()
         {
-            currentState = GameState.WaitingForInput;
-
             uiManager.OnSpinPressed += HandleSpin;
             uiManager.OnCollectPressed += HandleCollect;
             uiManager.OnRestartPressed += HandleRestart;
+            uiManager.OnWhatchAdReviveButton += HandleWhatchAdRevive;
+            uiManager.OnCoinReviveButton += HandleCoinRevive;
+            _popupManager.OnWatchAd += OnClickWatchAd;
+            _adManager.OnAdWatched += OnAdWatched;   
+            InitializeGame();
+        }
 
-            UpdateLeaveButton();
+
+        private void OnDestroy()
+        {
+            uiManager.OnSpinPressed -= HandleSpin;
+            uiManager.OnCollectPressed -= HandleCollect;
+            uiManager.OnRestartPressed -= HandleRestart;
+            uiManager.OnWhatchAdReviveButton -= HandleWhatchAdRevive;
+            uiManager.OnCoinReviveButton -= HandleCoinRevive;
+        }
+
+        private void InitializeGame()
+        {
+            currentState = GameState.WaitingForInput;
+            uiManager.SetGameOverPanel(false);
+            UpdateCollectButton();
             SetupWheel();
             SetWheelVisual();
+            uiManager.SetSpinButton(true);
+
         }
 
         private void HandleRestart()
         {
-            SceneManager.LoadScene(0);
+            zoneManager.ResetZone();
+            uiManager.UpdateZone(zoneManager.CurrentZone);
+            uiManager.SetGameOverPanel(false);
+            uiManager.ClearRewardArea();
+            rewardManager.ResetReward();
+            uiManager.SetSpinButton(true);
+            InitializeGame();
         }
 
         private void HandleCollect()
@@ -55,8 +91,10 @@ namespace Assets.Project.Scripts.GamePlay
             if (!canCollect)
                 return;
 
-
             currentState = GameState.GameOver;
+
+            //The rewards will be added to the user’s inventory.
+            HandleRestart(); // 
         }
 
         private void HandleSpin()
@@ -78,15 +116,12 @@ namespace Assets.Project.Scripts.GamePlay
         private void OnSpinCompleted(
                 WheelSliceData result)
         {
-            Debug.Log("Slice Type : " + result.SliceType);
             if (result.SliceType == SliceType.Bomb)
             {
-                currentState = GameState.GameOver;
+                currentState = GameState.Limbo;
 
-                rewardManager.ResetReward();
+                uiManager.SetGameOverPanel(true);
 
-                uiManager.ShowGameOver();
-                
                 return;
             }
 
@@ -102,7 +137,7 @@ namespace Assets.Project.Scripts.GamePlay
 
             uiManager.UpdateZone(zoneManager.CurrentZone);
 
-            UpdateLeaveButton();
+            UpdateCollectButton();
 
             uiManager.SetSpinButton(true);
 
@@ -167,7 +202,7 @@ namespace Assets.Project.Scripts.GamePlay
             wheelController.SetConfig(normalWheel);
         }
       
-        private void UpdateLeaveButton()
+        private void UpdateCollectButton()
         {
             ZoneType zoneType = zoneManager.GetCurrentZoneType();
 
@@ -178,5 +213,33 @@ namespace Assets.Project.Scripts.GamePlay
             uiManager.SetCollectButton(canCollect);
         }
 
+        private void HandleCoinRevive()
+        {
+            if (_userCurrencyData.Coins >= _reviveData.CoinReviveCost)
+            {
+                _userCurrencyData.Coins -= _reviveData.CoinReviveCost;
+                InitializeGame();
+                // Implement the logic to revive the player
+            }
+            else
+            {
+                _popupManager.ShowNotEnoughCoinsPopup();
+            }
+        }
+
+        private void HandleWhatchAdRevive()
+        {
+            _popupManager.ShowAdPopup();
+        }
+
+        private void OnClickWatchAd()
+        {
+            _adManager.ShowAd();
+        }
+
+        private void OnAdWatched()
+        {
+            InitializeGame();
+        }
     }
 }

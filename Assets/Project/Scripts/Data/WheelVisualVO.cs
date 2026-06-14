@@ -1,4 +1,5 @@
 ﻿
+using Assets.Project.Scripts.Enums;
 using System;
 using UnityEngine;
 

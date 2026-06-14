@@ -14,15 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Assets.Project.Scripts.Data.WheelConfig
   Zones:
   - Slices:
-    - SliceType: 0
+    - SliceType: 1
       Reward:
         RewardType: 0
         Amount: 1
-    - SliceType: 0
+    - SliceType: 1
       Reward:
         RewardType: 1
         Amount: 1
-    - SliceType: 0
+    - SliceType: 1
       Reward:
         RewardType: 2
         Amount: 100
@@ -30,19 +30,19 @@ MonoBehaviour:
       Reward:
         RewardType: 2
         Amount: 200
-    - SliceType: 0
+    - SliceType: 1
       Reward:
         RewardType: 2
         Amount: 300
-    - SliceType: 0
+    - SliceType: 1
       Reward:
         RewardType: 2
         Amount: 400
-    - SliceType: 0
+    - SliceType: 1
       Reward:
         RewardType: 2
         Amount: 500
-    - SliceType: 0
+    - SliceType: 1
       Reward:
         RewardType: 2
         Amount: 500

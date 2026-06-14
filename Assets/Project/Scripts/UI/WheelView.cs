@@ -3,29 +3,33 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class WheelView : MonoBehaviour
+namespace Assets.Project.Scripts.UI
 {
-    [SerializeField] List<RewardEntity> _rewardImages = new List<RewardEntity>();
-
-    [SerializeField] private Image pointerImage;
-    [SerializeField] private Image wheelImage;
-    [SerializeField] private TMP_Text wheelTitleText;
-    [SerializeField] private TMP_Text wheelBonusText;
-
-    public void SetRewardView(int index, Sprite sprite, string text)
+    public class WheelView : MonoBehaviour
     {
-        if (index >= 0 && index < _rewardImages.Count)
+        [SerializeField] List<RewardEntity> _rewardImages = new List<RewardEntity>();
+
+        [SerializeField] private Image pointerImage;
+        [SerializeField] private Image wheelImage;
+        [SerializeField] private TMP_Text wheelTitleText;
+        [SerializeField] private TMP_Text wheelBonusText;
+
+        public void SetRewardView(int index, Sprite sprite, string text)
         {
-            _rewardImages[index].SetReward(sprite, text);
+            if (index >= 0 && index < _rewardImages.Count)
+            {
+                _rewardImages[index].SetReward(sprite, text);
+            }
         }
-    }
 
-    public void SetPointerImage(Sprite pointerSprite, Sprite wheelSprite, Color textColor)
-    {
-        pointerImage.sprite = pointerSprite;
-        wheelImage.sprite = wheelSprite;
-        wheelTitleText.color = textColor;
-        wheelBonusText.color = textColor;
+        public void SetPointerImage(Sprite pointerSprite, Sprite wheelSprite, Color textColor)
+        {
+            pointerImage.sprite = pointerSprite;
+            wheelImage.sprite = wheelSprite;
+            wheelTitleText.color = textColor;
+            wheelBonusText.color = textColor;
+        }
+
     }
 
 }

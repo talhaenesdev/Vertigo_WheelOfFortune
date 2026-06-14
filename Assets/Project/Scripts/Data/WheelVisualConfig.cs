@@ -1,3 +1,4 @@
+using Assets.Project.Scripts.Enums;
 using System.Collections.Generic;
 using UnityEngine;
 

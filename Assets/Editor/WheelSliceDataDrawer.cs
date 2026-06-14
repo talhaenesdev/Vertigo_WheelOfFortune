@@ -1,6 +1,7 @@
 ﻿using UnityEditor;
 using UnityEngine;
 using Assets.Project.Scripts.Data;
+using Assets.Project.Scripts.Enums;
 
 [CustomPropertyDrawer(typeof(WheelSliceData))]
 public class WheelSliceDataDrawer : PropertyDrawer

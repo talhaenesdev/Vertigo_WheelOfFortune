@@ -1,3 +1,4 @@
+using Assets.Project.Scripts.Enums;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -29,6 +30,11 @@ namespace Assets.Project.Scripts.Data
         public Sprite GetRewardIcon(RewardType rewardType)
         {
             return rewardIconDatabase.GetIcon(rewardType);
+        }
+
+        public void CollectReward()
+        {
+
         }
     }
 }

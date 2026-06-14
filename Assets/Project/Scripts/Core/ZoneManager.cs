@@ -1,4 +1,4 @@
-using Assets.Project.Scripts.Data;
+using Assets.Project.Scripts.Enums;
 using UnityEngine;
 namespace Assets.Project.Scripts.GamePlay
 {
@@ -20,6 +20,11 @@ namespace Assets.Project.Scripts.GamePlay
         public void NextZone()
         {
             CurrentZone++;
+        }
+
+        public void ResetZone()
+        {
+            CurrentZone = 1;
         }
     }
 }

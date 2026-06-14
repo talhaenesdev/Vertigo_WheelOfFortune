@@ -1,4 +1,5 @@
 using Assets.Project.Scripts.Data;
+using Assets.Project.Scripts.Enums;
 using System;
 using System.Collections.Generic;
 using TMPro;
@@ -11,115 +12,156 @@ namespace Assets.Project.Scripts.UI
     {
 
         [SerializeField]
-        private TMP_Text zoneText;
+        private TMP_Text _zoneText;
         [SerializeField]
-        private TMP_Text wheelTitleText;
+        private TMP_Text _wheelTitleText;
         [SerializeField]
-        private TMP_Text zoneBonusText;
+        private TMP_Text _zoneBonusText;
 
         [SerializeField]
-        private Button spinButton;
+        private Button _spinButton;
         [SerializeField]
-        private Button collectButton;
+        private Button _collectButton;
         [SerializeField]
-        private Button restartButton;
+        private Button _restartButton;
+        [SerializeField]
+        private Button _whatchAdReviveButton;
+        [SerializeField]
+        private Button _coinReviveButton;
 
         [SerializeField]
-        private GameObject gameOverPanel;
+        private GameObject _gameOverPanel;
 
         [SerializeField]
-        private Image wheelImage;
+        private Image _wheelImage;
         [SerializeField]
-        private Image pointerImage;
+        private Image _pointerImage;
+
+        [SerializeField]
+        private WheelView _wheelView;
+        [SerializeField]
+        private Transform _rewardArea;
 
         public Action OnSpinPressed;
         public Action OnCollectPressed;
         public Action OnRestartPressed;
+        public Action OnWhatchAdReviveButton;
+        public Action OnCoinReviveButton;
 
-        [SerializeField]
-        private WheelView wheelView;
 
-        [SerializeField] 
-        private Transform rewardArea;
 
         [SerializeField] private GameObject rewardPrefab;
         List<CollectableRewardUI> currentRewards = new List<CollectableRewardUI>();
 
         private void OnValidate()
         {
-            if (zoneText == null)
-                zoneText = transform.Find("ui_panel_top/ui_text_zone_value")
+            AutoAssignReferences();
+        }
+
+        private void AutoAssignReferences()
+        {
+            if (_zoneText == null)
+                _zoneText = transform.Find("ui_panel_top/ui_text_zone_value")
                     .GetComponent<TMP_Text>();
 
-
-            if (wheelTitleText == null)
-                wheelTitleText = transform.Find("ui_panel_middle/ui_text_wheel_type")
+            if (_wheelTitleText == null)
+                _wheelTitleText = transform.Find("ui_panel_middle/ui_text_wheel_type")
                     .GetComponent<TMP_Text>();
 
-            if (zoneBonusText == null)
-                zoneBonusText = transform.Find("ui_panel_middle/ui_text_wheel_bonus")
+            if (_zoneBonusText == null)
+                _zoneBonusText = transform.Find("ui_panel_middle/ui_text_wheel_bonus")
                     .GetComponent<TMP_Text>();
 
-            if (collectButton == null)
-                collectButton = transform.Find("ui_panel_bottom/ui_button_collect")
+            if (_spinButton == null)
+                _spinButton = transform.Find("ui_panel_bottom/ui_button_spin")
                     .GetComponent<Button>();
 
+            if (_restartButton == null)
+                _restartButton = transform.Find("ui_panel_gameover/ui_buttons/ui_button_giveup")
+                    .GetComponent<Button>();
 
+            if (_collectButton == null)
+                _collectButton = transform.Find("ui_panel_bottom/ui_button_collect")
+                    .GetComponent<Button>();
+
+            if (_whatchAdReviveButton == null)
+                _whatchAdReviveButton = transform.Find("ui_panel_gameover/ui_buttons/ui_button_revive_ad")
+                    .GetComponent<Button>();
+
+            if (_coinReviveButton == null)
+                _coinReviveButton = transform.Find("ui_panel_gameover/ui_buttons/ui_button_revive_coin")
+                    .GetComponent<Button>();
+
+            if (_gameOverPanel == null)
+                _gameOverPanel = transform.Find("ui_panel_gameover").gameObject;
+
+            if (_wheelImage == null)
+                _wheelImage = transform.Find("ui_panel_middle/ui_image_wheel").GetComponent<Image>();
+
+            if (_pointerImage == null)
+                _pointerImage = transform.Find("ui_panel_middle/ui_image_pointer").GetComponent<Image>();
+
+            if (_wheelView == null)
+                _wheelView = transform.Find("ui_panel_middle/ui_image_wheel").GetComponent<WheelView>();
+
+            if (_rewardArea == null)
+                _rewardArea = transform.Find("ui_panel_top/ui_panel_reward_area").GetComponent<Transform>();
         }
 
         private void Start()
         {
-            spinButton.onClick.AddListener(
+            _spinButton.onClick.AddListener(
                 () => OnSpinPressed?.Invoke());
-            collectButton.onClick.AddListener(
+            _collectButton.onClick.AddListener(
                 () => OnCollectPressed?.Invoke());
-            restartButton.onClick.AddListener(
+            _restartButton.onClick.AddListener(
                 () => OnRestartPressed?.Invoke());
+            _whatchAdReviveButton.onClick.AddListener(
+                () => OnWhatchAdReviveButton?.Invoke());
+            _coinReviveButton.onClick.AddListener(
+                () => OnCoinReviveButton?.Invoke());
         }
 
         public void UpdateZone(int zone)
         {
-            zoneText.text = $"Zone: {zone}";
+            _zoneText.text = $"Zone: {zone}";
         }
 
         public void SetCollectButton(bool active)
         {
-            collectButton.interactable = active;
+            _collectButton.interactable = active;
         }
 
-        public void SetSpinButton(
-            bool active)
+        public void SetSpinButton(bool active)
         {
-            spinButton.interactable =
-                active;
+            _spinButton.interactable = active;
         }
 
         public void SetWheelRewardUI(int index, Sprite sprite, string text)
         {
-            wheelView.SetRewardView(index, sprite, text);
+            _wheelView.SetRewardView(index, sprite, text);
         }
 
-        public void ShowGameOver()
+        public void SetGameOverPanel(bool isActive)
         {
-            gameOverPanel.SetActive(true);
+            _gameOverPanel.SetActive(isActive);
         }
-
         public void WheelTypeText(string wheelType, Color textColor)
         {
-            wheelTitleText.text = wheelType + "SPIN";
-            wheelTitleText.color = textColor; 
+            _wheelTitleText.text = wheelType + "SPIN";
+            _wheelTitleText.color = textColor; 
         }
 
         public void ZoneBonusText(string bonusText = null)
         {
             if (bonusText != null)
             {
-                zoneBonusText.gameObject.SetActive(true);
-                zoneBonusText.text = "Up To " + bonusText + "Rewards";
+                _zoneBonusText.gameObject.SetActive(true);
+                _zoneBonusText.text = "Up To " + bonusText + "Rewards";
             }
             else
             {
-                zoneBonusText.gameObject.SetActive(false);
+                _zoneBonusText.gameObject.SetActive(false);
             }
         }
 
@@ -135,14 +177,25 @@ namespace Assets.Project.Scripts.UI
                 }
             }
 
-            CollectableRewardUI rewardUIEntity = Instantiate(rewardPrefab, rewardArea).GetComponent<CollectableRewardUI>();
+            CollectableRewardUI rewardUIEntity = Instantiate(rewardPrefab, _rewardArea).GetComponent<CollectableRewardUI>();
             currentRewards.Add(rewardUIEntity);
             rewardUIEntity.Setup(rewardType, rewardSprite, rewardAmount);
         }
 
+        public void ClearRewardArea()
+        {
+            foreach (var rewardUI in currentRewards)
+            {
+                Destroy(rewardUI.gameObject);
+            }
+            currentRewards.Clear();
+        }
+
+
+
         public void SetWheelVisual(WheelVisualVO wheelVisualVO)
         {
-            wheelView.SetPointerImage(wheelVisualVO.PointerSprite, wheelVisualVO.WheelSprite, wheelVisualVO.TextColor);
+            _wheelView.SetPointerImage(wheelVisualVO.PointerSprite, wheelVisualVO.WheelSprite, wheelVisualVO.TextColor);
         }
     }
 }
