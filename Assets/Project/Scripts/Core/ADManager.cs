@@ -14,7 +14,7 @@ namespace Assets.Project.Scripts.Core
         [SerializeField] private ADData _adData;
         [SerializeField] private TMP_Text _timerText;
 
-        public Action OnAdWatched;
+        public Action OnCollectAdReward;
 
         public void ShowAd()
         {
@@ -37,17 +37,17 @@ namespace Assets.Project.Scripts.Core
         private void CollectAdReward()
         {
             _adPanel.SetActive(false);
+            OnCollectAdReward?.Invoke();
         }
 
         private void WatchAd()
         {
-            DOVirtual.Int(55, 0, 55f, value =>
+            DOVirtual.Int(_adData.AdWaitTimeSeconds, 0, _adData.AdWaitTimeSeconds, value =>
             {
                 _timerText.text = value.ToString();
             }).OnComplete(() =>
             {
                 _collectWatchRewardButton.interactable = true;
-                OnAdWatched?.Invoke();
             });
         }
     }

@@ -28,6 +28,8 @@ namespace Assets.Project.Scripts.UI
         private Button _whatchAdReviveButton;
         [SerializeField]
         private Button _coinReviveButton;
+        [SerializeField]
+        private Button _openInventoryButton;
 
         [SerializeField]
         private GameObject _gameOverPanel;
@@ -47,10 +49,12 @@ namespace Assets.Project.Scripts.UI
         public Action OnRestartPressed;
         public Action OnWhatchAdReviveButton;
         public Action OnCoinReviveButton;
+        public Action OnOpenInventoryButton;
 
 
 
         [SerializeField] private GameObject rewardPrefab;
+        [SerializeField] private InventoryView _inventoryView;
         List<CollectableRewardUI> currentRewards = new List<CollectableRewardUI>();
 
         private void OnValidate()
@@ -92,6 +96,10 @@ namespace Assets.Project.Scripts.UI
                 _coinReviveButton = transform.Find("ui_panel_gameover/ui_buttons/ui_button_revive_coin")
                     .GetComponent<Button>();
 
+            if (_openInventoryButton == null)
+                _openInventoryButton = transform.Find("ui_panel_top/ui_button_inventory")
+                    .GetComponent<Button>();
+
             if (_gameOverPanel == null)
                 _gameOverPanel = transform.Find("ui_panel_gameover").gameObject;
 
@@ -105,7 +113,7 @@ namespace Assets.Project.Scripts.UI
                 _wheelView = transform.Find("ui_panel_middle/ui_image_wheel").GetComponent<WheelView>();
 
             if (_rewardArea == null)
-                _rewardArea = transform.Find("ui_panel_top/ui_panel_reward_area").GetComponent<Transform>();
+                _rewardArea = transform.Find("ui_panel_top/ui_panel_reward_area/ui_scroll_view/ui_view_port/ui_content").GetComponent<Transform>();
         }
 
         private void Start()
@@ -120,6 +128,8 @@ namespace Assets.Project.Scripts.UI
                 () => OnWhatchAdReviveButton?.Invoke());
             _coinReviveButton.onClick.AddListener(
                 () => OnCoinReviveButton?.Invoke());
+            _openInventoryButton.onClick.AddListener(
+                () => OnOpenInventoryButton?.Invoke());
         }
 
         public void UpdateZone(int zone)
@@ -165,7 +175,6 @@ namespace Assets.Project.Scripts.UI
             }
         }
 
-
         public void AddRewardArea(RewardType rewardType, Sprite rewardSprite, int rewardAmount)
         {
             foreach (var rewardUI in currentRewards)
@@ -191,11 +200,15 @@ namespace Assets.Project.Scripts.UI
             currentRewards.Clear();
         }
 
-
-
         public void SetWheelVisual(WheelVisualVO wheelVisualVO)
         {
             _wheelView.SetPointerImage(wheelVisualVO.PointerSprite, wheelVisualVO.WheelSprite, wheelVisualVO.TextColor);
+        }
+
+        public void OpenInventoryPanel(List<InventoryItemVO> inventoryItems)
+        {
+            _inventoryView.ShowInventory();
+            _inventoryView.FillItemArea(inventoryItems);
         }
     }
 }

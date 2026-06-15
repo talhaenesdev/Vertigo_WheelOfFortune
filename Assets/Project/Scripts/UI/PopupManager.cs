@@ -51,6 +51,7 @@ namespace Assets.Project.Scripts.UI
         private void HandleWatchAd()
         {
             OnWatchAd?.Invoke();
+            HideAdPopup();
         }
     }
 }

@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c45464b6d3d0ed24ba0bd2795d6cb68c, type: 3}
   m_Name: ADData
   m_EditorClassIdentifier: 
-  adWaitTimeSeconds: 5
+  AdWaitTimeSeconds: 5

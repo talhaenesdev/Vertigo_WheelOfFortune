@@ -10,42 +10,42 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 917b9e7c4b5a6a44b922dff1b89ef823, type: 3}
-  m_Name: NormalWheelConfig
+  m_Name: WheelSliceConfig
   m_EditorClassIdentifier: Assembly-CSharp::Assets.Project.Scripts.Data.WheelConfig
   Zones:
   - Slices:
-    - SliceType: 1
+    - SliceType: 0
       Reward:
-        RewardType: 0
+        RewardType: 9
         Amount: 1
-    - SliceType: 1
+    - SliceType: 0
       Reward:
-        RewardType: 1
+        RewardType: 16
         Amount: 1
-    - SliceType: 1
+    - SliceType: 0
       Reward:
-        RewardType: 2
-        Amount: 100
-    - SliceType: 1
+        RewardType: 18
+        Amount: 5
+    - SliceType: 0
       Reward:
-        RewardType: 2
-        Amount: 200
+        RewardType: 20
+        Amount: 1
     - SliceType: 1
       Reward:
         RewardType: 2
         Amount: 300
-    - SliceType: 1
+    - SliceType: 0
       Reward:
-        RewardType: 2
-        Amount: 400
-    - SliceType: 1
+        RewardType: 29
+        Amount: 1
+    - SliceType: 0
       Reward:
-        RewardType: 2
-        Amount: 500
-    - SliceType: 1
+        RewardType: 32
+        Amount: 1
+    - SliceType: 0
       Reward:
-        RewardType: 2
-        Amount: 500
+        RewardType: 30
+        Amount: 1
   - Slices:
     - SliceType: 0
       Reward:
@@ -674,35 +674,35 @@ MonoBehaviour:
         RewardType: 2
         Amount: 500
   - Slices:
-    - SliceType: 0
+    - SliceType: 1
       Reward:
         RewardType: 0
         Amount: 1
-    - SliceType: 0
+    - SliceType: 1
       Reward:
         RewardType: 1
         Amount: 1
-    - SliceType: 0
+    - SliceType: 1
       Reward:
         RewardType: 2
         Amount: 100
-    - SliceType: 0
+    - SliceType: 1
       Reward:
         RewardType: 2
         Amount: 200
-    - SliceType: 0
+    - SliceType: 1
       Reward:
         RewardType: 2
         Amount: 300
-    - SliceType: 0
+    - SliceType: 1
       Reward:
         RewardType: 2
         Amount: 400
-    - SliceType: 0
+    - SliceType: 1
       Reward:
         RewardType: 2
         Amount: 500
-    - SliceType: 0
+    - SliceType: 1
       Reward:
         RewardType: 2
         Amount: 500

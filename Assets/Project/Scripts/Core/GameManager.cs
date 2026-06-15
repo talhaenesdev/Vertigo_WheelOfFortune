@@ -3,6 +3,8 @@ using Assets.Project.Scripts.Economy;
 using Assets.Project.Scripts.Enums;
 using Assets.Project.Scripts.GamePlay;
 using Assets.Project.Scripts.UI;
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.Project.Scripts.Core
@@ -39,8 +41,9 @@ namespace Assets.Project.Scripts.Core
             uiManager.OnRestartPressed += HandleRestart;
             uiManager.OnWhatchAdReviveButton += HandleWhatchAdRevive;
             uiManager.OnCoinReviveButton += HandleCoinRevive;
+            uiManager.OnOpenInventoryButton += OnOpenInventory;
             _popupManager.OnWatchAd += OnClickWatchAd;
-            _adManager.OnAdWatched += OnAdWatched;   
+            _adManager.OnCollectAdReward += OnAdWatched;  
             InitializeGame();
         }
 
@@ -52,6 +55,9 @@ namespace Assets.Project.Scripts.Core
             uiManager.OnRestartPressed -= HandleRestart;
             uiManager.OnWhatchAdReviveButton -= HandleWhatchAdRevive;
             uiManager.OnCoinReviveButton -= HandleCoinRevive;
+            uiManager.OnOpenInventoryButton -= OnOpenInventory;
+            _popupManager.OnWatchAd -= OnClickWatchAd;
+            _adManager.OnCollectAdReward -= OnAdWatched;
         }
 
         private void InitializeGame()
@@ -93,6 +99,7 @@ namespace Assets.Project.Scripts.Core
 
             currentState = GameState.GameOver;
 
+            rewardManager.CollectReward();
             //The rewards will be added to the user’s inventory.
             HandleRestart(); // 
         }
@@ -219,7 +226,6 @@ namespace Assets.Project.Scripts.Core
             {
                 _userCurrencyData.Coins -= _reviveData.CoinReviveCost;
                 InitializeGame();
-                // Implement the logic to revive the player
             }
             else
             {
@@ -240,6 +246,26 @@ namespace Assets.Project.Scripts.Core
         private void OnAdWatched()
         {
             InitializeGame();
+        }
+        private void OnOpenInventory()
+        {
+            Dictionary<RewardType, int> inventory = new Dictionary<RewardType, int>();
+
+            inventory = rewardManager.GetRewardData();
+
+            List<InventoryItemVO> inventoryItems = new List<InventoryItemVO>();
+
+            foreach (var item in inventory)
+            {
+                inventoryItems.Add(new InventoryItemVO
+                {
+                    RewardType = item.Key,
+                    RewardSprite = rewardManager.GetRewardIcon(item.Key),
+                    RewardAmount = item.Value
+                });
+            }
+
+            uiManager.OpenInventoryPanel(inventoryItems);
         }
     }
 }
