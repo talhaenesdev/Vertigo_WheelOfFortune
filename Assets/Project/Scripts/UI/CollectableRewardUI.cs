@@ -1,4 +1,3 @@
-using Assets.Project.Scripts.Data;
 using Assets.Project.Scripts.Enums;
 using TMPro;
 using UnityEngine;
@@ -6,24 +5,24 @@ using UnityEngine.UI;
 
 namespace Assets.Project.Scripts.UI
 {
-    public class CollectableRewardUI : MonoBehaviour
+    internal class CollectableRewardUI : MonoBehaviour
     {
-        [SerializeField] private Image rewardImage;
-        [SerializeField] private TMP_Text rewardAmountText;
+        [SerializeField] private Image _rewardImage;
+        [SerializeField] private TMP_Text _rewardAmountText;
 
-        public RewardType RewardType { get; private set; }
+        internal RewardType RewardType { get; private set; }
 
-        public void Setup(RewardType rewardType, Sprite rewardSprite, int rewardAmount)
+        internal void Setup(RewardType rewardType, Sprite rewardSprite, int rewardAmount)
         {
             RewardType = rewardType;
-            rewardImage.sprite = rewardSprite;
-            rewardImage.preserveAspect = true;
+            _rewardImage.sprite = rewardSprite;
+            _rewardImage.preserveAspect = true;
             SetAmountText(rewardAmount);
         }
 
-        public void SetAmountText(int amount)
+        internal void SetAmountText(int amount)
         {
-            rewardAmountText.text = amount.ToString();
+            _rewardAmountText.text = amount.ToString();
         }
     }
 

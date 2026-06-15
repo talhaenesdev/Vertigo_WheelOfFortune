@@ -4,12 +4,12 @@ using UnityEngine.UI;
 
 namespace Assets.Project.Scripts.UI
 {
-    public class RewardEntity : MonoBehaviour
+    internal class RewardEntity : MonoBehaviour
     {
         [SerializeField] private Image _rewardImage;
         [SerializeField] private TMP_Text _rewardText;
 
-        public void SetReward(Sprite sprite, string text)
+        internal void SetReward(Sprite sprite, string text)
         {
             _rewardImage.sprite = sprite;
             _rewardImage.preserveAspect = true;

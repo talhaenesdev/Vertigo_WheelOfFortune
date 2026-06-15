@@ -5,11 +5,11 @@ using UnityEngine;
 
 namespace Assets.Project.Scripts.Economy
 {
-    public class RewardSaveData
+    internal class RewardSaveData
     {
         private const string SAVE_KEY = "RewardAmounts";
 
-        public void SaveRewards(Dictionary<RewardType, int> rewardAmounts)
+        internal void SaveRewards(Dictionary<RewardType, int> rewardAmounts)
         {
             RewardDictionarySaveData saveData = new();
 
@@ -28,7 +28,7 @@ namespace Assets.Project.Scripts.Economy
             PlayerPrefs.Save();
         }
 
-        public Dictionary<RewardType, int> LoadRewards()
+        internal Dictionary<RewardType, int> LoadRewards()
         {
             Dictionary<RewardType, int> rewardAmounts = new();
 
@@ -54,15 +54,15 @@ namespace Assets.Project.Scripts.Economy
     
     
     [Serializable]
-    public class RewardEntry
+    internal class RewardEntry
     {
-        public RewardType RewardType;
-        public int Amount;
+        internal RewardType RewardType;
+        internal int Amount;
     }
 
     [Serializable]
-    public class RewardDictionarySaveData
+    internal class RewardDictionarySaveData
     {
-        public List<RewardEntry> Rewards = new();
+        internal List<RewardEntry> Rewards = new();
     }
 }

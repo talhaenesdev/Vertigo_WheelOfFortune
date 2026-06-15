@@ -11,12 +11,12 @@ namespace Assets.Project.Scripts.Core
     {
         [SerializeField] private GameObject _adPanel;
         [SerializeField] private Button _collectWatchRewardButton;
-        [SerializeField] private ADData _adData;
+        [SerializeField] private AdData _adData;
         [SerializeField] private TMP_Text _timerText;
 
-        public Action OnCollectAdReward;
+        internal Action OnCollectAdReward;
 
-        public void ShowAd()
+        internal void ShowAd()
         {
             _adPanel.SetActive(true);
             // Simulate ad watching and reward collection
@@ -25,14 +25,18 @@ namespace Assets.Project.Scripts.Core
 
         private void OnEnable()
         {
-            _collectWatchRewardButton.interactable = false;
-            _collectWatchRewardButton.onClick.AddListener(CollectAdReward);
+            InteractableButton(false);
+            SubscribeEvents();
         }
 
         private void OnDisable()
         {
-            _collectWatchRewardButton.onClick.RemoveListener(CollectAdReward);
+            UnSubscribeEvents();
         }
+        private void SubscribeEvents() => _collectWatchRewardButton.onClick.AddListener(CollectAdReward);
+
+        private void UnSubscribeEvents() => _collectWatchRewardButton.onClick.RemoveListener(CollectAdReward);
+
 
         private void CollectAdReward()
         {
@@ -47,8 +51,10 @@ namespace Assets.Project.Scripts.Core
                 _timerText.text = value.ToString();
             }).OnComplete(() =>
             {
-                _collectWatchRewardButton.interactable = true;
+                InteractableButton(true);
             });
         }
+
+        private void InteractableButton(bool interactable) => _collectWatchRewardButton.interactable = interactable;
     }
 }

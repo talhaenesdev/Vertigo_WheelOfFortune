@@ -1,22 +1,26 @@
-﻿namespace Assets.Project.Scripts.Economy
+﻿using Assets.Project.Scripts.Data;
+using UnityEngine;
+
+namespace Assets.Project.Scripts.Economy
 {
-    internal class CurrencyManager
+    internal class CurrencyManager : MonoBehaviour
     {
-        public int Coins { get; private set; }
 
-        public void AddCoins(int amount)
-        {
-            Coins += amount;
-        }
+        [SerializeField]
+        private UserCurrencyData _userCurrencyData;
 
-        public bool SpendCoins(int amount)
+        internal void AddCoins(int amount) => _userCurrencyData.Coins += amount;
+
+        internal bool SpendCoins(int amount)
         {
-            if (Coins >= amount)
+            if (_userCurrencyData.Coins >= amount)
             {
-                Coins -= amount;
+                _userCurrencyData.Coins -= amount;
                 return true;
             }
             return false;
         }
+
+        internal int GetCurrentCoins() => _userCurrencyData.Coins;
     }
 }

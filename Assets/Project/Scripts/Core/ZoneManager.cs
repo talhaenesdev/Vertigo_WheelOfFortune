@@ -1,30 +1,35 @@
 using Assets.Project.Scripts.Enums;
 using UnityEngine;
+
 namespace Assets.Project.Scripts.GamePlay
 {
     public class ZoneManager : MonoBehaviour
     {
-        public int CurrentZone { get; private set; } = 1;
+        internal int CurrentZone { get; private set; } = 1;
 
-        public ZoneType GetCurrentZoneType()
+        internal ZoneType GetCurrentZoneType()
         {
             if (CurrentZone % 30 == 0)
                 return ZoneType.Golden;
 
             if (CurrentZone % 5 == 0)
-                return ZoneType.Bronze;
+                return ZoneType.Silver;
 
-            return ZoneType.Silver;
+            return ZoneType.Bronze;
         }
 
-        public void NextZone()
-        {
-            CurrentZone++;
-        }
+        internal void NextZone() => CurrentZone++;
 
-        public void ResetZone()
+        internal void ResetZone() => CurrentZone = 1;
+
+        internal int CurrentZoneIndex() => CurrentZone - 1;
+
+        internal bool CanCollect()
         {
-            CurrentZone = 1;
+            bool canCollect =
+                GetCurrentZoneType() == ZoneType.Silver ||
+                GetCurrentZoneType() == ZoneType.Golden;
+            return canCollect;  
         }
     }
 }

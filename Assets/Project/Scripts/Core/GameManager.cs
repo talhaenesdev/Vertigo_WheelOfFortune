@@ -3,7 +3,6 @@ using Assets.Project.Scripts.Economy;
 using Assets.Project.Scripts.Enums;
 using Assets.Project.Scripts.GamePlay;
 using Assets.Project.Scripts.UI;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,10 +10,10 @@ namespace Assets.Project.Scripts.Core
 {
     public class GameManager : MonoBehaviour
     {
-        [SerializeField] private UIManager uiManager;
-        [SerializeField] private WheelController wheelController;
-        [SerializeField] private RewardManager rewardManager;
-        [SerializeField] private ZoneManager zoneManager;
+        [SerializeField] private UIManager _uiManager;
+        [SerializeField] private WheelController _wheelController;
+        [SerializeField] private RewardManager _rewardManager;
+        [SerializeField] private ZoneManager _zoneManager;
         [SerializeField] private PopupManager _popupManager;
         [SerializeField] private CurrencyManager _currencyManager;
         [SerializeField] private ADManager _adManager;
@@ -23,62 +22,65 @@ namespace Assets.Project.Scripts.Core
         [SerializeField]
         private WheelConfig normalWheel;
 
-        [SerializeField]
-        private WheelVisualConfig wheelVisualConfig;
 
         [SerializeField]
         private ReviveData _reviveData;
 
-        [SerializeField]
-        private UserCurrencyData _userCurrencyData;
         
         private GameState currentState;
 
         private void Start()
         {
-            uiManager.OnSpinPressed += HandleSpin;
-            uiManager.OnCollectPressed += HandleCollect;
-            uiManager.OnRestartPressed += HandleRestart;
-            uiManager.OnWhatchAdReviveButton += HandleWhatchAdRevive;
-            uiManager.OnCoinReviveButton += HandleCoinRevive;
-            uiManager.OnOpenInventoryButton += OnOpenInventory;
-            _popupManager.OnWatchAd += OnClickWatchAd;
-            _adManager.OnCollectAdReward += OnAdWatched;  
+            SubscribeEvents();
             InitializeGame();
         }
-
-
         private void OnDestroy()
         {
-            uiManager.OnSpinPressed -= HandleSpin;
-            uiManager.OnCollectPressed -= HandleCollect;
-            uiManager.OnRestartPressed -= HandleRestart;
-            uiManager.OnWhatchAdReviveButton -= HandleWhatchAdRevive;
-            uiManager.OnCoinReviveButton -= HandleCoinRevive;
-            uiManager.OnOpenInventoryButton -= OnOpenInventory;
+            UnsubscribeEvents();
+        }
+        private void SubscribeEvents()
+        {
+            _uiManager.OnSpinPressed += HandleSpin;
+            _uiManager.OnCollectPressed += HandleCollect;
+            _uiManager.OnRestartPressed += HandleRestart;
+            _uiManager.OnWhatchAdReviveButton += HandleWhatchAdRevive;
+            _uiManager.OnCoinReviveButton += HandleCoinRevive;
+            _uiManager.OnOpenInventoryButton += OnOpenInventory;
+
+            _popupManager.OnWatchAd += OnClickWatchAd;
+            _adManager.OnCollectAdReward += OnAdWatched;
+        }
+        private void UnsubscribeEvents()
+        {
+            _uiManager.OnSpinPressed -= HandleSpin;
+            _uiManager.OnCollectPressed -= HandleCollect;
+            _uiManager.OnRestartPressed -= HandleRestart;
+            _uiManager.OnWhatchAdReviveButton -= HandleWhatchAdRevive;
+            _uiManager.OnCoinReviveButton -= HandleCoinRevive;
+            _uiManager.OnOpenInventoryButton -= OnOpenInventory;
+
             _popupManager.OnWatchAd -= OnClickWatchAd;
             _adManager.OnCollectAdReward -= OnAdWatched;
         }
 
         private void InitializeGame()
         {
-            currentState = GameState.WaitingForInput;
-            uiManager.SetGameOverPanel(false);
             UpdateCollectButton();
-            SetupWheel();
-            SetWheelVisual();
-            uiManager.SetSpinButton(true);
-
+            SetupWheelConfig();
+            SetWheel();
+            currentState = GameState.WaitingForInput;
+            _uiManager.SetGameOverPanel(false);
+            _uiManager.SetSpinButtonInteractable(true);
         }
 
         private void HandleRestart()
         {
-            zoneManager.ResetZone();
-            uiManager.UpdateZone(zoneManager.CurrentZone);
-            uiManager.SetGameOverPanel(false);
-            uiManager.ClearRewardArea();
-            rewardManager.ResetReward();
-            uiManager.SetSpinButton(true);
+            _zoneManager.ResetZone();
+            _rewardManager.ResetReward();
+            _uiManager.UpdateZone(_zoneManager.CurrentZone);
+            _uiManager.SetGameOverPanel(false);
+            _uiManager.ClearRewardArea();
+            _uiManager.SetSpinButtonInteractable(true);
             InitializeGame();
         }
 
@@ -87,21 +89,13 @@ namespace Assets.Project.Scripts.Core
             if (currentState != GameState.WaitingForInput)
                 return;
 
-            ZoneType zoneType =
-                zoneManager.GetCurrentZoneType();
-
-            bool canCollect =
-                zoneType == ZoneType.Bronze ||
-                zoneType == ZoneType.Golden;
-
-            if (!canCollect)
+            if (!_zoneManager.CanCollect())
                 return;
 
             currentState = GameState.GameOver;
 
-            rewardManager.CollectReward();
-            //The rewards will be added to the user’s inventory.
-            HandleRestart(); // 
+            _rewardManager.CollectReward();
+            HandleRestart();
         }
 
         private void HandleSpin()
@@ -111,121 +105,72 @@ namespace Assets.Project.Scripts.Core
 
             currentState = GameState.Spinning;
 
-            uiManager.SetSpinButton(false);
+            _uiManager.SetCollectButtonInteractable(false);
+            _uiManager.SetSpinButtonInteractable(false);
 
-            SetupWheel();
+            SetupWheelConfig();
 
-            int currentZoneIndex = zoneManager.CurrentZone - 1; 
-
-            wheelController.Spin(OnSpinCompleted, currentZoneIndex);
+            _wheelController.Spin(OnSpinCompleted, _zoneManager.CurrentZoneIndex());
         }
 
-        private void OnSpinCompleted(
-                WheelSliceData result)
+        private void OnSpinCompleted(WheelSliceData result)
         {
             if (result.SliceType == SliceType.Bomb)
             {
-                currentState = GameState.Limbo;
-
-                uiManager.SetGameOverPanel(true);
-
+                HandleBomb();
                 return;
             }
 
-            rewardManager.AddReward(result.Reward);
+            if (result.Reward != null)
+                _rewardManager.AddReward(result.Reward);
 
-            RewardType rewardType = result.Reward.RewardType;
+            var rewardType = result.Reward.RewardType;
 
-            uiManager.AddRewardArea(rewardType,
-                rewardManager.GetRewardIcon(rewardType),
-                rewardManager.GetRewardAmount(rewardType));
+            _uiManager.AddRewardArea(
+                rewardType,
+                _uiManager.GetRewardIcon(rewardType),
+                _rewardManager.GetRewardAmount(rewardType));
 
-            zoneManager.NextZone();
+            _zoneManager.NextZone();
 
-            uiManager.UpdateZone(zoneManager.CurrentZone);
+            _uiManager.UpdateZone(_zoneManager.CurrentZone);
 
             UpdateCollectButton();
 
-            uiManager.SetSpinButton(true);
+            _uiManager.SetSpinButtonInteractable(true);
+
+            SetWheel();
 
             currentState = GameState.WaitingForInput;
-
-            SetWheelVisual();
         }
 
-        private void SetWheelVisual()
+        private void HandleBomb()
         {
-            uiManager.SetWheelVisual(wheelVisualConfig.GetVisual(zoneManager.GetCurrentZoneType()));
+            currentState = GameState.Limbo;
 
-            ZoneType zoneType =
-                zoneManager.GetCurrentZoneType();
+            _rewardManager.ResetReward();
 
-            uiManager.ZoneBonusText();
-
-            switch (zoneType)
-            {
-                case ZoneType.Silver:
-                    uiManager.WheelTypeText("Normal Wheel", Color.white);
-                    break;
-
-                case ZoneType.Bronze:
-                    uiManager.WheelTypeText("Safe Wheel", Color.green);
-                    break;
-
-                case ZoneType.Golden:
-                    uiManager.WheelTypeText("Super Wheel", Color.yellow);
-                    uiManager.ZoneBonusText("10x");
-                    break;
-            }
-
-            int trueZoneIndex = zoneManager.CurrentZone - 1;
-            var slices = normalWheel.Zones[trueZoneIndex].Slices;
-
-            for (int i = 0; i < slices.Count; i++)
-            {
-                var slice = slices[i];
-
-                Sprite rewardIcon = null;
-                string rewardAmount = string.Empty;
-
-                if (slice.SliceType != SliceType.Bomb)
-                {
-                    rewardIcon = rewardManager.GetRewardIcon(slice.Reward.RewardType);
-                    rewardAmount = slice.Reward.Amount.ToString();
-                }
-                else
-                {
-                    rewardIcon = rewardManager.GetRewardIcon(RewardType.Bomb);
-                }
-
-                uiManager.SetWheelRewardUI(i, rewardIcon, rewardAmount);
-            }
-
-            Debug.Log($"Zone {zoneManager.CurrentZone} - {zoneType}");
+            _uiManager.SetGameOverPanel(true);
         }
 
-        private void SetupWheel()
+        private void SetupWheelConfig() => _wheelController.SetConfig(normalWheel);
+
+        private void SetWheel()
         {
-            wheelController.SetConfig(normalWheel);
+            _uiManager.SetWheelVisual(
+                _zoneManager.GetCurrentZoneType(),
+                normalWheel.Zones[_zoneManager.CurrentZoneIndex()].Slices);
         }
-      
-        private void UpdateCollectButton()
-        {
-            ZoneType zoneType = zoneManager.GetCurrentZoneType();
 
-            bool canCollect =
-                zoneType == ZoneType.Bronze ||
-                zoneType == ZoneType.Golden;
-
-            uiManager.SetCollectButton(canCollect);
-        }
+        private void UpdateCollectButton() => _uiManager.SetCollectButtonInteractable(_zoneManager.CanCollect());
 
         private void HandleCoinRevive()
         {
-            if (_userCurrencyData.Coins >= _reviveData.CoinReviveCost)
+            if (_currencyManager.GetCurrentCoins() >= _reviveData.CoinReviveCost)
             {
-                _userCurrencyData.Coins -= _reviveData.CoinReviveCost;
+                _currencyManager.SpendCoins(_reviveData.CoinReviveCost);
                 InitializeGame();
+                _uiManager.UpdateCurrencyText(_currencyManager.GetCurrentCoins());
             }
             else
             {
@@ -233,25 +178,11 @@ namespace Assets.Project.Scripts.Core
             }
         }
 
-        private void HandleWhatchAdRevive()
-        {
-            _popupManager.ShowAdPopup();
-        }
-
-        private void OnClickWatchAd()
-        {
-            _adManager.ShowAd();
-        }
-
-        private void OnAdWatched()
-        {
-            InitializeGame();
-        }
         private void OnOpenInventory()
         {
             Dictionary<RewardType, int> inventory = new Dictionary<RewardType, int>();
 
-            inventory = rewardManager.GetRewardData();
+            inventory = _rewardManager.GetRewardData();
 
             List<InventoryItemVO> inventoryItems = new List<InventoryItemVO>();
 
@@ -260,12 +191,19 @@ namespace Assets.Project.Scripts.Core
                 inventoryItems.Add(new InventoryItemVO
                 {
                     RewardType = item.Key,
-                    RewardSprite = rewardManager.GetRewardIcon(item.Key),
+                    RewardSprite = _uiManager.GetRewardIcon(item.Key),
                     RewardAmount = item.Value
                 });
             }
 
-            uiManager.OpenInventoryPanel(inventoryItems);
+            _uiManager.OpenInventoryPanel(inventoryItems);
         }
+
+
+        private void HandleWhatchAdRevive() => _popupManager.ShowAdPopup();
+
+        private void OnClickWatchAd() => _adManager.ShowAd();
+
+        private void OnAdWatched() => InitializeGame();
     }
 }

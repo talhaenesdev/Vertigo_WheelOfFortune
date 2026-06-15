@@ -1,6 +1,6 @@
 namespace Assets.Project.Scripts.Enums
 {
-    public enum GameState
+    internal enum GameState
     {
         WaitingForInput,
         Spinning,

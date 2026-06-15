@@ -418,8 +418,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a113029d7cdf98744a9682389d0f62fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rewardImage: {fileID: 432039382955559721}
-  rewardAmountText: {fileID: 2940333688972832314}
+  _rewardImage: {fileID: 432039382955559721}
+  _rewardAmountText: {fileID: 2940333688972832314}
 --- !u!222 &4970725567680944788
 CanvasRenderer:
   m_ObjectHideFlags: 0

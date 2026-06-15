@@ -1,6 +1,6 @@
 namespace Assets.Project.Scripts.Enums
 {
-    public enum ZoneType
+    internal enum ZoneType
     {
         Silver,
         Bronze,

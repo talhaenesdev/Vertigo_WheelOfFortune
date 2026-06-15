@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 namespace Assets.Project.Scripts.UI
 {
-    public class UIManager : MonoBehaviour
+    internal class UIManager : MonoBehaviour
     {
 
         [SerializeField]
@@ -17,6 +17,8 @@ namespace Assets.Project.Scripts.UI
         private TMP_Text _wheelTitleText;
         [SerializeField]
         private TMP_Text _zoneBonusText;
+        [SerializeField]
+        private TMP_Text _currencyText;
 
         [SerializeField]
         private Button _spinButton;
@@ -40,9 +42,17 @@ namespace Assets.Project.Scripts.UI
         private Image _pointerImage;
 
         [SerializeField]
-        private WheelView _wheelView;
+        private WheelUI _wheelUI;
         [SerializeField]
         private Transform _rewardArea;
+
+
+        [SerializeField] private GameObject _rewardPrefab;
+        [SerializeField] private InventoryUI _inventoryView;
+        [SerializeField] private RewardIconDatabase _rewardIconDatabase;
+        [SerializeField] private WheelVisualConfig wheelVisualConfig;
+
+        private List<CollectableRewardUI> _currentRewards = new List<CollectableRewardUI>();
 
         public Action OnSpinPressed;
         public Action OnCollectPressed;
@@ -51,17 +61,9 @@ namespace Assets.Project.Scripts.UI
         public Action OnCoinReviveButton;
         public Action OnOpenInventoryButton;
 
-
-
-        [SerializeField] private GameObject rewardPrefab;
-        [SerializeField] private InventoryView _inventoryView;
-        List<CollectableRewardUI> currentRewards = new List<CollectableRewardUI>();
-
-        private void OnValidate()
-        {
-            AutoAssignReferences();
-        }
-
+        private void OnValidate() => AutoAssignReferences();
+        private void Start() => SubscribeEvents();
+        private void OnDisable() => UnSubscribeEvents();
         private void AutoAssignReferences()
         {
             if (_zoneText == null)
@@ -109,14 +111,13 @@ namespace Assets.Project.Scripts.UI
             if (_pointerImage == null)
                 _pointerImage = transform.Find("ui_panel_middle/ui_image_pointer").GetComponent<Image>();
 
-            if (_wheelView == null)
-                _wheelView = transform.Find("ui_panel_middle/ui_image_wheel").GetComponent<WheelView>();
+            if (_wheelUI == null)
+                _wheelUI = transform.Find("ui_panel_middle/ui_image_wheel").GetComponent<WheelUI>();
 
             if (_rewardArea == null)
                 _rewardArea = transform.Find("ui_panel_top/ui_panel_reward_area/ui_scroll_view/ui_view_port/ui_content").GetComponent<Transform>();
         }
-
-        private void Start()
+        private void SubscribeEvents()
         {
             _spinButton.onClick.AddListener(
                 () => OnSpinPressed?.Invoke());
@@ -131,53 +132,36 @@ namespace Assets.Project.Scripts.UI
             _openInventoryButton.onClick.AddListener(
                 () => OnOpenInventoryButton?.Invoke());
         }
-
-        public void UpdateZone(int zone)
+        private void UnSubscribeEvents()
         {
-            _zoneText.text = $"Zone: {zone}";
+            _spinButton.onClick.RemoveListener(
+                () => OnSpinPressed?.Invoke());
+            _collectButton.onClick.RemoveListener(
+                () => OnCollectPressed?.Invoke());
+            _restartButton.onClick.RemoveListener(
+                () => OnRestartPressed?.Invoke());
+            _whatchAdReviveButton.onClick.RemoveListener(
+                () => OnWhatchAdReviveButton?.Invoke());
+            _coinReviveButton.onClick.RemoveListener(
+                () => OnCoinReviveButton?.Invoke());
+            _openInventoryButton.onClick.RemoveListener(
+                () => OnOpenInventoryButton?.Invoke());
         }
+        internal void UpdateZone(int zone) =>_zoneText.text = "ZONE " + zone;
+        internal void SetCollectButtonInteractable(bool active) => _collectButton.interactable = active;
+        internal void SetSpinButtonInteractable(bool active) => _spinButton.interactable = active;
+        private void SetWheelRewardUI(int index, Sprite sprite, string text) => _wheelUI.SetRewardView(index, sprite, text);
+        internal void SetGameOverPanel(bool isActive) => _gameOverPanel.SetActive(isActive);
 
-        public void SetCollectButton(bool active)
+        private void WheelTypeText(string wheelType, Color textColor)
         {
-            _collectButton.interactable = active;
-        }
-
-        public void SetSpinButton(bool active)
-        {
-            _spinButton.interactable = active;
-        }
-
-        public void SetWheelRewardUI(int index, Sprite sprite, string text)
-        {
-            _wheelView.SetRewardView(index, sprite, text);
-        }
-
-        public void SetGameOverPanel(bool isActive)
-        {
-            _gameOverPanel.SetActive(isActive);
-        }
-        public void WheelTypeText(string wheelType, Color textColor)
-        {
-            _wheelTitleText.text = wheelType + "SPIN";
+            _wheelTitleText.text = wheelType + " SPIN";
             _wheelTitleText.color = textColor; 
         }
 
-        public void ZoneBonusText(string bonusText = null)
+        internal void AddRewardArea(RewardType rewardType, Sprite rewardSprite, int rewardAmount)
         {
-            if (bonusText != null)
-            {
-                _zoneBonusText.gameObject.SetActive(true);
-                _zoneBonusText.text = "Up To " + bonusText + "Rewards";
-            }
-            else
-            {
-                _zoneBonusText.gameObject.SetActive(false);
-            }
-        }
-
-        public void AddRewardArea(RewardType rewardType, Sprite rewardSprite, int rewardAmount)
-        {
-            foreach (var rewardUI in currentRewards)
+            foreach (var rewardUI in _currentRewards)
             {
                 if (rewardType == rewardUI.RewardType)
                 {
@@ -186,29 +170,66 @@ namespace Assets.Project.Scripts.UI
                 }
             }
 
-            CollectableRewardUI rewardUIEntity = Instantiate(rewardPrefab, _rewardArea).GetComponent<CollectableRewardUI>();
-            currentRewards.Add(rewardUIEntity);
+            CollectableRewardUI rewardUIEntity = Instantiate(_rewardPrefab, _rewardArea).GetComponent<CollectableRewardUI>();
+            _currentRewards.Add(rewardUIEntity);
             rewardUIEntity.Setup(rewardType, rewardSprite, rewardAmount);
         }
 
-        public void ClearRewardArea()
+        internal void ClearRewardArea()
         {
-            foreach (var rewardUI in currentRewards)
+            foreach (var rewardUI in _currentRewards)
             {
                 Destroy(rewardUI.gameObject);
             }
-            currentRewards.Clear();
+            _currentRewards.Clear();
         }
 
-        public void SetWheelVisual(WheelVisualVO wheelVisualVO)
-        {
-            _wheelView.SetPointerImage(wheelVisualVO.PointerSprite, wheelVisualVO.WheelSprite, wheelVisualVO.TextColor);
-        }
-
-        public void OpenInventoryPanel(List<InventoryItemVO> inventoryItems)
+        internal void OpenInventoryPanel(List<InventoryItemVO> inventoryItems)
         {
             _inventoryView.ShowInventory();
             _inventoryView.FillItemArea(inventoryItems);
+        }
+
+        internal void UpdateCurrencyText(int amount) => _currencyText.text = amount.ToString();
+
+        internal Sprite GetRewardIcon(RewardType rewardType)
+        {
+            return _rewardIconDatabase.GetIcon(rewardType);
+        }
+
+        internal void SetWheelVisual(ZoneType currentZoneType, List<WheelSliceData> slices)
+        {
+
+            WheelTypeText(
+                wheelVisualConfig.GetWheelTypeText(currentZoneType),
+                wheelVisualConfig.GetWheelTextColor(currentZoneType));
+
+            for (int i = 0; i < slices.Count; i++)
+            {
+                var slice = slices[i];
+
+                Sprite rewardIcon = null;
+                string rewardAmount = string.Empty;
+
+                if (slice.SliceType != SliceType.Bomb)
+                {
+                    rewardIcon = GetRewardIcon(slice.Reward.RewardType);
+                    rewardAmount = slice.Reward.Amount.ToString();
+                }
+                else
+                {
+                    rewardIcon = GetRewardIcon(RewardType.Bomb);
+                }
+
+
+                SetWheelRewardUI(i, rewardIcon, rewardAmount);
+
+                WheelVisualVO wheelVisualVO = wheelVisualConfig.GetVisual(currentZoneType);
+
+                _wheelUI.SetWheelVisuals(wheelVisualVO.PointerSprite,
+                                         wheelVisualVO.WheelSprite,
+                                         wheelVisualVO.TextColor);
+            }
         }
     }
 }

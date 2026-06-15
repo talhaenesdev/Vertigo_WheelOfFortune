@@ -5,32 +5,50 @@ using UnityEngine;
 namespace Assets.Project.Scripts.Data
 {
     [CreateAssetMenu(fileName = "WheelVisualConfig", menuName = "Game/Wheel Visual Config")]
-    public class WheelVisualConfig : ScriptableObject
+    internal class WheelVisualConfig : ScriptableObject
     {
-       [SerializeField] private List<WheelVisualVO> WheelVisuals;
+       [SerializeField] private List<WheelVisualVO> _wheelVisuals;
 
-       private Dictionary<ZoneType, WheelVisualVO> cache;
+       private Dictionary<ZoneType, WheelVisualVO> _cache;
 
        private void OnEnable()
        {
-           cache = new Dictionary<ZoneType, WheelVisualVO>();
+           _cache = new Dictionary<ZoneType, WheelVisualVO>();
 
-           if (WheelVisuals == null)
+           if (_wheelVisuals == null)
                return;
 
-           foreach (var visual in WheelVisuals)
+           foreach (var visual in _wheelVisuals)
            {
                if (visual == null)
                    continue;
 
-               cache[visual.ZoneType] = visual;
+               _cache[visual.ZoneType] = visual;
            }
        }
 
-        public WheelVisualVO GetVisual(ZoneType zoneType)
+        internal WheelVisualVO GetVisual(ZoneType zoneType)
         {
-            cache.TryGetValue(zoneType, out var visual);
+            _cache.TryGetValue(zoneType, out var visual);
             return visual;
+        }
+
+        internal string GetWheelTypeText(ZoneType zoneType)
+        {
+            if (_cache.TryGetValue(zoneType, out var visual))
+            {
+                return visual.TitleText;
+            }
+            return string.Empty;
+        }
+
+        internal Color GetWheelTextColor(ZoneType zoneType)
+        {
+            if (_cache.TryGetValue(zoneType, out var visual))
+            {
+                return visual.TextColor;
+            }
+            return Color.white;
         }
     }
 }

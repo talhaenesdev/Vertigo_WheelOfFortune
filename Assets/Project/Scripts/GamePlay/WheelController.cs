@@ -4,21 +4,19 @@ using UnityEngine;
 
 namespace Assets.Project.Scripts.GamePlay
 {
-    public class WheelController : MonoBehaviour
+    internal class WheelController : MonoBehaviour
     {
         [SerializeField]
-        private RectTransform wheelTransform;
+        private RectTransform _wheelTransform;
 
-        private WheelConfig currentConfig;
+        private WheelConfig _currentConfig;
 
-        public void SetConfig(WheelConfig config)
+
+        internal void SetConfig(WheelConfig config) => _currentConfig = config;
+
+        internal void Spin(System.Action<WheelSliceData> onComplete, int currentZoneId)
         {
-            currentConfig = config;
-        }
-
-        public void Spin(System.Action<WheelSliceData> onComplete, int currentZoneId)
-        {
-            var zone = currentConfig.Zones[currentZoneId];
+            var zone = _currentConfig.Zones[currentZoneId];
 
             int sliceCount = zone.Slices.Count;
             float sliceAngle = 360f / sliceCount;
@@ -27,22 +25,24 @@ namespace Assets.Project.Scripts.GamePlay
 
             float offset = sliceAngle * 0.9f;
 
-            float targetRotation = 360f * 5 + (targetIndex * sliceAngle) - offset;
+            float targetRotation = 360f * _currentConfig.FreeSpinCount + (targetIndex * sliceAngle) - offset;
 
-            wheelTransform
+            _wheelTransform
                 .DORotate(
                     new Vector3(0, 0, -targetRotation),
-                    4f,
+                    _currentConfig.SpinTime,
                     RotateMode.FastBeyond360)
                 .SetEase(Ease.OutQuart)
                 .OnComplete(() =>
                 {
-                    float z = wheelTransform.eulerAngles.z;
+                    float z = _wheelTransform.eulerAngles.z;
 
                     int resultIndex = Mathf.FloorToInt((z + offset) / sliceAngle) % sliceCount;
 
                     onComplete?.Invoke(zone.Slices[resultIndex]);
                 });
         }
+
+       
     }
 }

@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fda594a999481de4491a390df9ee4340, type: 3}
   m_Name: WheelVisualConfig
   m_EditorClassIdentifier: 
-  WheelVisuals:
-  - ZoneType: 0
-    TextColor: {r: 1, g: 1, b: 1, a: 1}
-    WheelSprite: {fileID: -4250264824657568362, guid: e1c07481585d16342a834f564c4194a6, type: 3}
-    PointerSprite: {fileID: 2528496851094761378, guid: e77d52b58bd1caf40bb14e09be048701, type: 3}
+  _wheelVisuals:
   - ZoneType: 1
-    TextColor: {r: 0.5660378, g: 0.5660378, b: 0.5660378, a: 1}
+    TextColor: {r: 1, g: 1, b: 1, a: 1}
     WheelSprite: {fileID: -7416167051008218582, guid: cac160598cffb144ea744a04abeb6465, type: 3}
     PointerSprite: {fileID: 5759410588988491854, guid: 185424e09ab4d1b499177a0cbca14288, type: 3}
+  - ZoneType: 0
+    TextColor: {r: 1, g: 0.7052167, b: 0, a: 1}
+    WheelSprite: {fileID: -4250264824657568362, guid: e1c07481585d16342a834f564c4194a6, type: 3}
+    PointerSprite: {fileID: 2528496851094761378, guid: e77d52b58bd1caf40bb14e09be048701, type: 3}
   - ZoneType: 2
-    TextColor: {r: 1, g: 0.99149597, b: 0, a: 1}
+    TextColor: {r: 0.91188633, g: 1, b: 0, a: 1}
     WheelSprite: {fileID: 5770997025872212153, guid: d23de632509f46345838ae3c37bc7f2a, type: 3}
     PointerSprite: {fileID: 8294000708589155680, guid: 19e96f3d1066f1d43a322e1f8c516d57, type: 3}
