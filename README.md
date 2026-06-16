@@ -1,34 +1,78 @@
-# Vertigo Games - Wheel of Fortune Demo
+# 🎡 Vertigo Games - Wheel of Fortune (Demo)
 
+A Wheel of Fortune-style risk & reward game developed as part of the Vertigo Games Game Developer assessment.
 
-- ## Gameplay Video
-- https://youtu.be/pnUFxZCAMfk
+---
 
-## Screenshots
-### 20:9
-![Golden Area](InGamePictures/golden_area_4_3.png)
+## 🎥 Gameplay Video
 
-### 16:9
-![Silver Area](InGamePictures/silver_spin_16_9.png)
+[![Wheel of Fortune Gameplay](https://img.youtube.com/vi/pnUFxZCAMfk/0.jpg)](https://youtu.be/pnUFxZCAMfk)
 
-### 4:3
-![Golden Area](InGamePictures/wheel_spin_4_3.png)
+---
 
+## 📸 Screenshots
 
-A Wheel of Fortune style risk-reward game developed as part of the Vertigo Games Game Developer assessment.
+### Wheel Spin (20:9)
+![Wheel Spin](InGamePictures/wheel_spin_20_9.png)
 
-## Features
-- Zone-based progression
+### Wheel Spin (16:9)
+![Wheel Spin](InGamePictures/wheel_spin_16_9.png)
+
+### Wheel Spin (4:3)
+![Wheel Spin](InGamePictures/wheel_spin_4_3.png)
+
+---
+
+## 🎮 Features
+
+- Dynamic wheel spin system
+- Zone-based progression system
+- Risk vs reward mechanics
+- Bomb mechanic (full progress reset)
 - Safe Zones (every 5th zone)
 - Super Zones (every 30th zone)
-- Configurable wheel slices via Scriptable Objects
-- Responsive UI (20:9, 16:9, 4:3)
-- DOTween wheel animations
-- SOLID and scalable architecture
+- Walk-away decision system before spin
+- ScriptableObject-driven configuration
+- DOTween-based animations
+- Responsive UI (20:9 / 16:9 / 4:3)
 
-## Built With
+---
+
+## 🧱 Architecture Highlights
+
+- Clean, reusable and scalable code structure
+- SOLID principles applied
+- Data-driven design using Scriptable Objects
+- Separation of UI / Logic / Data layers
+
+---
+
+## 🛠 Built With
+
 - Unity 2021 LTS
 - TextMeshPro
 - DOTween
 - Scriptable Objects
+- New Input System
 
+---
+
+## 🚀 How to Run
+
+- Open project in Unity 2021 LTS
+- Load the main scene
+- Press Play
+
+---
+
+## 📦 Build
+
+Android APK is available in the **GitHub Releases** section.
+
+---
+
+## 📌 Notes
+
+- UI is optimized for multiple aspect ratios (20:9, 16:9, 4:3)
+- All systems are modular and extendable
+- Designed for scalability and maintainability
