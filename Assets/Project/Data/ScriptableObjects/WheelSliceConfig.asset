@@ -977,32 +977,32 @@ MonoBehaviour:
         Amount: 1
     - SliceType: 0
       Reward:
-        RewardType: 1
+        RewardType: 11
         Amount: 1
     - SliceType: 0
       Reward:
         RewardType: 2
-        Amount: 100
+        Amount: 10000
     - SliceType: 0
       Reward:
         RewardType: 2
-        Amount: 200
-    - SliceType: 1
-      Reward:
-        RewardType: 2
-        Amount: 300
+        Amount: 20000
     - SliceType: 0
       Reward:
         RewardType: 2
-        Amount: 400
+        Amount: 30000
     - SliceType: 0
       Reward:
-        RewardType: 2
-        Amount: 500
+        RewardType: 16
+        Amount: 1
     - SliceType: 0
       Reward:
-        RewardType: 2
-        Amount: 500
+        RewardType: 30
+        Amount: 1
+    - SliceType: 0
+      Reward:
+        RewardType: 28
+        Amount: 1
   FreeSpinCount: 4
   SpinTime: 4
   SilverZoneSlice: 5
