@@ -15,6 +15,25 @@ namespace Assets.Project.Scripts.UI
         [SerializeField] private Button _closeButton;
 
         List<CollectableRewardUI> _pool = new();
+
+#if UNITY_EDITOR
+        private void OnValidate() => AutoAssignReferences();
+        private void AutoAssignReferences()
+        {
+            if (_inventoryPanel == null)
+                _inventoryPanel = UIHierarchyHelper.FindGameObject(
+                    transform, "ui_panel_inventory");
+
+            if (_inventoryObjectPrefab == null)
+                _inventoryObjectPrefab = UIHierarchyHelper.FindGameObject(
+                    transform, "ui_panel_reward_area/ui_scroll_view/ui_view_port/ui_content");
+
+            if (_closeButton == null)
+                _closeButton = UIHierarchyHelper.FindComponent<Button>(
+                    transform, "ui_button_close");
+        }
+#endif
+
         private void OnEnable()
         {
             SubscribeEvents();
@@ -31,6 +50,7 @@ namespace Assets.Project.Scripts.UI
         internal void ShowInventory() => _inventoryPanel.SetActive(true);
         internal void FillItemArea(List<InventoryItemVO> inventoryItems)
         {
+            Debug.Log("Filling inventory with items: " + inventoryItems.Count);
             ClearItemArea();
 
             for (int i = 0; i < inventoryItems.Count; i++)

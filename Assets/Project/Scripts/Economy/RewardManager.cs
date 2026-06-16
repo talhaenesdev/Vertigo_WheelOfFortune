@@ -24,6 +24,7 @@ namespace Assets.Project.Scripts.Economy
 
         internal void CollectReward()
         {
+            Debug.Log("[RewardManager] - CollectReward");
             RewardSaveData rewardSaveData = new RewardSaveData();
 
             Dictionary<RewardType, int> hasRewards = new();
@@ -61,6 +62,7 @@ namespace Assets.Project.Scripts.Economy
 
         internal Dictionary<RewardType, int> GetRewardData()
         {
+            Debug.Log("[RewardManager] - GetRewardData");
             RewardSaveData rewardSaveData = new RewardSaveData();
             return rewardSaveData.LoadRewards();
         }

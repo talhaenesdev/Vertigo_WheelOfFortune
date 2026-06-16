@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Assets.Project.Scripts.Data
 {
     [CreateAssetMenu(fileName = "RewardIcon",menuName = "Game/RewardIcon Config")]
-    internal class RewardIconDatabase : ScriptableObject
+    public class RewardIconDatabase : ScriptableObject
     {
         [SerializeField] private List<RewardIconData> items;
 
@@ -31,14 +31,14 @@ namespace Assets.Project.Scripts.Data
             }
         }
 
-        internal Sprite GetIcon(RewardType type)
+        public Sprite GetIcon(RewardType type)
         {
             return cache.TryGetValue(type, out var icon) ? icon : null;
         }
     }
 
     [Serializable]
-    internal class RewardIconData
+    public class RewardIconData
     {
         public RewardType rewardType;
         public Sprite icon;

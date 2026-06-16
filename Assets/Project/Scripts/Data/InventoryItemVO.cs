@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Assets.Project.Scripts.Data
 {
-    internal class InventoryItemVO
+    public class InventoryItemVO
     {
         public RewardType RewardType { get; set; }
         public Sprite RewardSprite { get; set; }

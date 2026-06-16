@@ -12,7 +12,7 @@ namespace Assets.Project.Scripts.UI
         internal void SetReward(Sprite sprite, string text)
         {
             _rewardImage.sprite = sprite;
-            _rewardImage.preserveAspect = true;
+            _rewardImage.SetNativeSize();
             _rewardText.text = text;
         }
     }

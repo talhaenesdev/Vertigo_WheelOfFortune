@@ -11,6 +11,15 @@ namespace Assets.Project.Scripts.GamePlay
 
         private WheelConfig _currentConfig;
 
+#if UNITY_EDITOR
+        private void OnValidate() => AutoAssignReferences();
+        private void AutoAssignReferences()
+        {
+            if (_wheelTransform == null)
+                _wheelTransform = UIHierarchyHelper.FindComponent<RectTransform>(
+                    transform, "ui_panel_middle/ui_image_wheel_parent");
+        }
+#endif
 
         internal void SetConfig(WheelConfig config) => _currentConfig = config;
 

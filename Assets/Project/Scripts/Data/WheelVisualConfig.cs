@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Assets.Project.Scripts.Data
 {
     [CreateAssetMenu(fileName = "WheelVisualConfig", menuName = "Game/Wheel Visual Config")]
-    internal class WheelVisualConfig : ScriptableObject
+    public class WheelVisualConfig : ScriptableObject
     {
        [SerializeField] private List<WheelVisualVO> _wheelVisuals;
 
@@ -27,22 +27,22 @@ namespace Assets.Project.Scripts.Data
            }
        }
 
-        internal WheelVisualVO GetVisual(ZoneType zoneType)
+        public WheelVisualVO GetVisual(ZoneType zoneType)
         {
             _cache.TryGetValue(zoneType, out var visual);
             return visual;
         }
 
-        internal string GetWheelTypeText(ZoneType zoneType)
+        public string GetWheelTypeText(ZoneType zoneType)
         {
             if (_cache.TryGetValue(zoneType, out var visual))
             {
-                return visual.TitleText;
+                return visual.WheelTypeText;
             }
             return string.Empty;
         }
 
-        internal Color GetWheelTextColor(ZoneType zoneType)
+        public Color GetWheelTextColor(ZoneType zoneType)
         {
             if (_cache.TryGetValue(zoneType, out var visual))
             {

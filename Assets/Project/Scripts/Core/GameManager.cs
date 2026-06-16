@@ -18,14 +18,8 @@ namespace Assets.Project.Scripts.Core
         [SerializeField] private CurrencyManager _currencyManager;
         [SerializeField] private ADManager _adManager;
 
-
-        [SerializeField]
-        private WheelConfig normalWheel;
-
-
         [SerializeField]
         private ReviveData _reviveData;
-
         
         private GameState currentState;
 
@@ -96,6 +90,7 @@ namespace Assets.Project.Scripts.Core
 
             _rewardManager.CollectReward();
             HandleRestart();
+            Debug.Log("[GameManager] - HandleCollect");
         }
 
         private void HandleSpin()
@@ -115,6 +110,8 @@ namespace Assets.Project.Scripts.Core
 
         private void OnSpinCompleted(WheelSliceData result)
         {
+            Debug.Log("[GameManager] - OnSpinCompleted");
+
             if (result.SliceType == SliceType.Bomb)
             {
                 HandleBomb();
@@ -146,6 +143,7 @@ namespace Assets.Project.Scripts.Core
 
         private void HandleBomb()
         {
+            Debug.Log("[GameManager] - HandleBomb");
             currentState = GameState.Limbo;
 
             _rewardManager.ResetReward();
@@ -153,19 +151,21 @@ namespace Assets.Project.Scripts.Core
             _uiManager.SetGameOverPanel(true);
         }
 
-        private void SetupWheelConfig() => _wheelController.SetConfig(normalWheel);
+        private void SetupWheelConfig() => _wheelController.SetConfig(_zoneManager.GetWheelConfig());
 
         private void SetWheel()
         {
+            Debug.Log("[GameManager] - SetWheel");
             _uiManager.SetWheelVisual(
                 _zoneManager.GetCurrentZoneType(),
-                normalWheel.Zones[_zoneManager.CurrentZoneIndex()].Slices);
+                _zoneManager.GetWheelSliceRows());
         }
 
         private void UpdateCollectButton() => _uiManager.SetCollectButtonInteractable(_zoneManager.CanCollect());
 
         private void HandleCoinRevive()
         {
+            Debug.Log("[GameManager] - HandleCoinRevive");
             if (_currencyManager.GetCurrentCoins() >= _reviveData.CoinReviveCost)
             {
                 _currencyManager.SpendCoins(_reviveData.CoinReviveCost);
@@ -180,6 +180,7 @@ namespace Assets.Project.Scripts.Core
 
         private void OnOpenInventory()
         {
+            Debug.Log("[GameManager] - OnOpenInventory");
             Dictionary<RewardType, int> inventory = new Dictionary<RewardType, int>();
 
             inventory = _rewardManager.GetRewardData();

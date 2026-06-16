@@ -179,6 +179,72 @@ MonoBehaviour:
         RewardType: 2
         Amount: 500
   - Slices:
+    - SliceType: 1
+      Reward:
+        RewardType: 0
+        Amount: 1
+    - SliceType: 0
+      Reward:
+        RewardType: 1
+        Amount: 1
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 100
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 200
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 300
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 400
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 500
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 500
+  - Slices:
+    - SliceType: 0
+      Reward:
+        RewardType: 0
+        Amount: 1
+    - SliceType: 0
+      Reward:
+        RewardType: 1
+        Amount: 1
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 100
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 200
+    - SliceType: 1
+      Reward:
+        RewardType: 2
+        Amount: 300
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 400
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 500
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 500
+  - Slices:
     - SliceType: 0
       Reward:
         RewardType: 0
@@ -204,6 +270,39 @@ MonoBehaviour:
         RewardType: 2
         Amount: 400
     - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 500
+    - SliceType: 1
+      Reward:
+        RewardType: 2
+        Amount: 500
+  - Slices:
+    - SliceType: 0
+      Reward:
+        RewardType: 0
+        Amount: 1
+    - SliceType: 0
+      Reward:
+        RewardType: 1
+        Amount: 1
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 100
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 200
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 300
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 400
+    - SliceType: 1
       Reward:
         RewardType: 2
         Amount: 500
@@ -253,7 +352,7 @@ MonoBehaviour:
       Reward:
         RewardType: 1
         Amount: 1
-    - SliceType: 0
+    - SliceType: 1
       Reward:
         RewardType: 2
         Amount: 100
@@ -298,7 +397,7 @@ MonoBehaviour:
       Reward:
         RewardType: 2
         Amount: 300
-    - SliceType: 0
+    - SliceType: 1
       Reward:
         RewardType: 2
         Amount: 400
@@ -327,337 +426,7 @@ MonoBehaviour:
       Reward:
         RewardType: 2
         Amount: 200
-    - SliceType: 0
-      Reward:
-        RewardType: 2
-        Amount: 300
-    - SliceType: 0
-      Reward:
-        RewardType: 2
-        Amount: 400
-    - SliceType: 0
-      Reward:
-        RewardType: 2
-        Amount: 500
-    - SliceType: 0
-      Reward:
-        RewardType: 2
-        Amount: 500
-  - Slices:
-    - SliceType: 0
-      Reward:
-        RewardType: 0
-        Amount: 1
-    - SliceType: 0
-      Reward:
-        RewardType: 1
-        Amount: 1
-    - SliceType: 0
-      Reward:
-        RewardType: 2
-        Amount: 100
-    - SliceType: 0
-      Reward:
-        RewardType: 2
-        Amount: 200
-    - SliceType: 0
-      Reward:
-        RewardType: 2
-        Amount: 300
-    - SliceType: 0
-      Reward:
-        RewardType: 2
-        Amount: 400
-    - SliceType: 0
-      Reward:
-        RewardType: 2
-        Amount: 500
-    - SliceType: 0
-      Reward:
-        RewardType: 2
-        Amount: 500
-  - Slices:
-    - SliceType: 0
-      Reward:
-        RewardType: 0
-        Amount: 1
-    - SliceType: 0
-      Reward:
-        RewardType: 1
-        Amount: 1
-    - SliceType: 0
-      Reward:
-        RewardType: 2
-        Amount: 100
-    - SliceType: 0
-      Reward:
-        RewardType: 2
-        Amount: 200
-    - SliceType: 0
-      Reward:
-        RewardType: 2
-        Amount: 300
-    - SliceType: 0
-      Reward:
-        RewardType: 2
-        Amount: 400
-    - SliceType: 0
-      Reward:
-        RewardType: 2
-        Amount: 500
-    - SliceType: 0
-      Reward:
-        RewardType: 2
-        Amount: 500
-  - Slices:
-    - SliceType: 0
-      Reward:
-        RewardType: 0
-        Amount: 1
-    - SliceType: 0
-      Reward:
-        RewardType: 1
-        Amount: 1
-    - SliceType: 0
-      Reward:
-        RewardType: 2
-        Amount: 100
-    - SliceType: 0
-      Reward:
-        RewardType: 2
-        Amount: 200
-    - SliceType: 0
-      Reward:
-        RewardType: 2
-        Amount: 300
-    - SliceType: 0
-      Reward:
-        RewardType: 2
-        Amount: 400
-    - SliceType: 0
-      Reward:
-        RewardType: 2
-        Amount: 500
-    - SliceType: 0
-      Reward:
-        RewardType: 2
-        Amount: 500
-  - Slices:
-    - SliceType: 0
-      Reward:
-        RewardType: 0
-        Amount: 1
-    - SliceType: 0
-      Reward:
-        RewardType: 1
-        Amount: 1
-    - SliceType: 0
-      Reward:
-        RewardType: 2
-        Amount: 100
-    - SliceType: 0
-      Reward:
-        RewardType: 2
-        Amount: 200
-    - SliceType: 0
-      Reward:
-        RewardType: 2
-        Amount: 300
-    - SliceType: 0
-      Reward:
-        RewardType: 2
-        Amount: 400
-    - SliceType: 0
-      Reward:
-        RewardType: 2
-        Amount: 500
-    - SliceType: 0
-      Reward:
-        RewardType: 2
-        Amount: 500
-  - Slices:
-    - SliceType: 0
-      Reward:
-        RewardType: 0
-        Amount: 1
-    - SliceType: 0
-      Reward:
-        RewardType: 1
-        Amount: 1
-    - SliceType: 0
-      Reward:
-        RewardType: 2
-        Amount: 100
-    - SliceType: 0
-      Reward:
-        RewardType: 2
-        Amount: 200
-    - SliceType: 0
-      Reward:
-        RewardType: 2
-        Amount: 300
-    - SliceType: 0
-      Reward:
-        RewardType: 2
-        Amount: 400
-    - SliceType: 0
-      Reward:
-        RewardType: 2
-        Amount: 500
-    - SliceType: 0
-      Reward:
-        RewardType: 2
-        Amount: 500
-  - Slices:
-    - SliceType: 0
-      Reward:
-        RewardType: 0
-        Amount: 1
-    - SliceType: 0
-      Reward:
-        RewardType: 1
-        Amount: 1
-    - SliceType: 0
-      Reward:
-        RewardType: 2
-        Amount: 100
-    - SliceType: 0
-      Reward:
-        RewardType: 2
-        Amount: 200
-    - SliceType: 0
-      Reward:
-        RewardType: 2
-        Amount: 300
-    - SliceType: 0
-      Reward:
-        RewardType: 2
-        Amount: 400
-    - SliceType: 0
-      Reward:
-        RewardType: 2
-        Amount: 500
-    - SliceType: 0
-      Reward:
-        RewardType: 2
-        Amount: 500
-  - Slices:
-    - SliceType: 0
-      Reward:
-        RewardType: 0
-        Amount: 1
-    - SliceType: 0
-      Reward:
-        RewardType: 1
-        Amount: 1
-    - SliceType: 0
-      Reward:
-        RewardType: 2
-        Amount: 100
-    - SliceType: 0
-      Reward:
-        RewardType: 2
-        Amount: 200
-    - SliceType: 0
-      Reward:
-        RewardType: 2
-        Amount: 300
-    - SliceType: 0
-      Reward:
-        RewardType: 2
-        Amount: 400
-    - SliceType: 0
-      Reward:
-        RewardType: 2
-        Amount: 500
-    - SliceType: 0
-      Reward:
-        RewardType: 2
-        Amount: 500
-  - Slices:
-    - SliceType: 0
-      Reward:
-        RewardType: 0
-        Amount: 1
-    - SliceType: 0
-      Reward:
-        RewardType: 1
-        Amount: 1
-    - SliceType: 0
-      Reward:
-        RewardType: 2
-        Amount: 100
-    - SliceType: 0
-      Reward:
-        RewardType: 2
-        Amount: 200
-    - SliceType: 0
-      Reward:
-        RewardType: 2
-        Amount: 300
-    - SliceType: 0
-      Reward:
-        RewardType: 2
-        Amount: 400
-    - SliceType: 0
-      Reward:
-        RewardType: 2
-        Amount: 500
-    - SliceType: 0
-      Reward:
-        RewardType: 2
-        Amount: 500
-  - Slices:
-    - SliceType: 0
-      Reward:
-        RewardType: 0
-        Amount: 1
-    - SliceType: 0
-      Reward:
-        RewardType: 1
-        Amount: 1
-    - SliceType: 0
-      Reward:
-        RewardType: 2
-        Amount: 100
-    - SliceType: 0
-      Reward:
-        RewardType: 2
-        Amount: 200
-    - SliceType: 0
-      Reward:
-        RewardType: 2
-        Amount: 300
-    - SliceType: 0
-      Reward:
-        RewardType: 2
-        Amount: 400
-    - SliceType: 0
-      Reward:
-        RewardType: 2
-        Amount: 500
-    - SliceType: 0
-      Reward:
-        RewardType: 2
-        Amount: 500
-  - Slices:
-    - SliceType: 0
-      Reward:
-        RewardType: 0
-        Amount: 1
-    - SliceType: 0
-      Reward:
-        RewardType: 1
-        Amount: 1
-    - SliceType: 0
-      Reward:
-        RewardType: 2
-        Amount: 100
-    - SliceType: 0
-      Reward:
-        RewardType: 2
-        Amount: 200
-    - SliceType: 0
+    - SliceType: 1
       Reward:
         RewardType: 2
         Amount: 300
@@ -678,19 +447,85 @@ MonoBehaviour:
       Reward:
         RewardType: 0
         Amount: 1
-    - SliceType: 1
+    - SliceType: 0
       Reward:
         RewardType: 1
         Amount: 1
-    - SliceType: 1
+    - SliceType: 0
       Reward:
         RewardType: 2
         Amount: 100
-    - SliceType: 1
+    - SliceType: 0
       Reward:
         RewardType: 2
         Amount: 200
-    - SliceType: 1
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 300
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 400
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 500
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 500
+  - Slices:
+    - SliceType: 0
+      Reward:
+        RewardType: 0
+        Amount: 1
+    - SliceType: 0
+      Reward:
+        RewardType: 1
+        Amount: 1
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 100
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 200
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 300
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 400
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 500
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 500
+  - Slices:
+    - SliceType: 0
+      Reward:
+        RewardType: 0
+        Amount: 1
+    - SliceType: 0
+      Reward:
+        RewardType: 1
+        Amount: 1
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 100
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 200
+    - SliceType: 0
       Reward:
         RewardType: 2
         Amount: 300
@@ -698,11 +533,477 @@ MonoBehaviour:
       Reward:
         RewardType: 2
         Amount: 400
-    - SliceType: 1
+    - SliceType: 0
       Reward:
         RewardType: 2
         Amount: 500
-    - SliceType: 1
+    - SliceType: 0
       Reward:
         RewardType: 2
         Amount: 500
+  - Slices:
+    - SliceType: 0
+      Reward:
+        RewardType: 0
+        Amount: 1
+    - SliceType: 0
+      Reward:
+        RewardType: 1
+        Amount: 1
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 100
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 200
+    - SliceType: 1
+      Reward:
+        RewardType: 2
+        Amount: 300
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 400
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 500
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 500
+  - Slices:
+    - SliceType: 0
+      Reward:
+        RewardType: 0
+        Amount: 1
+    - SliceType: 1
+      Reward:
+        RewardType: 1
+        Amount: 1
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 100
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 200
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 300
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 400
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 500
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 500
+  - Slices:
+    - SliceType: 0
+      Reward:
+        RewardType: 0
+        Amount: 1
+    - SliceType: 0
+      Reward:
+        RewardType: 1
+        Amount: 1
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 100
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 200
+    - SliceType: 1
+      Reward:
+        RewardType: 2
+        Amount: 300
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 400
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 500
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 500
+  - Slices:
+    - SliceType: 0
+      Reward:
+        RewardType: 0
+        Amount: 1
+    - SliceType: 0
+      Reward:
+        RewardType: 1
+        Amount: 1
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 100
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 200
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 300
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 400
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 500
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 500
+  - Slices:
+    - SliceType: 0
+      Reward:
+        RewardType: 0
+        Amount: 1
+    - SliceType: 0
+      Reward:
+        RewardType: 1
+        Amount: 1
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 100
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 200
+    - SliceType: 1
+      Reward:
+        RewardType: 2
+        Amount: 300
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 400
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 500
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 500
+  - Slices:
+    - SliceType: 0
+      Reward:
+        RewardType: 0
+        Amount: 1
+    - SliceType: 0
+      Reward:
+        RewardType: 1
+        Amount: 1
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 100
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 200
+    - SliceType: 1
+      Reward:
+        RewardType: 2
+        Amount: 300
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 400
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 500
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 500
+  - Slices:
+    - SliceType: 0
+      Reward:
+        RewardType: 0
+        Amount: 1
+    - SliceType: 0
+      Reward:
+        RewardType: 1
+        Amount: 1
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 100
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 200
+    - SliceType: 1
+      Reward:
+        RewardType: 2
+        Amount: 300
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 400
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 500
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 500
+  - Slices:
+    - SliceType: 0
+      Reward:
+        RewardType: 0
+        Amount: 1
+    - SliceType: 0
+      Reward:
+        RewardType: 1
+        Amount: 1
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 100
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 200
+    - SliceType: 1
+      Reward:
+        RewardType: 2
+        Amount: 300
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 400
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 500
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 500
+  - Slices:
+    - SliceType: 0
+      Reward:
+        RewardType: 0
+        Amount: 1
+    - SliceType: 0
+      Reward:
+        RewardType: 1
+        Amount: 1
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 100
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 200
+    - SliceType: 1
+      Reward:
+        RewardType: 2
+        Amount: 300
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 400
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 500
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 500
+  - Slices:
+    - SliceType: 0
+      Reward:
+        RewardType: 0
+        Amount: 1
+    - SliceType: 0
+      Reward:
+        RewardType: 1
+        Amount: 1
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 100
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 200
+    - SliceType: 1
+      Reward:
+        RewardType: 2
+        Amount: 300
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 400
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 500
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 500
+  - Slices:
+    - SliceType: 0
+      Reward:
+        RewardType: 0
+        Amount: 1
+    - SliceType: 0
+      Reward:
+        RewardType: 1
+        Amount: 1
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 100
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 200
+    - SliceType: 1
+      Reward:
+        RewardType: 2
+        Amount: 300
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 400
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 500
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 500
+  - Slices:
+    - SliceType: 0
+      Reward:
+        RewardType: 0
+        Amount: 1
+    - SliceType: 0
+      Reward:
+        RewardType: 1
+        Amount: 1
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 100
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 200
+    - SliceType: 1
+      Reward:
+        RewardType: 2
+        Amount: 300
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 400
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 500
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 500
+  - Slices:
+    - SliceType: 0
+      Reward:
+        RewardType: 0
+        Amount: 1
+    - SliceType: 0
+      Reward:
+        RewardType: 1
+        Amount: 1
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 100
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 200
+    - SliceType: 1
+      Reward:
+        RewardType: 2
+        Amount: 300
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 400
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 500
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 500
+  - Slices:
+    - SliceType: 0
+      Reward:
+        RewardType: 0
+        Amount: 1
+    - SliceType: 0
+      Reward:
+        RewardType: 1
+        Amount: 1
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 100
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 200
+    - SliceType: 1
+      Reward:
+        RewardType: 2
+        Amount: 300
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 400
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 500
+    - SliceType: 0
+      Reward:
+        RewardType: 2
+        Amount: 500
+  FreeSpinCount: 4
+  SpinTime: 4
+  SilverZoneSlice: 5
+  GoldenZoneSlice: 30

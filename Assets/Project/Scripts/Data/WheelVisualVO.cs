@@ -6,12 +6,13 @@ using UnityEngine;
 namespace Assets.Project.Scripts.Data
 {
     [Serializable]
-    internal class WheelVisualVO
+    public class WheelVisualVO
     {
         public ZoneType ZoneType;
         public Color TextColor;
         public Sprite WheelSprite;
         public Sprite PointerSprite;
-        public string TitleText;
+        public string WheelTypeText;
+        public string ZoneTypeText;
     }
 }

@@ -22,11 +22,14 @@ namespace Assets.Project.Scripts.UI
             }
         }
 
-        internal void SetWheelVisuals(Sprite pointerSprite, Sprite wheelSprite, Color textColor)
+        internal void SetWheelVisuals(Sprite pointerSprite, Sprite wheelSprite, Color textColor, string wheelType, string zoneType)
         {
             _pointerImage.sprite = pointerSprite;
             _wheelImage.sprite = wheelSprite;
             _wheelTitleText.color = textColor;
+            _wheelTitleText.text = wheelType;
+            _wheelTitleText.color = textColor;
+            _wheelBonusText.text = zoneType;
             _wheelBonusText.color = textColor;
         }
 

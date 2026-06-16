@@ -323,23 +323,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce38358f390a2b54bb7db01ee94bb82f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Assets.Project.Scripts.UI.UIManager
-  _zoneText: {fileID: 347040580}
-  _wheelTitleText: {fileID: 8461634857296582063}
-  _zoneBonusText: {fileID: 948839511095808859}
-  _currencyText: {fileID: 779985783}
+  _zoneValue: {fileID: 347040580}
+  _currencyValue: {fileID: 779985783}
   _spinButton: {fileID: 1728932342}
   _collectButton: {fileID: 326173447}
   _restartButton: {fileID: 2138278598}
-  _whatchAdReviveButton: {fileID: 1472556633}
+  _watchAdReviveButton: {fileID: 1472556633}
   _coinReviveButton: {fileID: 1493260122}
   _openInventoryButton: {fileID: 1824698036}
   _gameOverPanel: {fileID: 1817550248}
-  _wheelImage: {fileID: 6259299840353966196}
-  _pointerImage: {fileID: 73281005}
-  _wheelUI: {fileID: 790196935016855549}
-  _rewardArea: {fileID: 1498150181}
   _rewardPrefab: {fileID: 8659195771743062860, guid: 6f67be8b6ca75884e995c8811c0f858e, type: 3}
-  _inventoryView: {fileID: 1292021517}
+  _wheelUI: {fileID: 790196935016855549}
+  _inventoryUI: {fileID: 1292021517}
+  _rewardArea: {fileID: 1498150181}
+  _rewardIconDatabase: {fileID: 11400000, guid: fc2aae9ee2a1c2148aa5a597379c6b3f, type: 2}
+  _wheelVisualConfig: {fileID: 11400000, guid: 02534b09971af48469d2a08263793abe, type: 2}
 --- !u!114 &4889041
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2185,6 +2183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e5e22bfeed6cdb49877a34baaba5147, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Assets.Project.Scripts.GamePlay.ZoneManager
+  _wheelConfig: {fileID: 11400000, guid: 4b5c3519f223bf74097dd8cf0e70d05a, type: 2}
 --- !u!4 &504083024
 Transform:
   m_ObjectHideFlags: 0
@@ -2543,9 +2542,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
+  m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -4796,7 +4795,7 @@ GameObject:
   - component: {fileID: 1370767785}
   - component: {fileID: 1370767784}
   m_Layer: 5
-  m_Name: ui_text_ad_count_time
+  m_Name: ui_text_timer_value
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4836,9 +4835,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
+  m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -5620,8 +5619,6 @@ MonoBehaviour:
   _popupManager: {fileID: 845422659}
   _currencyManager: {fileID: 1010887193}
   _adManager: {fileID: 1685412673}
-  normalWheel: {fileID: 11400000, guid: 4b5c3519f223bf74097dd8cf0e70d05a, type: 2}
-  wheelVisualConfig: {fileID: 11400000, guid: 02534b09971af48469d2a08263793abe, type: 2}
   _reviveData: {fileID: 11400000, guid: 860011d5ca0df2341a57540353880f6d, type: 2}
 --- !u!4 &1520458042
 Transform:
@@ -6073,7 +6070,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
+  m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -6109,8 +6106,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _adPanel: {fileID: 1685412669}
   _collectWatchRewardButton: {fileID: 44200862}
+  _timerValue: {fileID: 0}
   _adData: {fileID: 11400000, guid: 55fa0b71bd17fe24cab099b2f17a74fc, type: 2}
-  _timerText: {fileID: 1370767784}
 --- !u!1 &1723248399
 GameObject:
   m_ObjectHideFlags: 0
@@ -6712,7 +6709,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -86.47, y: -32.36}
+  m_AnchoredPosition: {x: -86.470215, y: -32.36}
   m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1824698036
@@ -7650,7 +7647,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d133f89165e5b604ba8383ad200e16c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Assets.Project.Scripts.GamePlay.RewardManager
-  _rewardIconDatabase: {fileID: 11400000, guid: fc2aae9ee2a1c2148aa5a597379c6b3f, type: 2}
 --- !u!4 &2098769645
 Transform:
   m_ObjectHideFlags: 0

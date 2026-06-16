@@ -14,10 +14,6 @@ namespace Assets.Project.Scripts.UI
         [SerializeField]
         private TMP_Text _zoneText;
         [SerializeField]
-        private TMP_Text _wheelTitleText;
-        [SerializeField]
-        private TMP_Text _zoneBonusText;
-        [SerializeField]
         private TMP_Text _currencyText;
 
         [SerializeField]
@@ -27,7 +23,7 @@ namespace Assets.Project.Scripts.UI
         [SerializeField]
         private Button _restartButton;
         [SerializeField]
-        private Button _whatchAdReviveButton;
+        private Button _watchAdReviveButton;
         [SerializeField]
         private Button _coinReviveButton;
         [SerializeField]
@@ -35,22 +31,22 @@ namespace Assets.Project.Scripts.UI
 
         [SerializeField]
         private GameObject _gameOverPanel;
-
-        [SerializeField]
-        private Image _wheelImage;
-        [SerializeField]
-        private Image _pointerImage;
+        [SerializeField] 
+        private GameObject _inventoryPanel;
 
         [SerializeField]
         private WheelUI _wheelUI;
         [SerializeField]
+        private InventoryUI _inventoryUI;
+
+        [SerializeField]
         private Transform _rewardArea;
 
 
-        [SerializeField] private GameObject _rewardPrefab;
-        [SerializeField] private InventoryUI _inventoryView;
-        [SerializeField] private RewardIconDatabase _rewardIconDatabase;
-        [SerializeField] private WheelVisualConfig wheelVisualConfig;
+        [SerializeField] 
+        private RewardIconDatabase _rewardIconDatabase;
+        [SerializeField] 
+        private WheelVisualConfig _wheelVisualConfig;
 
         private List<CollectableRewardUI> _currentRewards = new List<CollectableRewardUI>();
 
@@ -61,104 +57,101 @@ namespace Assets.Project.Scripts.UI
         public Action OnCoinReviveButton;
         public Action OnOpenInventoryButton;
 
+
+#if UNITY_EDITOR
         private void OnValidate() => AutoAssignReferences();
-        private void Start() => SubscribeEvents();
-        private void OnDisable() => UnSubscribeEvents();
+        private T FindComponent<T>(string path) where T : Component
+        {
+            Transform target = transform.Find(path);
+
+            if (target == null)
+            {
+                Debug.LogError(
+                    $"[{nameof(UIManager)}] Path not found: {path}",
+                    this);
+
+                return null;
+            }
+
+            T component = target.GetComponent<T>();
+
+            if (component == null)
+            {
+                Debug.LogError(
+                    $"[{nameof(UIManager)}] Component {typeof(T).Name} not found on {path}",
+                    this);
+            }
+
+            return component;
+        }
+        private GameObject FindGameObject(string path)
+        {
+            Transform target = transform.Find(path);
+
+            if (target == null)
+            {
+                Debug.LogError($"Path not found: {path}", this);
+                return null;
+            }
+
+            return target.gameObject;
+        }
         private void AutoAssignReferences()
         {
             if (_zoneText == null)
-                _zoneText = transform.Find("ui_panel_top/ui_text_zone_value")
-                    .GetComponent<TMP_Text>();
+                _zoneText = FindComponent<TMP_Text>(
+                    "ui_panel_top/ui_text_zone_value");
 
-            if (_wheelTitleText == null)
-                _wheelTitleText = transform.Find("ui_panel_middle/ui_text_wheel_type")
-                    .GetComponent<TMP_Text>();
-
-            if (_zoneBonusText == null)
-                _zoneBonusText = transform.Find("ui_panel_middle/ui_text_wheel_bonus")
-                    .GetComponent<TMP_Text>();
+            if (_currencyText == null)
+                _currencyText = FindComponent<TMP_Text>(
+                    "ui_panel_top/ui_text_currency_value");
 
             if (_spinButton == null)
-                _spinButton = transform.Find("ui_panel_bottom/ui_button_spin")
-                    .GetComponent<Button>();
-
+                _spinButton = FindComponent<Button>(
+                    "ui_panel_bottom/ui_button_spin");
             if (_restartButton == null)
-                _restartButton = transform.Find("ui_panel_gameover/ui_buttons/ui_button_giveup")
-                    .GetComponent<Button>();
+                _restartButton = FindComponent<Button>(
+                    "ui_panel_gameover/ui_buttons/ui_button_giveup");
 
             if (_collectButton == null)
-                _collectButton = transform.Find("ui_panel_bottom/ui_button_collect")
-                    .GetComponent<Button>();
-
-            if (_whatchAdReviveButton == null)
-                _whatchAdReviveButton = transform.Find("ui_panel_gameover/ui_buttons/ui_button_revive_ad")
-                    .GetComponent<Button>();
+                _collectButton = FindComponent<Button>(
+                    "ui_panel_bottom/ui_button_collect");
+            if (_watchAdReviveButton == null)
+                _watchAdReviveButton = FindComponent<Button>(
+                    "ui_panel_gameover/ui_buttons/ui_button_revive_ad");
 
             if (_coinReviveButton == null)
-                _coinReviveButton = transform.Find("ui_panel_gameover/ui_buttons/ui_button_revive_coin")
-                    .GetComponent<Button>();
-
+                _coinReviveButton = FindComponent<Button>(
+                    "ui_panel_gameover/ui_buttons/ui_button_revive_coin");
             if (_openInventoryButton == null)
-                _openInventoryButton = transform.Find("ui_panel_top/ui_button_inventory")
-                    .GetComponent<Button>();
+                _openInventoryButton = FindComponent<Button>(
+                    "ui_panel_top/ui_button_inventory");
 
             if (_gameOverPanel == null)
-                _gameOverPanel = transform.Find("ui_panel_gameover").gameObject;
+                _gameOverPanel = FindGameObject("ui_panel_gameover");
 
-            if (_wheelImage == null)
-                _wheelImage = transform.Find("ui_panel_middle/ui_image_wheel").GetComponent<Image>();
-
-            if (_pointerImage == null)
-                _pointerImage = transform.Find("ui_panel_middle/ui_image_pointer").GetComponent<Image>();
-
+            if (_inventoryPanel == null)
+                _inventoryPanel = FindGameObject("ui_panel_inventory");
+            
             if (_wheelUI == null)
-                _wheelUI = transform.Find("ui_panel_middle/ui_image_wheel").GetComponent<WheelUI>();
+                _wheelUI = FindComponent<WheelUI>(
+                    "ui_panel_middle/ui_image_wheel");
+
+            if (_inventoryUI == null)
+                _inventoryUI = FindComponent<InventoryUI>(
+                    "ui_panel_inventory");
 
             if (_rewardArea == null)
-                _rewardArea = transform.Find("ui_panel_top/ui_panel_reward_area/ui_scroll_view/ui_view_port/ui_content").GetComponent<Transform>();
+                _rewardArea = FindComponent<Transform>(
+                    "ui_panel_top/ui_panel_reward_area/ui_scroll_view/ui_view_port/ui_content");
         }
-        private void SubscribeEvents()
-        {
-            _spinButton.onClick.AddListener(
-                () => OnSpinPressed?.Invoke());
-            _collectButton.onClick.AddListener(
-                () => OnCollectPressed?.Invoke());
-            _restartButton.onClick.AddListener(
-                () => OnRestartPressed?.Invoke());
-            _whatchAdReviveButton.onClick.AddListener(
-                () => OnWhatchAdReviveButton?.Invoke());
-            _coinReviveButton.onClick.AddListener(
-                () => OnCoinReviveButton?.Invoke());
-            _openInventoryButton.onClick.AddListener(
-                () => OnOpenInventoryButton?.Invoke());
-        }
-        private void UnSubscribeEvents()
-        {
-            _spinButton.onClick.RemoveListener(
-                () => OnSpinPressed?.Invoke());
-            _collectButton.onClick.RemoveListener(
-                () => OnCollectPressed?.Invoke());
-            _restartButton.onClick.RemoveListener(
-                () => OnRestartPressed?.Invoke());
-            _whatchAdReviveButton.onClick.RemoveListener(
-                () => OnWhatchAdReviveButton?.Invoke());
-            _coinReviveButton.onClick.RemoveListener(
-                () => OnCoinReviveButton?.Invoke());
-            _openInventoryButton.onClick.RemoveListener(
-                () => OnOpenInventoryButton?.Invoke());
-        }
+#endif
+
+
         internal void UpdateZone(int zone) =>_zoneText.text = "ZONE " + zone;
         internal void SetCollectButtonInteractable(bool active) => _collectButton.interactable = active;
         internal void SetSpinButtonInteractable(bool active) => _spinButton.interactable = active;
-        private void SetWheelRewardUI(int index, Sprite sprite, string text) => _wheelUI.SetRewardView(index, sprite, text);
         internal void SetGameOverPanel(bool isActive) => _gameOverPanel.SetActive(isActive);
-
-        private void WheelTypeText(string wheelType, Color textColor)
-        {
-            _wheelTitleText.text = wheelType + " SPIN";
-            _wheelTitleText.color = textColor; 
-        }
-
         internal void AddRewardArea(RewardType rewardType, Sprite rewardSprite, int rewardAmount)
         {
             foreach (var rewardUI in _currentRewards)
@@ -170,7 +163,7 @@ namespace Assets.Project.Scripts.UI
                 }
             }
 
-            CollectableRewardUI rewardUIEntity = Instantiate(_rewardPrefab, _rewardArea).GetComponent<CollectableRewardUI>();
+            CollectableRewardUI rewardUIEntity = Instantiate(_inventoryPanel, _rewardArea).GetComponent<CollectableRewardUI>();
             _currentRewards.Add(rewardUIEntity);
             rewardUIEntity.Setup(rewardType, rewardSprite, rewardAmount);
         }
@@ -186,23 +179,23 @@ namespace Assets.Project.Scripts.UI
 
         internal void OpenInventoryPanel(List<InventoryItemVO> inventoryItems)
         {
-            _inventoryView.ShowInventory();
-            _inventoryView.FillItemArea(inventoryItems);
+            _inventoryUI.ShowInventory();
+            _inventoryUI.FillItemArea(inventoryItems);
         }
 
         internal void UpdateCurrencyText(int amount) => _currencyText.text = amount.ToString();
 
-        internal Sprite GetRewardIcon(RewardType rewardType)
-        {
-            return _rewardIconDatabase.GetIcon(rewardType);
-        }
-
         internal void SetWheelVisual(ZoneType currentZoneType, List<WheelSliceData> slices)
         {
 
-            WheelTypeText(
-                wheelVisualConfig.GetWheelTypeText(currentZoneType),
-                wheelVisualConfig.GetWheelTextColor(currentZoneType));
+            WheelVisualVO wheelVisualVO = _wheelVisualConfig.GetVisual(currentZoneType);
+
+            _wheelUI.SetWheelVisuals(wheelVisualVO.PointerSprite,
+                                     wheelVisualVO.WheelSprite,
+                                     wheelVisualVO.TextColor,
+                                     wheelVisualVO.WheelTypeText,
+                                     wheelVisualVO.ZoneTypeText);
+
 
             for (int i = 0; i < slices.Count; i++)
             {
@@ -221,15 +214,12 @@ namespace Assets.Project.Scripts.UI
                     rewardIcon = GetRewardIcon(RewardType.Bomb);
                 }
 
-
-                SetWheelRewardUI(i, rewardIcon, rewardAmount);
-
-                WheelVisualVO wheelVisualVO = wheelVisualConfig.GetVisual(currentZoneType);
-
-                _wheelUI.SetWheelVisuals(wheelVisualVO.PointerSprite,
-                                         wheelVisualVO.WheelSprite,
-                                         wheelVisualVO.TextColor);
+                _wheelUI.SetRewardView(i, rewardIcon, rewardAmount);
             }
+        }
+        internal Sprite GetRewardIcon(RewardType rewardType)
+        {
+            return _rewardIconDatabase.GetIcon(rewardType);
         }
     }
 }
