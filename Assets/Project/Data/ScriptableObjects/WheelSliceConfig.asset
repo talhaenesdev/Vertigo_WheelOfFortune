@@ -1007,3 +1007,6 @@ MonoBehaviour:
   SpinTime: 4
   SilverZoneSlice: 5
   GoldenZoneSlice: 30
+  PointerPunchAngle: -5
+  PointerPunchVibrato: 8
+  PointerPunchElasticity: 1

@@ -12,9 +12,9 @@ namespace Assets.Project.Scripts.UI
     {
 
         [SerializeField]
-        private TMP_Text _zoneText;
+        private TMP_Text _zoneValue;
         [SerializeField]
-        private TMP_Text _currencyText;
+        private TMP_Text _currencyValue;
 
         [SerializeField]
         private Button _spinButton;
@@ -32,7 +32,7 @@ namespace Assets.Project.Scripts.UI
         [SerializeField]
         private GameObject _gameOverPanel;
         [SerializeField] 
-        private GameObject _inventoryPanel;
+        private GameObject _rewardPrefab;
 
         [SerializeField]
         private WheelUI _wheelUI;
@@ -60,95 +60,98 @@ namespace Assets.Project.Scripts.UI
 
 #if UNITY_EDITOR
         private void OnValidate() => AutoAssignReferences();
-        private T FindComponent<T>(string path) where T : Component
-        {
-            Transform target = transform.Find(path);
-
-            if (target == null)
-            {
-                Debug.LogError(
-                    $"[{nameof(UIManager)}] Path not found: {path}",
-                    this);
-
-                return null;
-            }
-
-            T component = target.GetComponent<T>();
-
-            if (component == null)
-            {
-                Debug.LogError(
-                    $"[{nameof(UIManager)}] Component {typeof(T).Name} not found on {path}",
-                    this);
-            }
-
-            return component;
-        }
-        private GameObject FindGameObject(string path)
-        {
-            Transform target = transform.Find(path);
-
-            if (target == null)
-            {
-                Debug.LogError($"Path not found: {path}", this);
-                return null;
-            }
-
-            return target.gameObject;
-        }
         private void AutoAssignReferences()
         {
-            if (_zoneText == null)
-                _zoneText = FindComponent<TMP_Text>(
-                    "ui_panel_top/ui_text_zone_value");
+            if (_zoneValue == null)
+                _zoneValue = UIHierarchyHelper.FindComponent<TMP_Text>(
+                    transform, "ui_panel_top/ui_text_zone_value");
 
-            if (_currencyText == null)
-                _currencyText = FindComponent<TMP_Text>(
-                    "ui_panel_top/ui_text_currency_value");
+            if (_currencyValue == null)
+                _currencyValue = UIHierarchyHelper.FindComponent<TMP_Text>(
+                    transform, "ui_panel_top/ui_text_currency_value");
 
             if (_spinButton == null)
-                _spinButton = FindComponent<Button>(
-                    "ui_panel_bottom/ui_button_spin");
+                _spinButton = UIHierarchyHelper.FindComponent<Button>(
+                    transform, "ui_panel_bottom/ui_button_spin");
             if (_restartButton == null)
-                _restartButton = FindComponent<Button>(
-                    "ui_panel_gameover/ui_buttons/ui_button_giveup");
+                _restartButton = UIHierarchyHelper.FindComponent<Button>(
+                    transform, "ui_panel_gameover/ui_buttons/ui_button_giveup");
 
             if (_collectButton == null)
-                _collectButton = FindComponent<Button>(
-                    "ui_panel_bottom/ui_button_collect");
+                _collectButton = UIHierarchyHelper.FindComponent<Button>(
+                    transform, "ui_panel_bottom/ui_button_collect");
             if (_watchAdReviveButton == null)
-                _watchAdReviveButton = FindComponent<Button>(
-                    "ui_panel_gameover/ui_buttons/ui_button_revive_ad");
+                _watchAdReviveButton = UIHierarchyHelper.FindComponent<Button>(
+                    transform, "ui_panel_gameover/ui_buttons/ui_button_revive_ad");
 
             if (_coinReviveButton == null)
-                _coinReviveButton = FindComponent<Button>(
-                    "ui_panel_gameover/ui_buttons/ui_button_revive_coin");
+                _coinReviveButton = UIHierarchyHelper.FindComponent<Button>(
+                    transform, "ui_panel_gameover/ui_buttons/ui_button_revive_coin");
             if (_openInventoryButton == null)
-                _openInventoryButton = FindComponent<Button>(
-                    "ui_panel_top/ui_button_inventory");
+                _openInventoryButton = UIHierarchyHelper.FindComponent<Button>(
+                    transform, "ui_panel_top/ui_button_inventory");
 
             if (_gameOverPanel == null)
-                _gameOverPanel = FindGameObject("ui_panel_gameover");
+                _gameOverPanel = UIHierarchyHelper.FindGameObject(
+                    transform, "ui_panel_gameover");
 
-            if (_inventoryPanel == null)
-                _inventoryPanel = FindGameObject("ui_panel_inventory");
-            
             if (_wheelUI == null)
-                _wheelUI = FindComponent<WheelUI>(
-                    "ui_panel_middle/ui_image_wheel");
+                _wheelUI = UIHierarchyHelper.FindComponent<WheelUI>(
+                    transform, "ui_panel_middle/ui_image_wheel"); if (_wheelUI != null)
 
-            if (_inventoryUI == null)
-                _inventoryUI = FindComponent<InventoryUI>(
-                    "ui_panel_inventory");
+                if (_inventoryUI == null)
+                    _inventoryUI = UIHierarchyHelper.FindComponent<InventoryUI>(
+                        transform, "ui_panel_inventory");
 
             if (_rewardArea == null)
-                _rewardArea = FindComponent<Transform>(
-                    "ui_panel_top/ui_panel_reward_area/ui_scroll_view/ui_view_port/ui_content");
+                _rewardArea = UIHierarchyHelper.FindComponent<Transform>(
+                    transform, "ui_panel_top/ui_panel_reward_area/ui_scroll_view/ui_view_port/ui_content");
+
+            if (_rewardPrefab == null)
+            {
+                Debug.LogError($"[{nameof(UIManager)}] Reward prefab is missing!", this);
+                return;
+            }
         }
 #endif
+        private void Start()
+        {
+            SubscribeEvents();
+        }
+
+        private void OnDisable()
+        {
+            UnSubscribeEvents();
+        }
+
+        private void SubscribeEvents()
+        {
+            _spinButton.onClick.AddListener(OnSpinClicked);
+            _collectButton.onClick.AddListener(OnCollectClicked);
+            _restartButton.onClick.AddListener(OnRestartClicked);
+            _watchAdReviveButton.onClick.AddListener(OnWatchAdReviveClicked);
+            _coinReviveButton.onClick.AddListener(OnCoinReviveClicked);
+            _openInventoryButton.onClick.AddListener(OnOpenInventoryClicked);
+        }
+        private void UnSubscribeEvents()
+        {
+            _spinButton.onClick.RemoveListener(OnSpinClicked);
+            _collectButton.onClick.RemoveListener(OnCollectClicked);
+            _restartButton.onClick.RemoveListener(OnRestartClicked);
+            _watchAdReviveButton.onClick.RemoveListener(OnWatchAdReviveClicked);
+            _coinReviveButton.onClick.RemoveListener(OnCoinReviveClicked);
+            _openInventoryButton.onClick.RemoveListener(OnOpenInventoryClicked);
+        }
+
+        private void OnSpinClicked() => OnSpinPressed?.Invoke();
+        private void OnCollectClicked() => OnCollectPressed?.Invoke();
+        private void OnRestartClicked() => OnRestartPressed?.Invoke();
+        private void OnWatchAdReviveClicked() => OnWhatchAdReviveButton?.Invoke();
+        private void OnCoinReviveClicked() => OnCoinReviveButton?.Invoke();
+        private void OnOpenInventoryClicked() => OnOpenInventoryButton?.Invoke();
 
 
-        internal void UpdateZone(int zone) =>_zoneText.text = "ZONE " + zone;
+        internal void UpdateZone(int zone) =>_zoneValue.text = "ZONE " + zone;
         internal void SetCollectButtonInteractable(bool active) => _collectButton.interactable = active;
         internal void SetSpinButtonInteractable(bool active) => _spinButton.interactable = active;
         internal void SetGameOverPanel(bool isActive) => _gameOverPanel.SetActive(isActive);
@@ -163,7 +166,7 @@ namespace Assets.Project.Scripts.UI
                 }
             }
 
-            CollectableRewardUI rewardUIEntity = Instantiate(_inventoryPanel, _rewardArea).GetComponent<CollectableRewardUI>();
+            CollectableRewardUI rewardUIEntity = Instantiate(_rewardPrefab, _rewardArea).GetComponent<CollectableRewardUI>();
             _currentRewards.Add(rewardUIEntity);
             rewardUIEntity.Setup(rewardType, rewardSprite, rewardAmount);
         }
@@ -183,7 +186,7 @@ namespace Assets.Project.Scripts.UI
             _inventoryUI.FillItemArea(inventoryItems);
         }
 
-        internal void UpdateCurrencyText(int amount) => _currencyText.text = amount.ToString();
+        internal void UpdateCurrencyText(int amount) => _currencyValue.text = amount.ToString();
 
         internal void SetWheelVisual(ZoneType currentZoneType, List<WheelSliceData> slices)
         {

@@ -11,5 +11,8 @@ namespace Assets.Project.Scripts.Data
         public float SpinTime;
         public int SilverZoneSlice;
         public int GoldenZoneSlice;
+        public int PointerPunchAngle;
+        public int PointerPunchVibrato;
+        public int PointerPunchElasticity;
     }
 }

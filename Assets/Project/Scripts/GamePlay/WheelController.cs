@@ -9,22 +9,19 @@ namespace Assets.Project.Scripts.GamePlay
         [SerializeField]
         private RectTransform _wheelTransform;
 
-        private WheelConfig _currentConfig;
+        [SerializeField]
+        private RectTransform _pointerTransform;
 
-#if UNITY_EDITOR
-        private void OnValidate() => AutoAssignReferences();
-        private void AutoAssignReferences()
-        {
-            if (_wheelTransform == null)
-                _wheelTransform = UIHierarchyHelper.FindComponent<RectTransform>(
-                    transform, "ui_panel_middle/ui_image_wheel_parent");
-        }
-#endif
+        private WheelConfig _currentConfig;
 
         internal void SetConfig(WheelConfig config) => _currentConfig = config;
 
         internal void Spin(System.Action<WheelSliceData> onComplete, int currentZoneId)
         {
+            _pointerTransform.DOKill();
+
+            _pointerTransform
+                .DOPunchRotation(new Vector3(0, 0, -_currentConfig.PointerPunchAngle), _currentConfig.SpinTime, _currentConfig.PointerPunchVibrato, _currentConfig.PointerPunchElasticity);
             var zone = _currentConfig.Zones[currentZoneId];
 
             int sliceCount = zone.Slices.Count;
@@ -49,6 +46,7 @@ namespace Assets.Project.Scripts.GamePlay
                     int resultIndex = Mathf.FloorToInt((z + offset) / sliceAngle) % sliceCount;
 
                     onComplete?.Invoke(zone.Slices[resultIndex]);
+                    _pointerTransform.DORotate(Vector3.zero, 0.2f);
                 });
         }
 
