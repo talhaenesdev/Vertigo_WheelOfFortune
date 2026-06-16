@@ -1,5 +1,20 @@
 # Vertigo Games - Wheel of Fortune Demo
 
+
+- ## Gameplay Video
+- https://youtu.be/pnUFxZCAMfk
+
+## Screenshots
+### 20:9
+[resim]
+
+### 16:9
+[resim]
+
+### 4:3
+[resim]
+
+
 A Wheel of Fortune style risk-reward game developed as part of the Vertigo Games Game Developer assessment.
 
 ## Features
@@ -16,3 +31,4 @@ A Wheel of Fortune style risk-reward game developed as part of the Vertigo Games
 - TextMeshPro
 - DOTween
 - Scriptable Objects
+
