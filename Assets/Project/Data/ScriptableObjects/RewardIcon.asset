@@ -14,72 +14,70 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   items:
   - rewardType: 0
-    icon: {fileID: -1109620717404360278, guid: 3b081f7d24ee16d42b5e9305b43f9ed9, type: 3}
+    icon: {fileID: 21300000, guid: 3b081f7d24ee16d42b5e9305b43f9ed9, type: 3}
   - rewardType: 1
-    icon: {fileID: -5733527284831398832, guid: c164a60b0c90155459e5c519128c71a4, type: 3}
+    icon: {fileID: 21300000, guid: c164a60b0c90155459e5c519128c71a4, type: 3}
   - rewardType: 2
-    icon: {fileID: 7347395048315886003, guid: 175519222c83a724e9acba80635021bb, type: 3}
+    icon: {fileID: 21300000, guid: 175519222c83a724e9acba80635021bb, type: 3}
   - rewardType: 3
-    icon: {fileID: -4939823803957887640, guid: 0be8d4b7b62ad5e4b9a62353fcb0934b, type: 3}
+    icon: {fileID: 21300000, guid: 0be8d4b7b62ad5e4b9a62353fcb0934b, type: 3}
   - rewardType: 4
-    icon: {fileID: -8731708261444831326, guid: 1fbf14e6c0f45a04081bf3de38bd48f9, type: 3}
+    icon: {fileID: 21300000, guid: 1fbf14e6c0f45a04081bf3de38bd48f9, type: 3}
   - rewardType: 5
-    icon: {fileID: -4875417417886520195, guid: fcf5ae1faec39af4ba038c55dcc725ce, type: 3}
+    icon: {fileID: 21300000, guid: fcf5ae1faec39af4ba038c55dcc725ce, type: 3}
   - rewardType: 6
-    icon: {fileID: -2733076883953118537, guid: d3e06bd5318bbe7419580c0e66b4a3a9, type: 3}
+    icon: {fileID: 21300000, guid: d3e06bd5318bbe7419580c0e66b4a3a9, type: 3}
   - rewardType: 7
-    icon: {fileID: -4379012504692226635, guid: 9570a1fda496fa946b4c0613177925c3, type: 3}
+    icon: {fileID: 21300000, guid: 9570a1fda496fa946b4c0613177925c3, type: 3}
   - rewardType: 8
-    icon: {fileID: -4654250119808573944, guid: baa5d3293a3d70c4a864ea4753b02cd4, type: 3}
+    icon: {fileID: 21300000, guid: baa5d3293a3d70c4a864ea4753b02cd4, type: 3}
   - rewardType: 9
-    icon: {fileID: -5371827261078721444, guid: f2f90e6c4f87f1348b9adbb4ce04a01c, type: 3}
+    icon: {fileID: 21300000, guid: f2f90e6c4f87f1348b9adbb4ce04a01c, type: 3}
   - rewardType: 10
-    icon: {fileID: 952800183794916973, guid: 11458e18298efc143a4457df37f7e569, type: 3}
+    icon: {fileID: 21300000, guid: 11458e18298efc143a4457df37f7e569, type: 3}
   - rewardType: 11
-    icon: {fileID: -427936682113137119, guid: 4bb9e9fed5492c647b46771b0f66c50a, type: 3}
+    icon: {fileID: 21300000, guid: 4bb9e9fed5492c647b46771b0f66c50a, type: 3}
   - rewardType: 12
-    icon: {fileID: 4456147647422321989, guid: 34cd129aa2792ae44980bd6ff2e7ddb2, type: 3}
+    icon: {fileID: 21300000, guid: 34cd129aa2792ae44980bd6ff2e7ddb2, type: 3}
   - rewardType: 13
-    icon: {fileID: -8530197202772083711, guid: 66881a6458f29d34e844d49598e1141c, type: 3}
+    icon: {fileID: 21300000, guid: 66881a6458f29d34e844d49598e1141c, type: 3}
   - rewardType: 14
-    icon: {fileID: -8530197202772083711, guid: 66881a6458f29d34e844d49598e1141c, type: 3}
+    icon: {fileID: 21300000, guid: b8ae344f9d5d87c4a9a561c3b6cb76fc, type: 3}
   - rewardType: 15
-    icon: {fileID: -8436940113609446805, guid: e962058b16bf4fb4c8d675d48d190e21, type: 3}
+    icon: {fileID: 21300000, guid: e962058b16bf4fb4c8d675d48d190e21, type: 3}
   - rewardType: 16
-    icon: {fileID: 3833793503973785886, guid: 07e60219ad87bc4468d01b246bbc26f3, type: 3}
+    icon: {fileID: 21300000, guid: 07e60219ad87bc4468d01b246bbc26f3, type: 3}
   - rewardType: 17
-    icon: {fileID: 7017515970967946093, guid: f1073afd6aced3f4aba3a4750b40371c, type: 3}
+    icon: {fileID: 21300000, guid: f1073afd6aced3f4aba3a4750b40371c, type: 3}
   - rewardType: 18
-    icon: {fileID: -3161244886251355856, guid: dd2471a7b23c46d4caa89b2dfbcaae14, type: 3}
+    icon: {fileID: 21300000, guid: dd2471a7b23c46d4caa89b2dfbcaae14, type: 3}
   - rewardType: 19
-    icon: {fileID: -5281350351124101004, guid: 3c91cb0e997fecd4da3e03ad4d3eba0e, type: 3}
+    icon: {fileID: 21300000, guid: 3c91cb0e997fecd4da3e03ad4d3eba0e, type: 3}
   - rewardType: 20
-    icon: {fileID: 4658459910315597717, guid: 5e65e846076c1f24984470e171ddceb7, type: 3}
+    icon: {fileID: 21300000, guid: 5e65e846076c1f24984470e171ddceb7, type: 3}
   - rewardType: 21
-    icon: {fileID: 795073897822961988, guid: 6c11e4e6639226c4da244ca849e32222, type: 3}
+    icon: {fileID: 21300000, guid: 6c11e4e6639226c4da244ca849e32222, type: 3}
   - rewardType: 22
-    icon: {fileID: -1995457932549516950, guid: 96188be99228da54c945f2184d58e918, type: 3}
+    icon: {fileID: 21300000, guid: 96188be99228da54c945f2184d58e918, type: 3}
   - rewardType: 23
-    icon: {fileID: -7069822948184546093, guid: b3377a5e1a93ec04eac9cfd0bf9bda9e, type: 3}
+    icon: {fileID: 21300000, guid: b3377a5e1a93ec04eac9cfd0bf9bda9e, type: 3}
   - rewardType: 24
-    icon: {fileID: -3878008160132674235, guid: dfed8251b7c6ea045bf70e9af4e44202, type: 3}
-  - rewardType: 24
-    icon: {fileID: -3878008160132674235, guid: dfed8251b7c6ea045bf70e9af4e44202, type: 3}
+    icon: {fileID: 21300000, guid: dfed8251b7c6ea045bf70e9af4e44202, type: 3}
   - rewardType: 25
-    icon: {fileID: -64891307874697501, guid: eb048a12970bf15439511863e06e3b56, type: 3}
+    icon: {fileID: 21300000, guid: eb048a12970bf15439511863e06e3b56, type: 3}
   - rewardType: 26
-    icon: {fileID: 1742066445721694904, guid: b02bec6378411d64bb6811e65cd82e20, type: 3}
+    icon: {fileID: 21300000, guid: b02bec6378411d64bb6811e65cd82e20, type: 3}
   - rewardType: 27
-    icon: {fileID: 95983631781727552, guid: d0274a2913935ac4486c7314575c00cc, type: 3}
+    icon: {fileID: 21300000, guid: d0274a2913935ac4486c7314575c00cc, type: 3}
   - rewardType: 28
-    icon: {fileID: -1983989049330747494, guid: 2cc31d8d1317ac146b6649eb5ced2795, type: 3}
+    icon: {fileID: 21300000, guid: 2cc31d8d1317ac146b6649eb5ced2795, type: 3}
   - rewardType: 29
-    icon: {fileID: 2406621693580753259, guid: b5a8af2fb278df340b44fe93fe615d45, type: 3}
+    icon: {fileID: 21300000, guid: b5a8af2fb278df340b44fe93fe615d45, type: 3}
   - rewardType: 30
-    icon: {fileID: 4302927716473386306, guid: 3bcf7142673f29b479b1d9618312e552, type: 3}
+    icon: {fileID: 21300000, guid: 3bcf7142673f29b479b1d9618312e552, type: 3}
   - rewardType: 31
-    icon: {fileID: -2243273156050388040, guid: 4d5f62541bf6104458f3b5b8251607bd, type: 3}
+    icon: {fileID: 21300000, guid: 4d5f62541bf6104458f3b5b8251607bd, type: 3}
   - rewardType: 32
-    icon: {fileID: -9176328233517467004, guid: b35db111d5012884c9e9410e0b0d003c, type: 3}
+    icon: {fileID: 21300000, guid: b35db111d5012884c9e9410e0b0d003c, type: 3}
   - rewardType: 33
-    icon: {fileID: -6860072587592751284, guid: 0920acc72b4c1334dbb11645bddcdd3d, type: 3}
+    icon: {fileID: 21300000, guid: 0920acc72b4c1334dbb11645bddcdd3d, type: 3}

@@ -40,7 +40,7 @@ MonoBehaviour:
         Amount: 1
     - SliceType: 0
       Reward:
-        RewardType: 32
+        RewardType: 19
         Amount: 1
     - SliceType: 0
       Reward:

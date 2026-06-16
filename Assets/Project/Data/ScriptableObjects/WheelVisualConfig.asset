@@ -15,19 +15,19 @@ MonoBehaviour:
   _wheelVisuals:
   - ZoneType: 1
     TextColor: {r: 0.5882353, g: 0.34901962, b: 0.10980393, a: 1}
-    WheelSprite: {fileID: -7416167051008218582, guid: cac160598cffb144ea744a04abeb6465, type: 3}
-    PointerSprite: {fileID: 5759410588988491854, guid: 185424e09ab4d1b499177a0cbca14288, type: 3}
+    WheelSprite: {fileID: 21300000, guid: cac160598cffb144ea744a04abeb6465, type: 3}
+    PointerSprite: {fileID: 21300000, guid: 185424e09ab4d1b499177a0cbca14288, type: 3}
     WheelTypeText: Bronze Spin
     ZoneTypeText: Normal Reward Area
   - ZoneType: 0
     TextColor: {r: 0.5754717, g: 0.5754717, b: 0.5754717, a: 1}
-    WheelSprite: {fileID: -4250264824657568362, guid: e1c07481585d16342a834f564c4194a6, type: 3}
-    PointerSprite: {fileID: 2528496851094761378, guid: e77d52b58bd1caf40bb14e09be048701, type: 3}
+    WheelSprite: {fileID: 21300000, guid: e1c07481585d16342a834f564c4194a6, type: 3}
+    PointerSprite: {fileID: 21300000, guid: e77d52b58bd1caf40bb14e09be048701, type: 3}
     WheelTypeText: Silver Spin
     ZoneTypeText: Safe Area
   - ZoneType: 2
     TextColor: {r: 0.86274517, g: 0.72156864, b: 0.22352943, a: 1}
-    WheelSprite: {fileID: 5770997025872212153, guid: d23de632509f46345838ae3c37bc7f2a, type: 3}
-    PointerSprite: {fileID: 8294000708589155680, guid: 19e96f3d1066f1d43a322e1f8c516d57, type: 3}
+    WheelSprite: {fileID: 21300000, guid: d23de632509f46345838ae3c37bc7f2a, type: 3}
+    PointerSprite: {fileID: 21300000, guid: 19e96f3d1066f1d43a322e1f8c516d57, type: 3}
     WheelTypeText: Golden Spin
     ZoneTypeText: Bonus Area
