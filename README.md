@@ -21,6 +21,10 @@ A Wheel of Fortune-style risk & reward game developed as part of the Vertigo Gam
 ### Wheel Spin (4:3)
 ![Wheel Spin](InGamePictures/bronze_spin_4_3.png)
 
+### Bomb Screen (4:3)
+![Wheel Spin](InGamePictures/bomb_screen_4_3.png)
+
+
 ---
 
 ## 🎮 Features
