@@ -1,5 +1,5 @@
 ﻿using Assets.Project.Scripts.Data;
-using Assets.Project.Scripts.UI;
+using Assets.Project.Scripts.Utilities;
 using DG.Tweening;
 using System;
 using TMPro;

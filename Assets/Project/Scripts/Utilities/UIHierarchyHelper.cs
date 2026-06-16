@@ -1,37 +1,39 @@
 ﻿using UnityEngine;
-
-public static class UIHierarchyHelper
+namespace Assets.Project.Scripts.Utilities
 {
-    public static T FindComponent<T>(Transform root, string path) where T : Component
+    public static class UIHierarchyHelper
     {
-        Transform target = root.Find(path);
-
-        if (target == null)
+        public static T FindComponent<T>(Transform root, string path) where T : Component
         {
-            Debug.LogError($"Path not found: {path}");
-            return null;
+            Transform target = root.Find(path);
+
+            if (target == null)
+            {
+                Debug.LogError($"Path not found: {path}");
+                return null;
+            }
+
+            T component = target.GetComponent<T>();
+
+            if (component == null)
+            {
+                Debug.LogError($"Component {typeof(T).Name} not found on {path}");
+            }
+
+            return component;
         }
 
-        T component = target.GetComponent<T>();
-
-        if (component == null)
+        public static GameObject FindGameObject(Transform root, string path)
         {
-            Debug.LogError($"Component {typeof(T).Name} not found on {path}");
+            Transform target = root.Find(path);
+
+            if (target == null)
+            {
+                Debug.LogError($"Path not found: {path}");
+                return null;
+            }
+
+            return target.gameObject;
         }
-
-        return component;
-    }
-
-    public static GameObject FindGameObject(Transform root, string path)
-    {
-        Transform target = root.Find(path);
-
-        if (target == null)
-        {
-            Debug.LogError($"Path not found: {path}");
-            return null;
-        }
-
-        return target.gameObject;
     }
 }

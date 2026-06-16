@@ -21,7 +21,7 @@ namespace Assets.Project.Scripts.Core
         [SerializeField]
         private ReviveData _reviveData;
         
-        private GameState currentState;
+        private GameState _currentState;
 
         private void Start()
         {
@@ -62,7 +62,7 @@ namespace Assets.Project.Scripts.Core
             UpdateCollectButton();
             SetupWheelConfig();
             SetWheel();
-            currentState = GameState.WaitingForInput;
+            _currentState = GameState.WaitingForInput;
             _uiManager.SetGameOverPanel(false);
             _uiManager.SetSpinButtonInteractable(true);
         }
@@ -80,13 +80,13 @@ namespace Assets.Project.Scripts.Core
 
         private void HandleCollect()
         {
-            if (currentState != GameState.WaitingForInput)
+            if (_currentState != GameState.WaitingForInput)
                 return;
 
             if (!_zoneManager.CanCollect())
                 return;
 
-            currentState = GameState.GameOver;
+            _currentState = GameState.GameOver;
 
             _rewardManager.CollectReward();
             HandleRestart();
@@ -95,10 +95,10 @@ namespace Assets.Project.Scripts.Core
 
         private void HandleSpin()
         {
-            if (currentState != GameState.WaitingForInput)
+            if (_currentState != GameState.WaitingForInput)
                 return;
 
-            currentState = GameState.Spinning;
+            _currentState = GameState.Spinning;
 
             _uiManager.SetCollectButtonInteractable(false);
             _uiManager.SetSpinButtonInteractable(false);
@@ -138,13 +138,13 @@ namespace Assets.Project.Scripts.Core
 
             SetWheel();
 
-            currentState = GameState.WaitingForInput;
+            _currentState = GameState.WaitingForInput;
         }
 
         private void HandleBomb()
         {
             Debug.Log("[GameManager] - HandleBomb");
-            currentState = GameState.Limbo;
+            _currentState = GameState.Limbo;
 
             _rewardManager.ResetReward();
 

@@ -1,5 +1,6 @@
 using Assets.Project.Scripts.Data;
 using Assets.Project.Scripts.Enums;
+using Assets.Project.Scripts.Utilities;
 using System;
 using System.Collections.Generic;
 using TMPro;
