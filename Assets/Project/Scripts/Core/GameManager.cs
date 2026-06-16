@@ -146,7 +146,6 @@ namespace Assets.Project.Scripts.Core
             Debug.Log("[GameManager] - HandleBomb");
             _currentState = GameState.Limbo;
 
-            _rewardManager.ResetReward();
 
             _uiManager.SetGameOverPanel(true);
         }
