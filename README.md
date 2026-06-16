@@ -36,6 +36,8 @@ A Wheel of Fortune-style risk & reward game developed as part of the Vertigo Gam
 - ScriptableObject-driven configuration
 - DOTween-based animations
 - Responsive UI (20:9 / 16:9 / 4:3)
+- Optional rewarded continue system (ad-based revive)
+- Currency-based revive mechanic after failure
 
 ---
 
