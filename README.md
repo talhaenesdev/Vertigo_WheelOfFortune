@@ -13,13 +13,13 @@ A Wheel of Fortune-style risk & reward game developed as part of the Vertigo Gam
 ## 📸 Screenshots
 
 ### Wheel Spin (20:9)
-![Wheel Spin](InGamePictures/wheel_spin_20_9.png)
+![Wheel Spin](InGamePictures/golden_spin_20_9.png)
 
 ### Wheel Spin (16:9)
-![Wheel Spin](InGamePictures/wheel_spin_16_9.png)
+![Wheel Spin](InGamePictures/sillver_spin_16_9.png)
 
 ### Wheel Spin (4:3)
-![Wheel Spin](InGamePictures/wheel_spin_4_3.png)
+![Wheel Spin](InGamePictures/bronze_spin_4_3.png)
 
 ---
 
