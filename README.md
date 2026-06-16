@@ -29,6 +29,7 @@ A Wheel of Fortune-style risk & reward game developed as part of the Vertigo Gam
 - Zone-based progression system
 - Risk vs reward mechanics
 - Bomb mechanic (full progress reset)
+- Inventory system for collected rewards
 - Safe Zones (every 5th zone)
 - Super Zones (every 30th zone)
 - Walk-away decision system before spin
