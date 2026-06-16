@@ -6,13 +6,13 @@
 
 ## Screenshots
 ### 20:9
-[resim]
+![Golden Area](InGamePictures/golden_area_4_3.png)
 
 ### 16:9
-[resim]
+![Silver Area](InGamePictures/silver_spin_16_9.png)
 
 ### 4:3
-[resim]
+![Golden Area](InGamePictures/wheel_spin_4_3.png)
 
 
 A Wheel of Fortune style risk-reward game developed as part of the Vertigo Games Game Developer assessment.
