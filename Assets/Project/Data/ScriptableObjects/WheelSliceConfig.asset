@@ -1010,3 +1010,4 @@ MonoBehaviour:
   PointerPunchAngle: -5
   PointerPunchVibrato: 8
   PointerPunchElasticity: 1
+  StartZoneValue: 1
