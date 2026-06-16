@@ -20,7 +20,7 @@ MonoBehaviour:
     WheelTypeText: Bronze Spin
     ZoneTypeText: Normal Reward Area
   - ZoneType: 0
-    TextColor: {r: 1, g: 0.7052167, b: 0, a: 1}
+    TextColor: {r: 0.5754717, g: 0.5754717, b: 0.5754717, a: 1}
     WheelSprite: {fileID: -4250264824657568362, guid: e1c07481585d16342a834f564c4194a6, type: 3}
     PointerSprite: {fileID: 2528496851094761378, guid: e77d52b58bd1caf40bb14e09be048701, type: 3}
     WheelTypeText: Silver Spin

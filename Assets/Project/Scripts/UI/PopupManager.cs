@@ -22,11 +22,11 @@ namespace Assets.Project.Scripts.UI
         {
             if (_notEnoughCoinsPopup == null)
                 _notEnoughCoinsPopup = UIHierarchyHelper.FindGameObject(
-                    transform, "ui_panel_gameover");
+                    transform, "ui_popup_not_enough_money_parent");
 
             if (_adPopup == null)
                 _adPopup = UIHierarchyHelper.FindGameObject(
-                    transform, "ui_panel_ad");
+                    transform, "ui_popup_ad_parent");
 
             if (_closeNotEnoughCoinsButton == null)
                 _closeNotEnoughCoinsButton = UIHierarchyHelper.FindComponent<Button>(
@@ -34,11 +34,11 @@ namespace Assets.Project.Scripts.UI
 
             if (_closeAdPopupButton == null)
                 _closeAdPopupButton = UIHierarchyHelper.FindComponent<Button>(
-                    transform, "ui_popup_ad/ui_button_close");
+                    transform, "ui_popup_ad_parent/ui_popup_ad/ui_button_close");
 
-            if (_whatchAdPopupButton == null)
+            if (_whatchAdPopupButton == null) 
                 _whatchAdPopupButton = UIHierarchyHelper.FindComponent<Button>(
-                    transform, "ui_popup_ad/ui_button_watch");   
+                    transform, "ui_popup_ad_parent/ui_popup_ad/ui_button_watch");   
         }
 #endif
 

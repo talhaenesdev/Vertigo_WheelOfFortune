@@ -187,7 +187,7 @@ namespace Assets.Project.Scripts.UI
             _inventoryUI.FillItemArea(inventoryItems);
         }
 
-        internal void UpdateCurrencyText(int amount) => _currencyValue.text = amount.ToString();
+        internal void UpdateCurrencyText(int amount) => _currencyValue.text = "GOLD : " + amount.ToString();
 
         internal void SetWheelVisual(ZoneType currentZoneType, List<WheelSliceData> slices)
         {
