@@ -14,5 +14,6 @@ namespace Assets.Project.Scripts.Data
         public int PointerPunchAngle;
         public int PointerPunchVibrato;
         public int PointerPunchElasticity;
+        public int StartZoneValue;
     }
 }

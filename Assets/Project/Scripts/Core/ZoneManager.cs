@@ -10,7 +10,12 @@ namespace Assets.Project.Scripts.GamePlay
         [SerializeField]
         private WheelConfig _wheelConfig;
 
-        internal int CurrentZone { get; private set; } = 1;
+        internal int CurrentZone { get; private set; }
+
+        private void Start()
+        {
+            CurrentZone = _wheelConfig.StartZoneValue;
+        }
 
         internal ZoneType GetCurrentZoneType()
         {
@@ -25,7 +30,7 @@ namespace Assets.Project.Scripts.GamePlay
 
         internal void NextZone() => CurrentZone++;
 
-        internal void ResetZone() => CurrentZone = 1;
+        internal void ResetZone() => CurrentZone = _wheelConfig.StartZoneValue;
 
         internal int CurrentZoneIndex() => (CurrentZone - 1) % _wheelConfig.Zones.Count;
 
