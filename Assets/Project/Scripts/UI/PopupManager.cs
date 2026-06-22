@@ -20,23 +20,23 @@ namespace Assets.Project.Scripts.UI
         private void OnValidate() => AutoAssignReferences();
         private void AutoAssignReferences()
         {
-            if (_notEnoughCoinsPopup == null)
+            if (!_notEnoughCoinsPopup)
                 _notEnoughCoinsPopup = UIHierarchyHelper.FindGameObject(
                     transform, "ui_popup_not_enough_money_parent");
 
-            if (_adPopup == null)
+            if (!_adPopup)
                 _adPopup = UIHierarchyHelper.FindGameObject(
                     transform, "ui_popup_ad_parent");
 
-            if (_closeNotEnoughCoinsButton == null)
+            if (!_closeNotEnoughCoinsButton)
                 _closeNotEnoughCoinsButton = UIHierarchyHelper.FindComponent<Button>(
                     transform, "ui_popup_not_enough_money/ui_button_continue");
 
-            if (_closeAdPopupButton == null)
+            if (!_closeAdPopupButton)
                 _closeAdPopupButton = UIHierarchyHelper.FindComponent<Button>(
                     transform, "ui_popup_ad_parent/ui_popup_ad/ui_button_close");
 
-            if (_whatchAdPopupButton == null) 
+            if (!_whatchAdPopupButton) 
                 _whatchAdPopupButton = UIHierarchyHelper.FindComponent<Button>(
                     transform, "ui_popup_ad_parent/ui_popup_ad/ui_button_watch");   
         }

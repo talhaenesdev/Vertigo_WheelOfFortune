@@ -24,17 +24,14 @@ namespace Assets.Project.Scripts.Core
         private void OnValidate() => AutoAssignReferences();
         private void AutoAssignReferences()
         {
-            if (_adPanel == null)
-                _adPanel = UIHierarchyHelper.FindGameObject(
-                    transform, "ui_panel_ad");
+            if (!_adPanel)
+                _adPanel = UIHierarchyHelper.FindGameObject(transform, "ui_panel_ad");
 
-            if (_collectWatchRewardButton == null)
-                _collectWatchRewardButton = UIHierarchyHelper.FindComponent<Button>(
-                    transform, "ui_button_ad_complete");
+            if (!_collectWatchRewardButton)
+                _collectWatchRewardButton = UIHierarchyHelper.FindComponent<Button>(transform, "ui_button_ad_complete");
 
-            if (_timerValue == null)
-                _timerValue = UIHierarchyHelper.FindComponent<TMP_Text>(
-                    transform, "ui_text_timer_value");
+            if (!_timerValue)
+                _timerValue = UIHierarchyHelper.FindComponent<TMP_Text>(transform, "ui_text_timer_value");
         }
 #endif
         internal void ShowAd()
@@ -42,7 +39,6 @@ namespace Assets.Project.Scripts.Core
             _adPanel.SetActive(true);
             WatchAd();
 
-            Debug.Log("[ADManager] - ShowAd");
         }
 
         private void OnEnable()
@@ -64,7 +60,6 @@ namespace Assets.Project.Scripts.Core
         {
             _adPanel.SetActive(false);
             OnCollectAdReward?.Invoke();
-            Debug.Log("[ADManager] - CollectAdReward");
         }
 
         private void WatchAd()
@@ -76,7 +71,6 @@ namespace Assets.Project.Scripts.Core
             {
                 InteractableButton(true);
             });
-            Debug.Log("[ADManager] - WatchAd");
         }
 
         private void InteractableButton(bool interactable) => _collectWatchRewardButton.interactable = interactable;

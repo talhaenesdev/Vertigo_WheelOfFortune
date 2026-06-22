@@ -63,52 +63,55 @@ namespace Assets.Project.Scripts.UI
         private void OnValidate() => AutoAssignReferences();
         private void AutoAssignReferences()
         {
-            if (_zoneValue == null)
+            if (!_zoneValue)
                 _zoneValue = UIHierarchyHelper.FindComponent<TMP_Text>(
                     transform, "ui_panel_top/ui_text_zone_value");
 
-            if (_currencyValue == null)
+            if (!_currencyValue)
                 _currencyValue = UIHierarchyHelper.FindComponent<TMP_Text>(
                     transform, "ui_panel_top/ui_text_currency_value");
 
-            if (_spinButton == null)
+            if (!_spinButton)
                 _spinButton = UIHierarchyHelper.FindComponent<Button>(
                     transform, "ui_panel_bottom/ui_button_spin");
-            if (_restartButton == null)
+
+            if (!_restartButton)
                 _restartButton = UIHierarchyHelper.FindComponent<Button>(
                     transform, "ui_panel_gameover/ui_buttons/ui_button_giveup");
 
-            if (_collectButton == null)
+            if (!_collectButton)
                 _collectButton = UIHierarchyHelper.FindComponent<Button>(
                     transform, "ui_panel_bottom/ui_button_collect");
-            if (_watchAdReviveButton == null)
+
+            if (!_watchAdReviveButton)
                 _watchAdReviveButton = UIHierarchyHelper.FindComponent<Button>(
                     transform, "ui_panel_gameover/ui_buttons/ui_button_revive_ad");
 
-            if (_coinReviveButton == null)
+            if (!_coinReviveButton)
                 _coinReviveButton = UIHierarchyHelper.FindComponent<Button>(
                     transform, "ui_panel_gameover/ui_buttons/ui_button_revive_coin");
-            if (_openInventoryButton == null)
+
+            if (!_openInventoryButton)
                 _openInventoryButton = UIHierarchyHelper.FindComponent<Button>(
                     transform, "ui_panel_top/ui_button_inventory");
 
-            if (_gameOverPanel == null)
+            if (!_gameOverPanel)
                 _gameOverPanel = UIHierarchyHelper.FindGameObject(
                     transform, "ui_panel_gameover");
 
-            if (_wheelUI == null)
+            if (!_wheelUI)
                 _wheelUI = UIHierarchyHelper.FindComponent<WheelUI>(
-                    transform, "ui_panel_middle/ui_image_wheel"); if (_wheelUI != null)
+                    transform, "ui_panel_middle/ui_image_wheel");
 
-                if (_inventoryUI == null)
-                    _inventoryUI = UIHierarchyHelper.FindComponent<InventoryUI>(
-                        transform, "ui_panel_inventory");
+            if (!_inventoryUI)
+                _inventoryUI = UIHierarchyHelper.FindComponent<InventoryUI>(
+                    transform, "ui_panel_inventory");
 
-            if (_rewardArea == null)
+            if (!_rewardArea)
                 _rewardArea = UIHierarchyHelper.FindComponent<Transform>(
                     transform, "ui_panel_top/ui_panel_reward_area/ui_scroll_view/ui_view_port/ui_content");
 
-            if (_rewardPrefab == null)
+            if (!_rewardPrefab)
             {
                 Debug.LogError($"[{nameof(UIManager)}] Reward prefab is missing!", this);
                 return;

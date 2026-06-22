@@ -1,4 +1,4 @@
-using Assets.Project.Scripts.Data;
+﻿using Assets.Project.Scripts.Data;
 using Assets.Project.Scripts.Economy;
 using Assets.Project.Scripts.Enums;
 using Assets.Project.Scripts.GamePlay;
@@ -90,7 +90,6 @@ namespace Assets.Project.Scripts.Core
 
             _rewardManager.CollectReward();
             HandleRestart();
-            Debug.Log("[GameManager] - HandleCollect");
         }
 
         private void HandleSpin()
@@ -118,14 +117,16 @@ namespace Assets.Project.Scripts.Core
             }
 
             if (result.Reward != null)
+            {
                 _rewardManager.AddReward(result.Reward);
 
-            var rewardType = result.Reward.RewardType;
+                var rewardType = result.Reward.RewardType;
 
-            _uiManager.AddRewardArea(
-                rewardType,
-                _uiManager.GetRewardIcon(rewardType),
-                _rewardManager.GetRewardAmount(rewardType));
+                _uiManager.AddRewardArea(
+                    rewardType,
+                    _uiManager.GetRewardIcon(rewardType),
+                    _rewardManager.GetRewardAmount(rewardType));
+            }
 
             _zoneManager.NextZone();
 
@@ -175,10 +176,7 @@ namespace Assets.Project.Scripts.Core
 
         private void OnOpenInventory()
         {
-            Debug.Log("[GameManager] - OnOpenInventory");
-            Dictionary<RewardType, int> inventory = new Dictionary<RewardType, int>();
-
-            inventory = _rewardManager.GetRewardData();
+            var inventory = _rewardManager.GetRewardData();
 
             List<InventoryItemVO> inventoryItems = new List<InventoryItemVO>();
 

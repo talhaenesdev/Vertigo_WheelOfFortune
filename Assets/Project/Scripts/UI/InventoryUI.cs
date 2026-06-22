@@ -51,7 +51,6 @@ namespace Assets.Project.Scripts.UI
         internal void ShowInventory() => _inventoryPanel.SetActive(true);
         internal void FillItemArea(List<InventoryItemVO> inventoryItems)
         {
-            Debug.Log("Filling inventory with items: " + inventoryItems.Count);
             ClearItemArea();
 
             for (int i = 0; i < inventoryItems.Count; i++)
