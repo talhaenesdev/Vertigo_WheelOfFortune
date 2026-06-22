@@ -822,9 +822,9 @@ MonoBehaviour:
       Reward:
         RewardType: 2
         Amount: 200
-    - SliceType: 1
+    - SliceType: 0
       Reward:
-        RewardType: 2
+        RewardType: 0
         Amount: 300
     - SliceType: 0
       Reward:

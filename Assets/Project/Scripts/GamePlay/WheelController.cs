@@ -18,10 +18,12 @@ namespace Assets.Project.Scripts.GamePlay
 
         internal void Spin(System.Action<WheelSliceData> onComplete, int currentZoneId)
         {
-            _pointerTransform.DOKill();
+            _pointerTransform.DOKill(true);
+            _wheelTransform.DOKill(true);
 
-            _pointerTransform
-                .DOPunchRotation(new Vector3(0, 0, -_currentConfig.PointerPunchAngle), _currentConfig.SpinTime, _currentConfig.PointerPunchVibrato, _currentConfig.PointerPunchElasticity);
+            if (currentZoneId < 0 || currentZoneId >= _currentConfig.Zones.Count)
+                return;
+
             var zone = _currentConfig.Zones[currentZoneId];
 
             int sliceCount = zone.Slices.Count;
@@ -29,9 +31,20 @@ namespace Assets.Project.Scripts.GamePlay
 
             int targetIndex = Random.Range(0, sliceCount);
 
-            float offset = sliceAngle * 0.9f;
+            float offset = sliceAngle * _currentConfig.SliceCenterOffsetMultiplier;
 
-            float targetRotation = 360f * _currentConfig.FreeSpinCount + (targetIndex * sliceAngle) - offset;
+            float targetRotation =
+                360f * _currentConfig.FreeSpinCount +
+                (targetIndex * sliceAngle) +
+                offset +
+                _currentConfig.ExtraRotationOffset;
+
+            _pointerTransform.DOPunchRotation(
+                new Vector3(0, 0, -_currentConfig.PointerPunchAngle),
+                _currentConfig.SpinTime,
+                _currentConfig.PointerPunchVibrato,
+                _currentConfig.PointerPunchElasticity
+            );
 
             _wheelTransform
                 .DORotate(
@@ -41,15 +54,21 @@ namespace Assets.Project.Scripts.GamePlay
                 .SetEase(Ease.OutQuart)
                 .OnComplete(() =>
                 {
-                    float z = _wheelTransform.eulerAngles.z;
+                    float z = Mathf.Repeat(_wheelTransform.eulerAngles.z, 360f);
 
-                    int resultIndex = Mathf.FloorToInt((z + offset) / sliceAngle) % sliceCount;
+                    int resultIndex =
+                        Mathf.RoundToInt(z / sliceAngle) % sliceCount;
+
+                    if (resultIndex < 0)
+                        resultIndex += sliceCount;
 
                     onComplete?.Invoke(zone.Slices[resultIndex]);
-                    _pointerTransform.DORotate(Vector3.zero, 0.2f);
+
+                    _pointerTransform.DORotate(Vector3.zero, _currentConfig.PointerResetDuration);
+
+                    _wheelTransform.localEulerAngles = Vector3.zero;
                 });
         }
 
-       
     }
 }

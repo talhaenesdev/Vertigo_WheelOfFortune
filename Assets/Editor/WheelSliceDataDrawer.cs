@@ -1,7 +1,8 @@
-﻿using UnityEditor;
-using UnityEngine;
-using Assets.Project.Scripts.Data;
+﻿using Assets.Project.Scripts.Data;
 using Assets.Project.Scripts.Enums;
+using Assets.Project.Scripts.GamePlay;
+using UnityEditor;
+using UnityEngine;
 
 [CustomPropertyDrawer(typeof(WheelSliceData))]
 public class WheelSliceDataDrawer : PropertyDrawer
@@ -22,19 +23,42 @@ public class WheelSliceDataDrawer : PropertyDrawer
         var sliceType = property.FindPropertyRelative("SliceType");
         var reward = property.FindPropertyRelative("Reward");
 
-        int index = GetLastArrayIndex(property.propertyPath);
+        int sliceIndex = GetLastArrayIndex(property.propertyPath);
+        int zoneIndex = GetZoneIndex(property.propertyPath);
+
+        bool isBombRestrictedZone = WheelRules.IsBombRestrictedZone(zoneIndex);
 
         float lineHeight = EditorGUIUtility.singleLineHeight;
 
         Rect line = new Rect(position.x, position.y, position.width, lineHeight);
 
-        // 🔥 Slice label
-        EditorGUI.LabelField(line, index >= 0 ? $"Slice {index}" : "Slice");
+        EditorGUI.LabelField(line, $"Zone {zoneIndex} / Slice {sliceIndex}");
         line.y += lineHeight;
 
-        // SliceType
-        EditorGUI.PropertyField(line, sliceType);
-        line.y += lineHeight;
+        // 🚨 ZONE RULE: ALL SLICES PROHIBIT BOMB
+        if (isBombRestrictedZone)
+        {
+            if ((SliceType)sliceType.enumValueIndex == SliceType.Bomb)
+            {
+                sliceType.enumValueIndex = (int)SliceType.Reward;
+            }
+
+            EditorGUI.PropertyField(line, sliceType);
+            line.y += lineHeight;
+
+            EditorGUI.HelpBox(
+                new Rect(line.x, line.y, line.width, lineHeight),
+                "This zone is restricted: Bomb is not allowed in any slice",
+                MessageType.Warning
+            );
+
+            line.y += lineHeight;
+        }
+        else
+        {
+            EditorGUI.PropertyField(line, sliceType);
+            line.y += lineHeight;
+        }
 
         bool isReward = (SliceType)sliceType.enumValueIndex == SliceType.Reward;
 
@@ -59,6 +83,15 @@ public class WheelSliceDataDrawer : PropertyDrawer
             if (int.TryParse(number, out int result))
                 return result;
         }
+
+        return -1;
+    }
+
+    private int GetZoneIndex(string path)
+    {
+        var match = System.Text.RegularExpressions.Regex.Match(path, @"Zones\.Array\.data\[(\d+)\]");
+        if (match.Success && int.TryParse(match.Groups[1].Value, out int result))
+            return result;
 
         return -1;
     }

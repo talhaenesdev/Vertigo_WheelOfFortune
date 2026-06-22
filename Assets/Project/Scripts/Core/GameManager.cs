@@ -110,7 +110,6 @@ namespace Assets.Project.Scripts.Core
 
         private void OnSpinCompleted(WheelSliceData result)
         {
-            Debug.Log("[GameManager] - OnSpinCompleted");
 
             if (result.SliceType == SliceType.Bomb)
             {
@@ -143,7 +142,6 @@ namespace Assets.Project.Scripts.Core
 
         private void HandleBomb()
         {
-            Debug.Log("[GameManager] - HandleBomb");
             _currentState = GameState.Limbo;
 
 
@@ -154,7 +152,6 @@ namespace Assets.Project.Scripts.Core
 
         private void SetWheel()
         {
-            Debug.Log("[GameManager] - SetWheel");
             _uiManager.SetWheelVisual(
                 _zoneManager.GetCurrentZoneType(),
                 _zoneManager.GetWheelSliceRows());
@@ -164,7 +161,6 @@ namespace Assets.Project.Scripts.Core
 
         private void HandleCoinRevive()
         {
-            Debug.Log("[GameManager] - HandleCoinRevive");
             if (_currencyManager.GetCurrentCoins() >= _reviveData.CoinReviveCost)
             {
                 _currencyManager.SpendCoins(_reviveData.CoinReviveCost);

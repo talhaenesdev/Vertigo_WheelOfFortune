@@ -15,5 +15,8 @@ namespace Assets.Project.Scripts.Data
         public int PointerPunchVibrato;
         public int PointerPunchElasticity;
         public int StartZoneValue;
+        public float SliceCenterOffsetMultiplier;
+        public float ExtraRotationOffset;
+        public float PointerResetDuration;
     }
 }
