@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 namespace Assets.Project.Scripts.UI
 {
-    internal class UIManager : MonoBehaviour
+    internal class UIManager : MonoBehaviour, IUIServices
     {
 
         [SerializeField]
@@ -51,12 +51,12 @@ namespace Assets.Project.Scripts.UI
 
         private List<CollectableRewardUI> _currentRewards = new List<CollectableRewardUI>();
 
-        public Action OnSpinPressed;
-        public Action OnCollectPressed;
-        public Action OnRestartPressed;
-        public Action OnWhatchAdReviveButton;
-        public Action OnCoinReviveButton;
-        public Action OnOpenInventoryButton;
+        public event Action OnSpinPressed;
+        public event Action OnCollectPressed;
+        public event Action OnRestartPressed;
+        public event Action OnWhatchAdReviveButton;
+        public event Action OnCoinReviveButton;
+        public event Action OnOpenInventoryButton;
 
 
 #if UNITY_EDITOR
@@ -155,11 +155,11 @@ namespace Assets.Project.Scripts.UI
         private void OnOpenInventoryClicked() => OnOpenInventoryButton?.Invoke();
 
 
-        internal void UpdateZone(int zone) =>_zoneValue.text = "ZONE " + zone;
-        internal void SetCollectButtonInteractable(bool active) => _collectButton.interactable = active;
-        internal void SetSpinButtonInteractable(bool active) => _spinButton.interactable = active;
-        internal void SetGameOverPanel(bool isActive) => _gameOverPanel.SetActive(isActive);
-        internal void AddRewardArea(RewardType rewardType, Sprite rewardSprite, int rewardAmount)
+        public void UpdateZone(int zone) =>_zoneValue.text = "ZONE " + zone;
+        public void SetCollectButtonInteractable(bool active) => _collectButton.interactable = active;
+        public void SetSpinButtonInteractable(bool active) => _spinButton.interactable = active;
+        public void SetGameOverPanel(bool isActive) => _gameOverPanel.SetActive(isActive);
+        public void AddRewardArea(RewardType rewardType, Sprite rewardSprite, int rewardAmount)
         {
             foreach (var rewardUI in _currentRewards)
             {
@@ -175,7 +175,7 @@ namespace Assets.Project.Scripts.UI
             rewardUIEntity.Setup(rewardType, rewardSprite, rewardAmount);
         }
 
-        internal void ClearRewardArea()
+        public void ClearRewardArea()
         {
             foreach (var rewardUI in _currentRewards)
             {
@@ -184,15 +184,15 @@ namespace Assets.Project.Scripts.UI
             _currentRewards.Clear();
         }
 
-        internal void OpenInventoryPanel(List<InventoryItemVO> inventoryItems)
+        public void OpenInventoryPanel(List<InventoryItemVO> inventoryItems)
         {
             _inventoryUI.ShowInventory();
             _inventoryUI.FillItemArea(inventoryItems);
         }
 
-        internal void UpdateCurrencyText(int amount) => _currencyValue.text = "GOLD : " + amount.ToString();
+        public void UpdateCurrencyText(int amount) => _currencyValue.text = "GOLD : " + amount.ToString();
 
-        internal void SetWheelVisual(ZoneType currentZoneType, List<WheelSliceData> slices)
+        public void SetWheelVisual(ZoneType currentZoneType, List<WheelSliceData> slices)
         {
 
             WheelVisualVO wheelVisualVO = _wheelVisualConfig.GetVisual(currentZoneType);
@@ -224,7 +224,7 @@ namespace Assets.Project.Scripts.UI
                 _wheelUI.SetRewardView(i, rewardIcon, rewardAmount);
             }
         }
-        internal Sprite GetRewardIcon(RewardType rewardType)
+        public Sprite GetRewardIcon(RewardType rewardType)
         {
             return _rewardIconDatabase.GetIcon(rewardType);
         }

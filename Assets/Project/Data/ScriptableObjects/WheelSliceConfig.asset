@@ -1011,3 +1011,6 @@ MonoBehaviour:
   PointerPunchVibrato: 8
   PointerPunchElasticity: 1
   StartZoneValue: 1
+  SliceCenterOffsetMultiplier: 0.5
+  ExtraRotationOffset: 22.5
+  PointerResetDuration: 0.2

@@ -5,24 +5,24 @@ using UnityEngine;
 
 namespace Assets.Project.Scripts.Economy
 {
-    internal class RewardManager : MonoBehaviour
+    internal class RewardManager : MonoBehaviour, IRewardService
     {
 
         Dictionary<RewardType, int> _rewardAmounts = new Dictionary<RewardType, int>();
 
 
-        internal void AddReward(RewardData reward) => _rewardAmounts[reward.RewardType] = _rewardAmounts.GetValueOrDefault(reward.RewardType) + reward.Amount;
+        public void AddReward(RewardData reward) => _rewardAmounts[reward.RewardType] = _rewardAmounts.GetValueOrDefault(reward.RewardType) + reward.Amount;
 
-        internal int GetRewardAmount(RewardType rewardType)
+        public int GetRewardAmount(RewardType rewardType)
         {
             return _rewardAmounts.GetValueOrDefault(rewardType, 0);
         }
 
-        internal void ResetReward() => _rewardAmounts.Clear();
+        public void ResetReward() => _rewardAmounts.Clear();
 
 
 
-        internal void CollectReward()
+        public void CollectReward()
         {
             RewardSaveData rewardSaveData = new RewardSaveData();
 
@@ -59,7 +59,7 @@ namespace Assets.Project.Scripts.Economy
             return target;
         }
 
-        internal Dictionary<RewardType, int> GetRewardData()
+        public Dictionary<RewardType, int> GetRewardData()
         {
             RewardSaveData rewardSaveData = new RewardSaveData();
             return rewardSaveData.LoadRewards();

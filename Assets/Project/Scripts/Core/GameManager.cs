@@ -10,13 +10,13 @@ namespace Assets.Project.Scripts.Core
 {
     public class GameManager : MonoBehaviour
     {
-        [SerializeField] private UIManager _uiManager;
-        [SerializeField] private WheelController _wheelController;
-        [SerializeField] private RewardManager _rewardManager;
-        [SerializeField] private ZoneManager _zoneManager;
-        [SerializeField] private PopupManager _popupManager;
-        [SerializeField] private CurrencyManager _currencyManager;
-        [SerializeField] private ADManager _adManager;
+        private IUIServices _uIServices;
+        private IWheelService _wheelService;
+        private IRewardService _rewardService;
+        private IZoneService _zoneService;
+        private IPopupService _popupService;
+        private ICurrencyService _currencyService;
+        private IADService _aDService;
 
         [SerializeField]
         private ReviveData _reviveData;
@@ -32,29 +32,46 @@ namespace Assets.Project.Scripts.Core
         {
             UnsubscribeEvents();
         }
+
+        internal void Inject(IRewardService reward, 
+            IZoneService zone, 
+            IUIServices uI, 
+            IWheelService wheel, 
+            IPopupService popup, ICurrencyService currencyService, IADService aDService)
+        {
+            _rewardService = reward;
+            _zoneService = zone;
+            _uIServices = uI;
+            _wheelService = wheel;
+            _popupService = popup;
+            _popupService = popup;
+            _currencyService = currencyService;
+            _aDService = aDService;
+        }
+
         private void SubscribeEvents()
         {
-            _uiManager.OnSpinPressed += HandleSpin;
-            _uiManager.OnCollectPressed += HandleCollect;
-            _uiManager.OnRestartPressed += HandleRestart;
-            _uiManager.OnWhatchAdReviveButton += HandleWhatchAdRevive;
-            _uiManager.OnCoinReviveButton += HandleCoinRevive;
-            _uiManager.OnOpenInventoryButton += OnOpenInventory;
+            _uIServices.OnSpinPressed += HandleSpin;
+            _uIServices.OnCollectPressed += HandleCollect;
+            _uIServices.OnRestartPressed += HandleRestart;
+            _uIServices.OnWhatchAdReviveButton += HandleWhatchAdRevive;
+            _uIServices.OnCoinReviveButton += HandleCoinRevive;
+            _uIServices.OnOpenInventoryButton += OnOpenInventory;
 
-            _popupManager.OnWatchAd += OnClickWatchAd;
-            _adManager.OnCollectAdReward += OnAdWatched;
+            _popupService.OnWatchAd += OnClickWatchAd;
+            _aDService.OnCollectAdReward += OnAdWatched;
         }
         private void UnsubscribeEvents()
         {
-            _uiManager.OnSpinPressed -= HandleSpin;
-            _uiManager.OnCollectPressed -= HandleCollect;
-            _uiManager.OnRestartPressed -= HandleRestart;
-            _uiManager.OnWhatchAdReviveButton -= HandleWhatchAdRevive;
-            _uiManager.OnCoinReviveButton -= HandleCoinRevive;
-            _uiManager.OnOpenInventoryButton -= OnOpenInventory;
+            _uIServices.OnSpinPressed -= HandleSpin;
+            _uIServices.OnCollectPressed -= HandleCollect;
+            _uIServices.OnRestartPressed -= HandleRestart;
+            _uIServices.OnWhatchAdReviveButton -= HandleWhatchAdRevive;
+            _uIServices.OnCoinReviveButton -= HandleCoinRevive;
+            _uIServices.OnOpenInventoryButton -= OnOpenInventory;
 
-            _popupManager.OnWatchAd -= OnClickWatchAd;
-            _adManager.OnCollectAdReward -= OnAdWatched;
+            _popupService.OnWatchAd -= OnClickWatchAd;
+            _aDService.OnCollectAdReward -= OnAdWatched;
         }
 
         private void InitializeGame()
@@ -63,18 +80,19 @@ namespace Assets.Project.Scripts.Core
             SetupWheelConfig();
             SetWheel();
             _currentState = GameState.WaitingForInput;
-            _uiManager.SetGameOverPanel(false);
-            _uiManager.SetSpinButtonInteractable(true);
+            _uIServices.SetGameOverPanel(false);
+            _uIServices.SetSpinButtonInteractable(true);
+            _uIServices.UpdateCurrencyText(_currencyService.GetCurrentCoins());
         }
 
         private void HandleRestart()
         {
-            _zoneManager.ResetZone();
-            _rewardManager.ResetReward();
-            _uiManager.UpdateZone(_zoneManager.CurrentZone);
-            _uiManager.SetGameOverPanel(false);
-            _uiManager.ClearRewardArea();
-            _uiManager.SetSpinButtonInteractable(true);
+            _zoneService.ResetZone();
+            _rewardService.ResetReward();
+            _uIServices.UpdateZone(_zoneService.CurrentZone);
+            _uIServices.SetGameOverPanel(false);
+            _uIServices.ClearRewardArea();
+            _uIServices.SetSpinButtonInteractable(true);
             InitializeGame();
         }
 
@@ -83,12 +101,12 @@ namespace Assets.Project.Scripts.Core
             if (_currentState != GameState.WaitingForInput)
                 return;
 
-            if (!_zoneManager.CanCollect())
+            if (!_zoneService.CanCollect())
                 return;
 
             _currentState = GameState.GameOver;
 
-            _rewardManager.CollectReward();
+            _rewardService.CollectReward();
             HandleRestart();
         }
 
@@ -99,12 +117,12 @@ namespace Assets.Project.Scripts.Core
 
             _currentState = GameState.Spinning;
 
-            _uiManager.SetCollectButtonInteractable(false);
-            _uiManager.SetSpinButtonInteractable(false);
+            _uIServices.SetCollectButtonInteractable(false);
+            _uIServices.SetSpinButtonInteractable(false);
 
             SetupWheelConfig();
 
-            _wheelController.Spin(OnSpinCompleted, _zoneManager.CurrentZoneIndex());
+            _wheelService.Spin(OnSpinCompleted, _zoneService.CurrentZoneIndex());
         }
 
         private void OnSpinCompleted(WheelSliceData result)
@@ -118,23 +136,23 @@ namespace Assets.Project.Scripts.Core
 
             if (result.Reward != null)
             {
-                _rewardManager.AddReward(result.Reward);
+                _rewardService.AddReward(result.Reward);
 
                 var rewardType = result.Reward.RewardType;
 
-                _uiManager.AddRewardArea(
+                _uIServices.AddRewardArea(
                     rewardType,
-                    _uiManager.GetRewardIcon(rewardType),
-                    _rewardManager.GetRewardAmount(rewardType));
+                    _uIServices.GetRewardIcon(rewardType),
+                    _rewardService.GetRewardAmount(rewardType));
             }
 
-            _zoneManager.NextZone();
+            _zoneService.NextZone();
 
-            _uiManager.UpdateZone(_zoneManager.CurrentZone);
+            _uIServices.UpdateZone(_zoneService.CurrentZone);
 
             UpdateCollectButton();
 
-            _uiManager.SetSpinButtonInteractable(true);
+            _uIServices.SetSpinButtonInteractable(true);
 
             SetWheel();
 
@@ -146,37 +164,37 @@ namespace Assets.Project.Scripts.Core
             _currentState = GameState.Limbo;
 
 
-            _uiManager.SetGameOverPanel(true);
+            _uIServices.SetGameOverPanel(true);
         }
 
-        private void SetupWheelConfig() => _wheelController.SetConfig(_zoneManager.GetWheelConfig());
+        private void SetupWheelConfig() => _wheelService.SetConfig(_zoneService.GetWheelConfig());
 
         private void SetWheel()
         {
-            _uiManager.SetWheelVisual(
-                _zoneManager.GetCurrentZoneType(),
-                _zoneManager.GetWheelSliceRows());
+            _uIServices.SetWheelVisual(
+                _zoneService.GetCurrentZoneType(),
+                _zoneService.GetWheelSliceRows());
         }
 
-        private void UpdateCollectButton() => _uiManager.SetCollectButtonInteractable(_zoneManager.CanCollect());
+        private void UpdateCollectButton() => _uIServices.SetCollectButtonInteractable(_zoneService.CanCollect());
 
         private void HandleCoinRevive()
         {
-            if (_currencyManager.GetCurrentCoins() >= _reviveData.CoinReviveCost)
+            if (_currencyService.GetCurrentCoins() >= _reviveData.CoinReviveCost)
             {
-                _currencyManager.SpendCoins(_reviveData.CoinReviveCost);
+                _currencyService.SpendCoins(_reviveData.CoinReviveCost);
                 InitializeGame();
-                _uiManager.UpdateCurrencyText(_currencyManager.GetCurrentCoins());
+                _uIServices.UpdateCurrencyText(_currencyService.GetCurrentCoins());
             }
             else
             {
-                _popupManager.ShowNotEnoughCoinsPopup();
+                _popupService.ShowNotEnoughCoinsPopup();
             }
         }
 
         private void OnOpenInventory()
         {
-            var inventory = _rewardManager.GetRewardData();
+            var inventory = _rewardService.GetRewardData();
 
             List<InventoryItemVO> inventoryItems = new List<InventoryItemVO>();
 
@@ -185,18 +203,18 @@ namespace Assets.Project.Scripts.Core
                 inventoryItems.Add(new InventoryItemVO
                 {
                     RewardType = item.Key,
-                    RewardSprite = _uiManager.GetRewardIcon(item.Key),
+                    RewardSprite = _uIServices.GetRewardIcon(item.Key),
                     RewardAmount = item.Value
                 });
             }
 
-            _uiManager.OpenInventoryPanel(inventoryItems);
+            _uIServices.OpenInventoryPanel(inventoryItems);
         }
 
 
-        private void HandleWhatchAdRevive() => _popupManager.ShowAdPopup();
+        private void HandleWhatchAdRevive() => _popupService.ShowAdPopup();
 
-        private void OnClickWatchAd() => _adManager.ShowAd();
+        private void OnClickWatchAd() => _aDService.ShowAd();
 
         private void OnAdWatched() => InitializeGame();
     }

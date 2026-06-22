@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Assets.Project.Scripts.GamePlay
 {
-    internal class WheelController : MonoBehaviour
+    internal class WheelController : MonoBehaviour, IWheelService
     {
         [SerializeField]
         private RectTransform _wheelTransform;
@@ -14,9 +14,9 @@ namespace Assets.Project.Scripts.GamePlay
 
         private WheelConfig _currentConfig;
 
-        internal void SetConfig(WheelConfig config) => _currentConfig = config;
+        public void SetConfig(WheelConfig config) => _currentConfig = config;
 
-        internal void Spin(System.Action<WheelSliceData> onComplete, int currentZoneId)
+        public void Spin(System.Action<WheelSliceData> onComplete, int currentZoneId)
         {
             _pointerTransform.DOKill(true);
             _wheelTransform.DOKill(true);

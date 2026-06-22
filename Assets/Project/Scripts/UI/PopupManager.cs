@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace Assets.Project.Scripts.UI
 {
-    internal class PopupManager : MonoBehaviour
+    internal class PopupManager : MonoBehaviour, IPopupService
     {
         [SerializeField] private GameObject _notEnoughCoinsPopup;
         [SerializeField] private GameObject _adPopup;
@@ -14,7 +14,7 @@ namespace Assets.Project.Scripts.UI
         [SerializeField] private Button _whatchAdPopupButton;
 
 
-        internal Action OnWatchAd;
+        public event Action OnWatchAd;
 
 #if UNITY_EDITOR
         private void OnValidate() => AutoAssignReferences();
@@ -62,16 +62,16 @@ namespace Assets.Project.Scripts.UI
             _closeAdPopupButton.onClick.RemoveListener(HideAdPopup);
             _whatchAdPopupButton.onClick.RemoveListener(HandleWatchAd);
         }
-        internal void ShowNotEnoughCoinsPopup() => _notEnoughCoinsPopup.SetActive(true);
+        public void ShowNotEnoughCoinsPopup() => _notEnoughCoinsPopup.SetActive(true);
 
 
-        internal void HideNotEnoughCoinsPopup() => _notEnoughCoinsPopup.SetActive(false);
+        public void HideNotEnoughCoinsPopup() => _notEnoughCoinsPopup.SetActive(false);
 
 
-        internal void ShowAdPopup() => _adPopup.gameObject.SetActive(true);
+        public void ShowAdPopup() => _adPopup.gameObject.SetActive(true);
 
 
-        private void HideAdPopup() => _adPopup.SetActive(false);
+        public void HideAdPopup() => _adPopup.SetActive(false);
 
 
         private void HandleWatchAd()

@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 namespace Assets.Project.Scripts.Core
 {
-    public class ADManager : MonoBehaviour
+    public class ADManager : MonoBehaviour, IADService
     {
         [SerializeField] 
         private GameObject _adPanel;
@@ -19,7 +19,8 @@ namespace Assets.Project.Scripts.Core
         [SerializeField] 
         private AdData _adData;
 
-        internal Action OnCollectAdReward;
+        public event Action OnCollectAdReward;
+
 #if UNITY_EDITOR
         private void OnValidate() => AutoAssignReferences();
         private void AutoAssignReferences()
@@ -34,7 +35,7 @@ namespace Assets.Project.Scripts.Core
                 _timerValue = UIHierarchyHelper.FindComponent<TMP_Text>(transform, "ui_text_timer_value");
         }
 #endif
-        internal void ShowAd()
+        public void ShowAd()
         {
             _adPanel.SetActive(true);
             WatchAd();

@@ -3,21 +3,21 @@ using Assets.Project.Scripts.Enums;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Assets.Project.Scripts.GamePlay
+namespace Assets.Project.Scripts.Core
 {
-    public class ZoneManager : MonoBehaviour
+    public class ZoneManager : MonoBehaviour, IZoneService
     {
         [SerializeField]
         private WheelConfig _wheelConfig;
 
-        internal int CurrentZone { get; private set; }
+        public int CurrentZone { get; private set; }
 
         private void Start()
         {
             CurrentZone = _wheelConfig.StartZoneValue;
         }
 
-        internal ZoneType GetCurrentZoneType()
+        public ZoneType GetCurrentZoneType()
         {
             if (CurrentZone % _wheelConfig.GoldenZoneSlice == 0)
                 return ZoneType.Golden;
@@ -28,13 +28,13 @@ namespace Assets.Project.Scripts.GamePlay
             return ZoneType.Bronze;
         }
 
-        internal void NextZone() => CurrentZone++;
+        public void NextZone() => CurrentZone++;
 
-        internal void ResetZone() => CurrentZone = _wheelConfig.StartZoneValue;
+        public void ResetZone() => CurrentZone = _wheelConfig.StartZoneValue;
 
-        internal int CurrentZoneIndex() => (CurrentZone - 1) % _wheelConfig.Zones.Count;
+        public int CurrentZoneIndex() => (CurrentZone - 1) % _wheelConfig.Zones.Count;
 
-        internal bool CanCollect()
+        public bool CanCollect()
         {
             bool canCollect =
                 GetCurrentZoneType() == ZoneType.Silver ||

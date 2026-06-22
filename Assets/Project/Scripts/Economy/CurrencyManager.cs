@@ -3,15 +3,15 @@ using UnityEngine;
 
 namespace Assets.Project.Scripts.Economy
 {
-    internal class CurrencyManager : MonoBehaviour
+    internal class CurrencyManager : MonoBehaviour, ICurrencyService
     {
 
         [SerializeField]
         private UserCurrencyData _userCurrencyData;
 
-        internal void AddCoins(int amount) => _userCurrencyData.Coins += amount;
+        public void AddCoins(int amount) => _userCurrencyData.Coins += amount;
 
-        internal bool SpendCoins(int amount)
+        public bool SpendCoins(int amount)
         {
             if (_userCurrencyData.Coins >= amount)
             {
@@ -21,6 +21,6 @@ namespace Assets.Project.Scripts.Economy
             return false;
         }
 
-        internal int GetCurrentCoins() => _userCurrencyData.Coins;
+        public int GetCurrentCoins() => _userCurrencyData.Coins;
     }
 }
