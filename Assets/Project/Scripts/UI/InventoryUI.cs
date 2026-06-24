@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 namespace Assets.Project.Scripts.UI
 {
-    internal class InventoryUI : MonoBehaviour
+    public class InventoryUI : MonoBehaviour
     {
         [SerializeField] private GameObject _inventoryPanel;
 
@@ -72,8 +72,8 @@ namespace Assets.Project.Scripts.UI
                 Addressables.Release(_inventoryPrefabHandle);
         }
 
-        internal void ShowInventory() => _inventoryPanel.SetActive(true);
-        internal  void FillItemArea(List<InventoryItemVO> inventoryItems)
+        public void ShowInventory() => _inventoryPanel.SetActive(true);
+        public void FillItemArea(List<InventoryItemVO> inventoryItems)
         {
             ClearItemArea();
 

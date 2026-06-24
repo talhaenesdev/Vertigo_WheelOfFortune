@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace Assets.Project.Scripts.UI
 {
-    internal class PopupManager : MonoBehaviour, IPopupService
+    public class PopupManager : MonoBehaviour, IPopupService
     {
         [SerializeField] private GameObject _notEnoughCoinsPopup;
         [SerializeField] private GameObject _adPopup;

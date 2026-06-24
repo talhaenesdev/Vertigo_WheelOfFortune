@@ -1,8 +1,5 @@
-using Assets.Project.Scripts.Core;
 using Assets.Project.Scripts.Data;
-using Assets.Project.Scripts.Economy;
 using Assets.Project.Scripts.Enums;
-using Assets.Project.Scripts.GamePlay;
 using Assets.Project.Scripts.Utilities;
 using System;
 using System.Collections.Generic;
@@ -184,7 +181,7 @@ namespace Assets.Project.Scripts.UI
         public void SetCollectButtonInteractable(bool active) => _collectButton.interactable = active;
         public void SetSpinButtonInteractable(bool active) => _spinButton.interactable = active;
         public void SetGameOverPanel(bool isActive) => _gameOverPanel.SetActive(isActive);
-        public async void AddRewardArea(string rewardId, Sprite rewardSprite, int rewardAmount)
+        public void AddRewardArea(string rewardId, Sprite rewardSprite, int rewardAmount)
         {
             foreach (var rewardUI in _currentRewards)
             {

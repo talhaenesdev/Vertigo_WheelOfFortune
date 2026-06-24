@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Assets.Project.Scripts.GamePlay
 {
-    internal class WheelController : MonoBehaviour, IWheelService
+    public class WheelController : MonoBehaviour, IWheelService
     {
         [SerializeField]
         private RectTransform _wheelTransform;

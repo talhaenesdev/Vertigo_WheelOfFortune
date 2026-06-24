@@ -1,11 +1,10 @@
 using Assets.Project.Scripts.Data;
-using Assets.Project.Scripts.Enums;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.Project.Scripts.Economy
 {
-    internal class RewardManager : MonoBehaviour, IRewardService
+    public class RewardManager : MonoBehaviour, IRewardService
     {
 
         Dictionary<string, int> _rewardAmounts = new Dictionary<string, int>();
@@ -22,8 +21,6 @@ namespace Assets.Project.Scripts.Economy
 
         public void ResetReward() => _rewardAmounts.Clear();
 
-
-
         public void CollectReward()
         {
             RewardSaveData rewardSaveData = new RewardSaveData();
@@ -31,7 +28,6 @@ namespace Assets.Project.Scripts.Economy
             Dictionary<string, int> hasRewards = new();
 
             hasRewards = rewardSaveData.LoadRewards();
-
             
             rewardSaveData.SaveRewards(
                 MergeRewards(
