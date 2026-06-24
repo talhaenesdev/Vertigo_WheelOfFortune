@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace Assets.Project.Scripts.Data
 {
@@ -6,6 +7,7 @@ namespace Assets.Project.Scripts.Data
     public class RewardData
     {
         public ItemDefinition RewardItem;
+        [Min(1)]
         public int Amount;
     }
 }
