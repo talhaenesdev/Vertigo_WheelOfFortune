@@ -59,9 +59,9 @@ namespace Assets.Project.Scripts.Core
             _uIServices.OnSpinPressed += HandleSpin;
             _uIServices.OnCollectPressed += HandleCollect;
             _uIServices.OnRestartPressed += HandleRestart;
-            _uIServices.OnWhatchAdReviveButton += HandleWhatchAdRevive;
-            _uIServices.OnCoinReviveButton += HandleCoinRevive;
-            _uIServices.OnOpenInventoryButton += OnOpenInventory;
+            _uIServices.OnWatchAdRevive += HandleWhatchAdRevive;
+            _uIServices.OnCoinRevive += HandleCoinRevive;
+            _uIServices.OnOpenInventory += OnOpenInventory;
 
             _popupService.OnWatchAd += OnClickWatchAd;
             _aDService.OnCollectAdReward += OnAdWatched;
@@ -71,9 +71,9 @@ namespace Assets.Project.Scripts.Core
             _uIServices.OnSpinPressed -= HandleSpin;
             _uIServices.OnCollectPressed -= HandleCollect;
             _uIServices.OnRestartPressed -= HandleRestart;
-            _uIServices.OnWhatchAdReviveButton -= HandleWhatchAdRevive;
-            _uIServices.OnCoinReviveButton -= HandleCoinRevive;
-            _uIServices.OnOpenInventoryButton -= OnOpenInventory;
+            _uIServices.OnWatchAdRevive -= HandleWhatchAdRevive;
+            _uIServices.OnCoinRevive -= HandleCoinRevive;
+            _uIServices.OnOpenInventory -= OnOpenInventory;
 
             _popupService.OnWatchAd -= OnClickWatchAd;
             _aDService.OnCollectAdReward -= OnAdWatched;

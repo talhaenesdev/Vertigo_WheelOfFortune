@@ -53,9 +53,9 @@ namespace Assets.Project.Scripts.UI
         public event Action OnSpinPressed;
         public event Action OnCollectPressed;
         public event Action OnRestartPressed;
-        public event Action OnWhatchAdReviveButton;
-        public event Action OnCoinReviveButton;
-        public event Action OnOpenInventoryButton;
+        public event Action OnWatchAdRevive;
+        public event Action OnCoinRevive;
+        public event Action OnOpenInventory;
 
 
         private AsyncOperationHandle<GameObject> _inventoryPrefabHandle;
@@ -172,9 +172,9 @@ namespace Assets.Project.Scripts.UI
         private void OnSpinClicked() => OnSpinPressed?.Invoke();
         private void OnCollectClicked() => OnCollectPressed?.Invoke();
         private void OnRestartClicked() => OnRestartPressed?.Invoke();
-        private void OnWatchAdReviveClicked() => OnWhatchAdReviveButton?.Invoke();
-        private void OnCoinReviveClicked() => OnCoinReviveButton?.Invoke();
-        private void OnOpenInventoryClicked() => OnOpenInventoryButton?.Invoke();
+        private void OnWatchAdReviveClicked() => OnWatchAdRevive?.Invoke();
+        private void OnCoinReviveClicked() => OnCoinRevive?.Invoke();
+        private void OnOpenInventoryClicked() => OnOpenInventory?.Invoke();
 
 
         public void UpdateZone(int zone) =>_zoneValue.text = "ZONE " + zone;

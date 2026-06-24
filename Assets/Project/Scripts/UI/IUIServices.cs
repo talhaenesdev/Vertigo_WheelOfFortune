@@ -12,9 +12,9 @@ namespace Assets.Project.Scripts.UI
         event Action OnSpinPressed;
         event Action OnCollectPressed;
         event Action OnRestartPressed;
-        event Action OnWhatchAdReviveButton;
-        event Action OnCoinReviveButton;
-        event Action OnOpenInventoryButton;
+        event Action OnWatchAdRevive;
+        event Action OnCoinRevive;
+        event Action OnOpenInventory;
         void UpdateZone(int zone);
         void SetCollectButtonInteractable(bool active);
         void SetSpinButtonInteractable(bool active);

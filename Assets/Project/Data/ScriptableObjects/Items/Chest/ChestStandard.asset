@@ -10,9 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7cd53711a8a09414c9f0166fcfdb48c2, type: 3}
-  m_Name: ChestStandart
+  m_Name: ChestStandard
   m_EditorClassIdentifier: 
-  _id: cheststandart
-  _displayName: Chest Standart
-  _category: 2
+  _id: ChestStandard
+  _displayName: Chest Standard
   _icon: {fileID: 21300000, guid: baa5d3293a3d70c4a864ea4753b02cd4, type: 3}
