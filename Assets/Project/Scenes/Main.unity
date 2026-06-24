@@ -336,8 +336,6 @@ MonoBehaviour:
   _wheelUI: {fileID: 790196935016855549}
   _inventoryUI: {fileID: 1292021517}
   _rewardArea: {fileID: 1498150181}
-  _rewardIconDatabase: {fileID: 11400000, guid: fc2aae9ee2a1c2148aa5a597379c6b3f, type: 2}
-  _wheelVisualConfig: {fileID: 11400000, guid: 02534b09971af48469d2a08263793abe, type: 2}
 --- !u!114 &4889041
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4290,6 +4288,9 @@ MonoBehaviour:
   CurrencyManager: {fileID: 1010887193}
   ADManager: {fileID: 1685412673}
   GameManager: {fileID: 1520458041}
+  _itemDatabase: {fileID: 11400000, guid: 53ccb40d99994ff4f8123e421beaaa0a, type: 2}
+  _reviveData: {fileID: 11400000, guid: 860011d5ca0df2341a57540353880f6d, type: 2}
+  _wheelVisualConfig: {fileID: 11400000, guid: 02534b09971af48469d2a08263793abe, type: 2}
 --- !u!4 &1187769763
 Transform:
   m_ObjectHideFlags: 0
@@ -5675,7 +5676,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f662fbbee5201394389491f9816a72b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Assets.Project.Scripts.GamePlay.GameManager
-  _reviveData: {fileID: 11400000, guid: 860011d5ca0df2341a57540353880f6d, type: 2}
 --- !u!4 &1520458042
 Transform:
   m_ObjectHideFlags: 0

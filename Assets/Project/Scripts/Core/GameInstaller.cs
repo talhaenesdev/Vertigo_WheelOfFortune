@@ -21,9 +21,11 @@ namespace Assets.Project.Scripts.Core
 
         [SerializeField] private ItemDatabase _itemDatabase;
         [SerializeField] private ReviveData _reviveData;
+        [SerializeField] private WheelVisualConfig _wheelVisualConfig;
         private void Awake()
         {
             GameManager.Inject(RewardManager, ZoneManager, UIManager, WheelController, PopupManager, CurrencyManager, ADManager, _itemDatabase, _reviveData);
+            UIManager.Inject(_wheelVisualConfig);
         }
 
 #if UNITY_EDITOR

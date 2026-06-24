@@ -1,5 +1,8 @@
+using Assets.Project.Scripts.Core;
 using Assets.Project.Scripts.Data;
+using Assets.Project.Scripts.Economy;
 using Assets.Project.Scripts.Enums;
+using Assets.Project.Scripts.GamePlay;
 using Assets.Project.Scripts.Utilities;
 using System;
 using System.Collections.Generic;
@@ -44,7 +47,6 @@ namespace Assets.Project.Scripts.UI
         private Transform _rewardArea;
 
 
-        [SerializeField] 
         private WheelVisualConfig _wheelVisualConfig;
 
         private List<CollectableRewardUI> _currentRewards = new List<CollectableRewardUI>();
@@ -144,7 +146,10 @@ namespace Assets.Project.Scripts.UI
             _coinReviveButton.onClick.RemoveListener(OnCoinReviveClicked);
             _openInventoryButton.onClick.RemoveListener(OnOpenInventoryClicked);
         }
-
+        internal void Inject(WheelVisualConfig wheelVisualConfig)
+        {
+            _wheelVisualConfig = wheelVisualConfig;
+        }
         private void OnSpinClicked() => OnSpinPressed?.Invoke();
         private void OnCollectClicked() => OnCollectPressed?.Invoke();
         private void OnRestartClicked() => OnRestartPressed?.Invoke();

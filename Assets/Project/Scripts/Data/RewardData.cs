@@ -1,5 +1,4 @@
-﻿using Assets.Project.Scripts.Enums;
-using System;
+﻿using System;
 
 namespace Assets.Project.Scripts.Data
 {
