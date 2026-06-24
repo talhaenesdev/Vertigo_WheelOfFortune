@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: UI_Reward
+  m_EditorClassIdentifier: 
+  m_GroupName: UI_Reward
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 713752dc64566a945a2fdfee79e213af
+  m_SerializeEntries:
+  - m_GUID: 6f67be8b6ca75884e995c8811c0f858e
+    m_Address: ui_reward_main
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 2f725e55ffe4e3147b7cdeb7d7059abe, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 0ca4fb3d7f5631442b0452a8eac02d10, type: 2}
+    - {fileID: 11400000, guid: 8a9beb606c832d84da98796e0f26cff4, type: 2}

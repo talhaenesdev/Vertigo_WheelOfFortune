@@ -6,8 +6,11 @@ using Assets.Project.Scripts.GamePlay;
 using Assets.Project.Scripts.Utilities;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.UI;
 
 namespace Assets.Project.Scripts.UI
@@ -35,7 +38,6 @@ namespace Assets.Project.Scripts.UI
 
         [SerializeField]
         private GameObject _gameOverPanel;
-        [SerializeField] 
         private GameObject _rewardPrefab;
 
         [SerializeField]
@@ -59,6 +61,7 @@ namespace Assets.Project.Scripts.UI
         public event Action OnOpenInventoryButton;
 
 
+        private AsyncOperationHandle<GameObject> _inventoryPrefabHandle;
 #if UNITY_EDITOR
         private void OnValidate() => AutoAssignReferences();
         private void AutoAssignReferences()
@@ -111,13 +114,14 @@ namespace Assets.Project.Scripts.UI
                 _rewardArea = UIHierarchyHelper.FindComponent<Transform>(
                     transform, "ui_panel_top/ui_panel_reward_area/ui_scroll_view/ui_view_port/ui_content");
 
-            if (!_rewardPrefab)
-            {
-                Debug.LogError($"[{nameof(UIManager)}] Reward prefab is missing!", this);
-                return;
-            }
         }
 #endif
+
+        private async void Awake()
+        {
+            await Initialize();
+        }
+
         private void Start()
         {
             SubscribeEvents();
@@ -126,6 +130,22 @@ namespace Assets.Project.Scripts.UI
         private void OnDisable()
         {
             UnSubscribeEvents();
+        }
+        public async Task Initialize()
+        {
+            await _inventoryUI.Initialize();
+            _inventoryPrefabHandle =
+                Addressables.LoadAssetAsync<GameObject>("ui_reward_main");
+
+            await _inventoryPrefabHandle.Task;
+
+            if (_inventoryPrefabHandle.Status != AsyncOperationStatus.Succeeded)
+            {
+                return;
+            }
+
+            _rewardPrefab = _inventoryPrefabHandle.Result;
+
         }
 
         private void SubscribeEvents()
@@ -145,6 +165,8 @@ namespace Assets.Project.Scripts.UI
             _watchAdReviveButton.onClick.RemoveListener(OnWatchAdReviveClicked);
             _coinReviveButton.onClick.RemoveListener(OnCoinReviveClicked);
             _openInventoryButton.onClick.RemoveListener(OnOpenInventoryClicked);
+            if (_inventoryPrefabHandle.IsValid())
+                Addressables.Release(_inventoryPrefabHandle);
         }
         internal void Inject(WheelVisualConfig wheelVisualConfig)
         {
@@ -162,7 +184,7 @@ namespace Assets.Project.Scripts.UI
         public void SetCollectButtonInteractable(bool active) => _collectButton.interactable = active;
         public void SetSpinButtonInteractable(bool active) => _spinButton.interactable = active;
         public void SetGameOverPanel(bool isActive) => _gameOverPanel.SetActive(isActive);
-        public void AddRewardArea(string rewardId, Sprite rewardSprite, int rewardAmount)
+        public async void AddRewardArea(string rewardId, Sprite rewardSprite, int rewardAmount)
         {
             foreach (var rewardUI in _currentRewards)
             {

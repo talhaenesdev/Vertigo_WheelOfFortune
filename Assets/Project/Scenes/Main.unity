@@ -332,7 +332,6 @@ MonoBehaviour:
   _coinReviveButton: {fileID: 1493260122}
   _openInventoryButton: {fileID: 1824698036}
   _gameOverPanel: {fileID: 1817550248}
-  _rewardPrefab: {fileID: 8659195771743062860, guid: 6f67be8b6ca75884e995c8811c0f858e, type: 3}
   _wheelUI: {fileID: 790196935016855549}
   _inventoryUI: {fileID: 1292021517}
   _rewardArea: {fileID: 1498150181}
@@ -666,7 +665,7 @@ GameObject:
   - component: {fileID: 118064621}
   - component: {fileID: 118064624}
   - component: {fileID: 118064623}
-  - component: {fileID: 118064622}
+  - component: {fileID: 118064625}
   m_Layer: 5
   m_Name: ui_view_port
   m_TagString: Untagged
@@ -692,22 +691,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 40, y: 0}
+  m_SizeDelta: {x: -80, y: 0}
   m_Pivot: {x: 0, y: 1}
---- !u!114 &118064622
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 118064620}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ShowMaskGraphic: 0
 --- !u!114 &118064623
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -721,10 +707,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 0
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -746,6 +732,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 118064620}
   m_CullTransparentMesh: 1
+--- !u!114 &118064625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 118064620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3312d7739989d2b4e91e6319e9a96d76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding: {x: 0, y: 0, z: 0, w: 0}
+  m_Softness: {x: 0, y: 0}
 --- !u!1 &129604940
 GameObject:
   m_ObjectHideFlags: 0
@@ -2119,8 +2119,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000061035156, y: 0.000076293945}
-  m_SizeDelta: {x: -4016.6665, y: 40}
+  m_AnchoredPosition: {x: 0, y: 0.000076293945}
+  m_SizeDelta: {x: -2310, y: 40}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &487745491
 MonoBehaviour:
@@ -4588,7 +4588,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _inventoryPanel: {fileID: 1292021513}
   _itemParent: {fileID: 487745490}
-  _inventoryObjectPrefab: {fileID: 8659195771743062860, guid: 6f67be8b6ca75884e995c8811c0f858e, type: 3}
   _closeButton: {fileID: 1031044282}
 --- !u!1 &1293751125
 GameObject:
@@ -5603,8 +5602,8 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000076293945}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1498150182
@@ -6670,9 +6669,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
+  m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -6685,7 +6684,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 0.04
 --- !u!222 &1762902985
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7598,7 +7597,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 0.06
+  m_PixelsPerUnitMultiplier: 0.04
 --- !u!222 &2065068661
 CanvasRenderer:
   m_ObjectHideFlags: 0

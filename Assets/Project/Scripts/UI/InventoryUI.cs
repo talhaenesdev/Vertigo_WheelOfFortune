@@ -1,7 +1,10 @@
 ﻿using Assets.Project.Scripts.Data;
 using Assets.Project.Scripts.Utilities;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.UI;
 
 namespace Assets.Project.Scripts.UI
@@ -11,12 +14,12 @@ namespace Assets.Project.Scripts.UI
         [SerializeField] private GameObject _inventoryPanel;
 
         [SerializeField] private Transform _itemParent;
-        [SerializeField] private GameObject _inventoryObjectPrefab;
+        private GameObject _inventoryObjectPrefab;
 
         [SerializeField] private Button _closeButton;
 
         List<CollectableRewardUI> _pool = new();
-
+        private AsyncOperationHandle<GameObject> _inventoryPrefabHandle;
 #if UNITY_EDITOR
         private void OnValidate() => AutoAssignReferences();
         private void AutoAssignReferences()
@@ -44,12 +47,33 @@ namespace Assets.Project.Scripts.UI
         {
             UnSubscribeEvents();
         }
+
+        public async Task Initialize()
+        {
+            _inventoryPrefabHandle =
+                Addressables.LoadAssetAsync<GameObject>("ui_reward_main");
+
+            await _inventoryPrefabHandle.Task;
+
+            if (_inventoryPrefabHandle.Status != AsyncOperationStatus.Succeeded)
+            {
+                return;
+            }
+
+            _inventoryObjectPrefab = _inventoryPrefabHandle.Result;
+        }
+
         private void SubscribeEvents() => _closeButton.onClick.AddListener(HideInventory);
 
-        private void UnSubscribeEvents() => _closeButton.onClick.RemoveListener(HideInventory);
+        private void UnSubscribeEvents() 
+        {
+            _closeButton.onClick.RemoveListener(HideInventory);
+            if (_inventoryPrefabHandle.IsValid())
+                Addressables.Release(_inventoryPrefabHandle);
+        }
 
         internal void ShowInventory() => _inventoryPanel.SetActive(true);
-        internal void FillItemArea(List<InventoryItemVO> inventoryItems)
+        internal  void FillItemArea(List<InventoryItemVO> inventoryItems)
         {
             ClearItemArea();
 
@@ -64,6 +88,8 @@ namespace Assets.Project.Scripts.UI
                 }
                 else
                 {
+
+
                     item = Instantiate(_inventoryObjectPrefab, _itemParent)
                         .GetComponent<CollectableRewardUI>();
 

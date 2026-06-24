@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: WheelUIs_Group
+  m_EditorClassIdentifier: 
+  m_GroupName: WheelUIs_Group
+  m_Data:
+    m_SerializedData: []
+  m_GUID: bc2e748d21d7ef341b45971cff919a56
+  m_SerializeEntries:
+  - m_GUID: 6508985c6edc21f4aa70f2e53cf3f234
+    m_Address: atlas_ui_wheel
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 2f725e55ffe4e3147b7cdeb7d7059abe, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 522bf72bbd924ca4b9dba1e31be1da3c, type: 2}
+    - {fileID: 11400000, guid: 0236289d4e8cac241aa759df9b6b95e6, type: 2}
