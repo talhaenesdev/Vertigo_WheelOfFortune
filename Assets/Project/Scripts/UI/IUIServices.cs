@@ -19,11 +19,10 @@ namespace Assets.Project.Scripts.UI
         void SetCollectButtonInteractable(bool active);
         void SetSpinButtonInteractable(bool active);
         void SetGameOverPanel(bool isActive);
-        void AddRewardArea(RewardType rewardType, Sprite rewardSprite, int rewardAmount);
+        void AddRewardArea(string rewardId, Sprite rewardSprite, int rewardAmount);
         void ClearRewardArea();
         void OpenInventoryPanel(List<InventoryItemVO> inventoryItems);
         void UpdateCurrencyText(int amount);
         void SetWheelVisual(ZoneType currentZoneType, List<WheelSliceData> slices);
-        Sprite GetRewardIcon(RewardType rewardType);
     }
 }

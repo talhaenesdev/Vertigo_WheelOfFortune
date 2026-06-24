@@ -8,14 +8,16 @@ namespace Assets.Project.Scripts.Economy
     internal class RewardManager : MonoBehaviour, IRewardService
     {
 
-        Dictionary<RewardType, int> _rewardAmounts = new Dictionary<RewardType, int>();
+        Dictionary<string, int> _rewardAmounts = new Dictionary<string, int>();
 
 
-        public void AddReward(RewardData reward) => _rewardAmounts[reward.RewardType] = _rewardAmounts.GetValueOrDefault(reward.RewardType) + reward.Amount;
-
-        public int GetRewardAmount(RewardType rewardType)
+        public void AddReward(RewardData reward)
         {
-            return _rewardAmounts.GetValueOrDefault(rewardType, 0);
+            _rewardAmounts[reward.RewardItem.Id] = _rewardAmounts.GetValueOrDefault(reward.RewardItem.Id) + reward.Amount;
+        }
+        public int GetRewardAmount(string rewardId)
+        {
+            return _rewardAmounts.GetValueOrDefault(rewardId, 0);
         }
 
         public void ResetReward() => _rewardAmounts.Clear();
@@ -26,7 +28,7 @@ namespace Assets.Project.Scripts.Economy
         {
             RewardSaveData rewardSaveData = new RewardSaveData();
 
-            Dictionary<RewardType, int> hasRewards = new();
+            Dictionary<string, int> hasRewards = new();
 
             hasRewards = rewardSaveData.LoadRewards();
 
@@ -40,9 +42,9 @@ namespace Assets.Project.Scripts.Economy
             ResetReward();
         }
 
-        private Dictionary<RewardType, int> MergeRewards(
-            Dictionary<RewardType, int> source,
-            Dictionary<RewardType, int> target)
+        private Dictionary<string, int> MergeRewards(
+            Dictionary<string, int> source,
+            Dictionary<string, int> target)
         {
             foreach (var reward in source)
             {
@@ -59,7 +61,7 @@ namespace Assets.Project.Scripts.Economy
             return target;
         }
 
-        public Dictionary<RewardType, int> GetRewardData()
+        public Dictionary<string, int> GetRewardData()
         {
             RewardSaveData rewardSaveData = new RewardSaveData();
             return rewardSaveData.LoadRewards();

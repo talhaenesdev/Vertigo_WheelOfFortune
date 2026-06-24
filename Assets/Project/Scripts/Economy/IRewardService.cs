@@ -7,10 +7,10 @@ namespace Assets.Project.Scripts.Economy
     public interface IRewardService
     {
         void AddReward(RewardData reward);
-        int GetRewardAmount(RewardType rewardType);
+        int GetRewardAmount(string rewardId);
         void ResetReward();
         void CollectReward();
-        Dictionary<RewardType, int> GetRewardData();
+        Dictionary<string, int> GetRewardData();
 
     }
 }

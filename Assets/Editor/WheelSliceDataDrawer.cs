@@ -38,7 +38,7 @@ public class WheelSliceDataDrawer : PropertyDrawer
         // 🚨 ZONE RULE: ALL SLICES PROHIBIT BOMB
         if (isBombRestrictedZone)
         {
-            if ((SliceType)sliceType.enumValueIndex == SliceType.Bomb)
+            if ((SliceType)sliceType.enumValueIndex == SliceType.GameOver)
             {
                 sliceType.enumValueIndex = (int)SliceType.Reward;
             }

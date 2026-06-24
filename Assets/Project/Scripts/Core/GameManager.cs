@@ -18,9 +18,9 @@ namespace Assets.Project.Scripts.Core
         private ICurrencyService _currencyService;
         private IADService _aDService;
 
-        [SerializeField]
         private ReviveData _reviveData;
-        
+        private ItemDatabase _itemDatabase;
+
         private GameState _currentState;
 
         private void Start()
@@ -37,7 +37,10 @@ namespace Assets.Project.Scripts.Core
             IZoneService zone, 
             IUIServices uI, 
             IWheelService wheel, 
-            IPopupService popup, ICurrencyService currencyService, IADService aDService)
+            IPopupService popup, 
+            ICurrencyService currencyService, 
+            IADService aDService,
+            ItemDatabase itemDatabase, ReviveData reviveData)
         {
             _rewardService = reward;
             _zoneService = zone;
@@ -47,6 +50,8 @@ namespace Assets.Project.Scripts.Core
             _popupService = popup;
             _currencyService = currencyService;
             _aDService = aDService;
+            _itemDatabase = itemDatabase;
+            _reviveData = reviveData;
         }
 
         private void SubscribeEvents()
@@ -128,7 +133,7 @@ namespace Assets.Project.Scripts.Core
         private void OnSpinCompleted(WheelSliceData result)
         {
 
-            if (result.SliceType == SliceType.Bomb)
+            if (result.SliceType == SliceType.GameOver)
             {
                 HandleBomb();
                 return;
@@ -138,12 +143,12 @@ namespace Assets.Project.Scripts.Core
             {
                 _rewardService.AddReward(result.Reward);
 
-                var rewardType = result.Reward.RewardType;
+                var rewardItem = result.Reward.RewardItem;
 
                 _uIServices.AddRewardArea(
-                    rewardType,
-                    _uIServices.GetRewardIcon(rewardType),
-                    _rewardService.GetRewardAmount(rewardType));
+                    rewardItem.Id,
+                    rewardItem.Icon,
+                    result.Reward.Amount);
             }
 
             _zoneService.NextZone();
@@ -202,8 +207,8 @@ namespace Assets.Project.Scripts.Core
             {
                 inventoryItems.Add(new InventoryItemVO
                 {
-                    RewardType = item.Key,
-                    RewardSprite = _uIServices.GetRewardIcon(item.Key),
+                    RewardId = item.Key,
+                    RewardSprite = _itemDatabase.GetIcon(item.Key),
                     RewardAmount = item.Value
                 });
             }

@@ -45,8 +45,6 @@ namespace Assets.Project.Scripts.UI
 
 
         [SerializeField] 
-        private RewardIconDatabase _rewardIconDatabase;
-        [SerializeField] 
         private WheelVisualConfig _wheelVisualConfig;
 
         private List<CollectableRewardUI> _currentRewards = new List<CollectableRewardUI>();
@@ -159,11 +157,11 @@ namespace Assets.Project.Scripts.UI
         public void SetCollectButtonInteractable(bool active) => _collectButton.interactable = active;
         public void SetSpinButtonInteractable(bool active) => _spinButton.interactable = active;
         public void SetGameOverPanel(bool isActive) => _gameOverPanel.SetActive(isActive);
-        public void AddRewardArea(RewardType rewardType, Sprite rewardSprite, int rewardAmount)
+        public void AddRewardArea(string rewardId, Sprite rewardSprite, int rewardAmount)
         {
             foreach (var rewardUI in _currentRewards)
             {
-                if (rewardType == rewardUI.RewardType)
+                if (rewardId == rewardUI._rewardId)
                 {
                     rewardUI.SetAmountText(rewardAmount);
                     return;
@@ -172,7 +170,7 @@ namespace Assets.Project.Scripts.UI
 
             CollectableRewardUI rewardUIEntity = Instantiate(_rewardPrefab, _rewardArea).GetComponent<CollectableRewardUI>();
             _currentRewards.Add(rewardUIEntity);
-            rewardUIEntity.Setup(rewardType, rewardSprite, rewardAmount);
+            rewardUIEntity.Setup(rewardId, rewardSprite, rewardAmount);
         }
 
         public void ClearRewardArea()
@@ -211,22 +209,18 @@ namespace Assets.Project.Scripts.UI
                 Sprite rewardIcon = null;
                 string rewardAmount = string.Empty;
 
-                if (slice.SliceType != SliceType.Bomb)
+                if (slice.SliceType != SliceType.GameOver)
                 {
-                    rewardIcon = GetRewardIcon(slice.Reward.RewardType);
+                    rewardIcon = slice.Reward.RewardItem.Icon;
                     rewardAmount = slice.Reward.Amount.ToString();
                 }
                 else
                 {
-                    rewardIcon = GetRewardIcon(RewardType.Bomb);
+                    rewardIcon = slice.Reward.RewardItem.Icon;
                 }
 
                 _wheelUI.SetRewardView(i, rewardIcon, rewardAmount);
             }
-        }
-        public Sprite GetRewardIcon(RewardType rewardType)
-        {
-            return _rewardIconDatabase.GetIcon(rewardType);
         }
     }
 }

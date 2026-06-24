@@ -5,7 +5,7 @@ namespace Assets.Project.Scripts.Data
 {
     public class InventoryItemVO
     {
-        public RewardType RewardType { get; set; }
+        public string RewardId { get; set; }
         public Sprite RewardSprite { get; set; }
         public int RewardAmount { get; set; }
     }

@@ -1,4 +1,5 @@
 ﻿
+using Assets.Project.Scripts.Data;
 using Assets.Project.Scripts.Economy;
 using Assets.Project.Scripts.GamePlay;
 using Assets.Project.Scripts.UI;
@@ -18,9 +19,11 @@ namespace Assets.Project.Scripts.Core
 
         [SerializeField] private GameManager GameManager;
 
+        [SerializeField] private ItemDatabase _itemDatabase;
+        [SerializeField] private ReviveData _reviveData;
         private void Awake()
         {
-            GameManager.Inject(RewardManager, ZoneManager, UIManager, WheelController, PopupManager, CurrencyManager, ADManager);
+            GameManager.Inject(RewardManager, ZoneManager, UIManager, WheelController, PopupManager, CurrencyManager, ADManager, _itemDatabase, _reviveData);
         }
 
 #if UNITY_EDITOR

@@ -10,11 +10,11 @@ namespace Assets.Project.Scripts.UI
         [SerializeField] private Image _rewardImage;
         [SerializeField] private TMP_Text _rewardAmountText;
 
-        internal RewardType RewardType { get; private set; }
+        internal string _rewardId { get; private set; }
 
-        internal void Setup(RewardType rewardType, Sprite rewardSprite, int rewardAmount)
+        internal void Setup(string rewardId, Sprite rewardSprite, int rewardAmount)
         {
-            RewardType = rewardType;
+            _rewardId = rewardId;
             _rewardImage.sprite = rewardSprite;
             _rewardImage.preserveAspect = true;
             SetAmountText(rewardAmount);

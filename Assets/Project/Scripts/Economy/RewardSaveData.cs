@@ -1,5 +1,4 @@
-﻿using Assets.Project.Scripts.Enums;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,7 +8,7 @@ namespace Assets.Project.Scripts.Economy
     {
         private const string SAVE_KEY = "RewardAmounts";
 
-        public void SaveRewards(Dictionary<RewardType, int> rewardAmounts)
+        public void SaveRewards(Dictionary<string, int> rewardAmounts)
         {
             RewardDictionarySaveData saveData = new();
 
@@ -17,7 +16,7 @@ namespace Assets.Project.Scripts.Economy
             {
                 saveData.Rewards.Add(new RewardEntry
                 {
-                    RewardType = reward.Key,
+                    RewardId = reward.Key,
                     Amount = reward.Value
                 });
             }
@@ -28,9 +27,9 @@ namespace Assets.Project.Scripts.Economy
             PlayerPrefs.Save();
         }
 
-        public Dictionary<RewardType, int> LoadRewards()
+        public Dictionary<string, int> LoadRewards()
         {
-            Dictionary<RewardType, int> rewardAmounts = new();
+            Dictionary<string, int> rewardAmounts = new();
 
             if (!PlayerPrefs.HasKey(SAVE_KEY))
                 return rewardAmounts;
@@ -45,7 +44,10 @@ namespace Assets.Project.Scripts.Economy
 
             foreach (var reward in saveData.Rewards)
             {
-                rewardAmounts[reward.RewardType] = reward.Amount;
+                if (string.IsNullOrEmpty(reward.RewardId))
+                    continue;
+
+                rewardAmounts[reward.RewardId] = reward.Amount;
             }
 
             return rewardAmounts;
@@ -56,7 +58,7 @@ namespace Assets.Project.Scripts.Economy
     [Serializable]
     public class RewardEntry
     {
-        public RewardType RewardType;
+        public string RewardId;
         public int Amount;
     }
 

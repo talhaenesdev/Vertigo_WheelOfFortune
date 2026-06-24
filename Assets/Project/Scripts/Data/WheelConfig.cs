@@ -18,5 +18,13 @@ namespace Assets.Project.Scripts.Data
         public float SliceCenterOffsetMultiplier;
         public float ExtraRotationOffset;
         public float PointerResetDuration;
+
+        [SerializeField]
+        private List<ItemDefinition> _availableItems;
+
+        public List<ItemDefinition> AvailableItems => _availableItems;
+        [SerializeField] private List<ItemDefinition> _bombItem;
+        public List<ItemDefinition> GameOverItems => _bombItem;
+
     }
 }

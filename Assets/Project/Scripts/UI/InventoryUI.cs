@@ -71,7 +71,7 @@ namespace Assets.Project.Scripts.UI
                 }
 
                 item.Setup(
-                    inventoryItems[i].RewardType,
+                    inventoryItems[i].RewardId,
                     inventoryItems[i].RewardSprite,
                     inventoryItems[i].RewardAmount
                 );

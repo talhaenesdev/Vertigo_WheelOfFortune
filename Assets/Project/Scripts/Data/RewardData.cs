@@ -6,7 +6,7 @@ namespace Assets.Project.Scripts.Data
     [Serializable]
     public class RewardData
     {
-        public RewardType RewardType;
+        public ItemDefinition RewardItem;
         public int Amount;
     }
 }

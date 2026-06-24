@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cd53711a8a09414c9f0166fcfdb48c2, type: 3}
+  m_Name: RifleUpgrade
+  m_EditorClassIdentifier: 
+  _id: rifleupgrade
+  _displayName: Rifle Upgrade
+  _category: 3
+  _icon: {fileID: 21300000, guid: 2cc31d8d1317ac146b6649eb5ced2795, type: 3}
