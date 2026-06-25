@@ -28,62 +28,52 @@ A Wheel of Fortune-style risk & reward game developed as part of the Vertigo Gam
 
 ## Additional Screenshots
 
-More screenshots are available in the `/InGamePictures` folder.
+Additional gameplay screenshots are available in the /InGamePictures folder.
 
-
-## 🎮 Features
-
-- Dynamic wheel spin system
-- Zone-based progression system
-- Risk vs reward mechanics
-- Bomb mechanic (full progress reset)
+🎮 Core Gameplay Features
+- Dynamic wheel spin system with deterministic zone logic
+- Zone-based progression with increasing risk/reward scaling
+- Bomb mechanic that resets progress on failure
+- Safe Zones (every 5th zone, no-bomb guaranteed spins)
+- Super Zones (every 30th zone, high reward/high risk)
+- Player decision system (walk-away before spin option)
 - Inventory system for collected rewards
-- Safe Zones (every 5th zone)
-- Super Zones (every 30th zone)
-- Walk-away decision system before spin
-- ScriptableObject-driven configuration
-- DOTween-based animations
-- Responsive UI (20:9 / 16:9 / 4:3)
-- Optional rewarded continue system (ad-based revive)
-- Currency-based revive mechanic after failure
+- Rewarded continue system (optional ad-based revive)
+- Currency-based revive system after failure
 
----
+⚙️ Game Systems
+- ScriptableObject-driven configuration system
+- Modular wheel & zone architecture
+- Configurable reward and progression pipeline
+- Clean separation between UI, gameplay logic, and data layers
+- DOTween-based animation system for smooth transitions
+- Responsive UI supporting multiple aspect ratios (20:9 / 16:9 / 4:3)
 
-## 🧱 Architecture Highlights
+🧱 Architecture Overview
+- Clean and reusable project structure
+- SOLID principles applied where applicable
+- Data-driven design using ScriptableObjects
+- Decoupled systems for scalability and maintainability
+- Centralized configuration for gameplay balancing
+- Improved null safety and runtime stability in core systems
 
-- Clean, reusable and scalable code structure
-- SOLID principles applied
-- Data-driven design using Scriptable Objects
-- Separation of UI / Logic / Data layers
-
----
-
-## 🛠 Built With
-
+🛠 Tech Stack
 - Unity 2021 LTS
 - TextMeshPro
 - DOTween
-- Scriptable Objects
+- ScriptableObjects
 - New Input System
 
----
-
-## 🚀 How to Run
-
+🚀 How to Run
 - Open project in Unity 2021 LTS
 - Load the main scene
 - Press Play
 
----
+📦 Build
+- Android build available in the GitHub Releases section
 
-## 📦 Build
-
-Android APK is available in the **GitHub Releases** section.
-
----
-
-## 📌 Notes
-
+📌 Notes
 - UI is optimized for multiple aspect ratios (20:9, 16:9, 4:3)
 - All systems are modular and extendable
-- Designed for scalability and maintainability
+- Designed with scalability, testability, and maintainability in mind
+- Core gameplay logic is deterministic to ensure consistent outcomes across sessions
