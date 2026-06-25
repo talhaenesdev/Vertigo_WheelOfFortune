@@ -16,7 +16,27 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: e63e957b6091d804f846c0cbdb608877
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: 6f67be8b6ca75884e995c8811c0f858e
+    m_Address: ui_reward_main
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 6508985c6edc21f4aa70f2e53cf3f234
+    m_Address: atlas_ui_wheel
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 53ae5811d3ccfed4c975bc5e1f798fcf
+    m_Address: atlas_ui_rewards
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 76a0a20a0173a8240b6a1d110cba1b9c
+    m_Address: atlas_ui_buttons
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 3024646f0ba4295459adf2dc4c4b1bfa
+    m_Address: atlas_ui_vfx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 2f725e55ffe4e3147b7cdeb7d7059abe, type: 2}
   m_SchemaSet:
