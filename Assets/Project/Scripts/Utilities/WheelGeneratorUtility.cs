@@ -2,7 +2,6 @@
 using Assets.Project.Scripts.Enums;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 public static class WheelGeneratorUtility
 {

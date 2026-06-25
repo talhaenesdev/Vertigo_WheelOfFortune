@@ -4291,6 +4291,7 @@ MonoBehaviour:
   _itemDatabase: {fileID: 11400000, guid: 53ccb40d99994ff4f8123e421beaaa0a, type: 2}
   _reviveData: {fileID: 11400000, guid: 860011d5ca0df2341a57540353880f6d, type: 2}
   _wheelVisualConfig: {fileID: 11400000, guid: 02534b09971af48469d2a08263793abe, type: 2}
+  _adData: {fileID: 11400000, guid: 55fa0b71bd17fe24cab099b2f17a74fc, type: 2}
 --- !u!4 &1187769763
 Transform:
   m_ObjectHideFlags: 0

@@ -16,8 +16,8 @@ namespace Assets.Project.Scripts.Core
         private Button _collectWatchRewardButton;
         [SerializeField] 
         private TMP_Text _timerValue;
-        [SerializeField] 
-        private AdData _adData;
+
+        private ADData _adData;
 
         public event Action OnCollectAdReward;
 
@@ -40,6 +40,10 @@ namespace Assets.Project.Scripts.Core
             _adPanel.SetActive(true);
             WatchAd();
 
+        }
+        public void Inject(ADData adData)
+        {
+            _adData = adData;
         }
 
         private void OnEnable()
@@ -75,5 +79,7 @@ namespace Assets.Project.Scripts.Core
         }
 
         private void InteractableButton(bool interactable) => _collectWatchRewardButton.interactable = interactable;
+
+
     }
 }
