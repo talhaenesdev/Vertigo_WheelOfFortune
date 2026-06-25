@@ -2191,7 +2191,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e5e22bfeed6cdb49877a34baaba5147, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Assets.Project.Scripts.GamePlay.ZoneManager
-  _wheelConfig: {fileID: 11400000, guid: 4b5c3519f223bf74097dd8cf0e70d05a, type: 2}
 --- !u!4 &504083024
 Transform:
   m_ObjectHideFlags: 0
@@ -4292,6 +4291,7 @@ MonoBehaviour:
   _reviveData: {fileID: 11400000, guid: 860011d5ca0df2341a57540353880f6d, type: 2}
   _wheelVisualConfig: {fileID: 11400000, guid: 02534b09971af48469d2a08263793abe, type: 2}
   _adData: {fileID: 11400000, guid: 55fa0b71bd17fe24cab099b2f17a74fc, type: 2}
+  _wheelConfig: {fileID: 11400000, guid: 4b5c3519f223bf74097dd8cf0e70d05a, type: 2}
 --- !u!4 &1187769763
 Transform:
   m_ObjectHideFlags: 0
@@ -6209,7 +6209,6 @@ MonoBehaviour:
   _adPanel: {fileID: 1685412669}
   _collectWatchRewardButton: {fileID: 44200862}
   _timerValue: {fileID: 1370767784}
-  _adData: {fileID: 11400000, guid: 55fa0b71bd17fe24cab099b2f17a74fc, type: 2}
 --- !u!1 &1723248399
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,5 +1,4 @@
-﻿using Assets.Project.Scripts.Enums;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Assets.Project.Scripts.Data
 {

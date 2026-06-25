@@ -14,5 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: bayonetsummer
   _displayName: Bayonet Summer
-  _category: 1
-  _icon: {fileID: 21300000, guid: 34cd129aa2792ae44980bd6ff2e7ddb2, type: 3}
+  _icon: {fileID: 21300000, guid: 66881a6458f29d34e844d49598e1141c, type: 3}

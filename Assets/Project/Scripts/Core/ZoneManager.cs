@@ -1,5 +1,6 @@
 using Assets.Project.Scripts.Data;
 using Assets.Project.Scripts.Enums;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,7 +8,6 @@ namespace Assets.Project.Scripts.Core
 {
     public class ZoneManager : MonoBehaviour, IZoneService
     {
-        [SerializeField]
         private WheelConfig _wheelConfig;
 
         public int CurrentZone { get; private set; }
@@ -15,6 +15,10 @@ namespace Assets.Project.Scripts.Core
         private void Start()
         {
             CurrentZone = _wheelConfig.StartZoneValue;
+        }
+        public void Inject(WheelConfig wheelConfig)
+        {
+            _wheelConfig = wheelConfig;
         }
 
         public ZoneType GetCurrentZoneType()
@@ -44,5 +48,7 @@ namespace Assets.Project.Scripts.Core
 
         public WheelConfig GetWheelConfig() => _wheelConfig;
         public List<WheelSliceData> GetWheelSliceRows() => GetWheelConfig().Zones[CurrentZoneIndex()].Slices;
+
+
     }
 }

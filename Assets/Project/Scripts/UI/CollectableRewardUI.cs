@@ -1,4 +1,3 @@
-using Assets.Project.Scripts.Enums;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
